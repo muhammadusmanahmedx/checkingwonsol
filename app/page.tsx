@@ -1,23 +1,16 @@
-import Image from "next/image";
-import Silk from "@/components/hero";
-import { MarqueeDemo } from "@/components/flagsection";
-import GlobalPresenceSection from "@/components/globalpresence";
- import Threads from '@/components/hero';
+// pages/index.tsx
+import HeroSection from "@/components/hero";
+import ServicesSection from "@/components/services";
+import WhyChooseUs from "@/components/why-choose-us";
+import FeaturedCaseStudies from "@/components/featured-case-studies";
 
 export default function Home() {
   return (
-    
-     
-
-    <>
-    
-  <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-  <Threads
-    amplitude={1}
-    distance={0}
-    enableMouseInteraction={true}
-  />
-</div>
-    </>
+    <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+      <HeroSection />
+      <ServicesSection />
+        <WhyChooseUs />
+      <FeaturedCaseStudies />
+    </div>
   );
 }

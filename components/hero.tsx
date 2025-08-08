@@ -1,5 +1,6 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+
+import React, { useEffect, useRef, useState } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
 interface ThreadsProps {
@@ -13,11 +14,11 @@ const vertexShader = `
 attribute vec2 position;
 attribute vec2 uv;
 varying vec2 vUv;
+
 void main() {
   vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
-}
-`;
+}`;
 
 const fragmentShader = `
 precision highp float;
@@ -31,7 +32,7 @@ uniform vec2 uMouse;
 
 #define PI 3.1415926538
 
-const int u_line_count = 40;
+const int u_line_count = 20;
 const float u_line_width = 7.0;
 const float u_line_blur = 10.0;
 
@@ -63,35 +64,28 @@ float pixel(float count, vec2 resolution) {
 float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float time, float amplitude, float distance) {
     float split_offset = (perc * 0.4);
     float split_point = 0.1 + split_offset;
-
     float amplitude_normal = smoothstep(split_point, 0.7, st.x);
     float amplitude_strength = 0.5;
     float finalAmplitude = amplitude_normal * amplitude_strength
                            * amplitude * (1.0 + (mouse.y - 0.5) * 0.2);
-
     float time_scaled = time / 10.0 + (mouse.x - 0.5) * 1.0;
     float blur = smoothstep(split_point, split_point + 0.05, st.x) * perc;
-
     float xnoise = mix(
         Perlin2D(vec2(time_scaled, st.x + perc) * 2.5),
         Perlin2D(vec2(time_scaled, st.x + time_scaled) * 3.5) / 1.5,
         st.x * 0.3
     );
-
     float y = 0.5 + (perc - 0.5) * distance + xnoise / 2.0 * finalAmplitude;
-
     float line_start = smoothstep(
         y + (width / 2.0) + (u_line_blur * pixel(1.0, iResolution.xy) * blur),
         y,
         st.y
     );
-
     float line_end = smoothstep(
         y,
         y - (width / 2.0) - (u_line_blur * pixel(1.0, iResolution.xy) * blur),
         st.y
     );
-
     return clamp(
         (line_start - line_end) * (1.0 - smoothstep(0.0, 1.0, pow(perc, 0.3))),
         0.0,
@@ -101,7 +95,6 @@ float lineFn(vec2 st, float width, float perc, float offset, vec2 mouse, float t
 
 void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     vec2 uv = fragCoord / iResolution.xy;
-
     float line_strength = 1.0;
     for (int i = 0; i < u_line_count; i++) {
         float p = float(i) / float(u_line_count);
@@ -116,18 +109,27 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
             uDistance
         ));
     }
-
     float colorVal = 1.0 - line_strength;
     fragColor = vec4(uColor * colorVal, colorVal);
 }
 
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
+}`;
+
+function throttle(fn: (...args: any[]) => void, wait: number) {
+  let lastTime = 0;
+  return (...args: any[]) => {
+    const now = Date.now();
+    if (now - lastTime >= wait) {
+      fn(...args);
+      lastTime = now;
+    }
+  };
 }
-`;
 
 const Threads: React.FC<ThreadsProps> = ({
-  color = [0.2, 0.4, 0.8], // Nice blue color
+  color = [0.2, 0.5, 0.9], // Changed to blue tones
   amplitude = 1,
   distance = 0,
   enableMouseInteraction = false,
@@ -135,16 +137,19 @@ const Threads: React.FC<ThreadsProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const animationFrameId = useRef<number | null>(null);
+  const lastFrameTime = useRef<number>(0);
 
   useEffect(() => {
     if (!containerRef.current) return;
-    const container = containerRef.current;
 
+    const container = containerRef.current;
     const renderer = new Renderer({ alpha: true });
     const gl = renderer.gl;
+
     gl.clearColor(0, 0, 0, 0);
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
     container.appendChild(gl.canvas);
 
     const geometry = new Triangle(gl);
@@ -153,13 +158,7 @@ const Threads: React.FC<ThreadsProps> = ({
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
-        iResolution: {
-          value: new Color(
-            gl.canvas.width,
-            gl.canvas.height,
-            gl.canvas.width / gl.canvas.height
-          ),
-        },
+        iResolution: { value: new Color(0, 0, 0) },
         uColor: { value: new Color(...color) },
         uAmplitude: { value: amplitude },
         uDistance: { value: distance },
@@ -169,34 +168,43 @@ const Threads: React.FC<ThreadsProps> = ({
 
     const mesh = new Mesh(gl, { geometry, program });
 
-    function resize() {
+    const resize = throttle(() => {
       const { clientWidth, clientHeight } = container;
       renderer.setSize(clientWidth, clientHeight);
       program.uniforms.iResolution.value.r = clientWidth;
       program.uniforms.iResolution.value.g = clientHeight;
       program.uniforms.iResolution.value.b = clientWidth / clientHeight;
-    }
-    window.addEventListener("resize", resize);
+    }, 100);
+
+    window.addEventListener("resize", resize, { passive: true });
     resize();
 
     let currentMouse = [0.5, 0.5];
     let targetMouse = [0.5, 0.5];
 
-    function handleMouseMove(e: MouseEvent) {
+    const handleMouseMove = throttle((e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width;
       const y = 1.0 - (e.clientY - rect.top) / rect.height;
       targetMouse = [x, y];
-    }
-    function handleMouseLeave() {
+    }, 50);
+
+    const handleMouseLeave = () => {
       targetMouse = [0.5, 0.5];
-    }
+    };
+
     if (enableMouseInteraction) {
-      container.addEventListener("mousemove", handleMouseMove);
+      container.addEventListener("mousemove", handleMouseMove, { passive: true });
       container.addEventListener("mouseleave", handleMouseLeave);
     }
 
     function update(t: number) {
+      if (t - lastFrameTime.current < 33.33) {
+        animationFrameId.current = requestAnimationFrame(update);
+        return;
+      }
+      lastFrameTime.current = t;
+
       if (enableMouseInteraction) {
         const smoothing = 0.05;
         currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
@@ -207,18 +215,17 @@ const Threads: React.FC<ThreadsProps> = ({
         program.uniforms.uMouse.value[0] = 0.5;
         program.uniforms.uMouse.value[1] = 0.5;
       }
-      program.uniforms.iTime.value = t * 0.001;
 
+      program.uniforms.iTime.value = t * 0.001;
       renderer.render({ scene: mesh });
       animationFrameId.current = requestAnimationFrame(update);
     }
+
     animationFrameId.current = requestAnimationFrame(update);
 
     return () => {
-      if (animationFrameId.current)
-        cancelAnimationFrame(animationFrameId.current);
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
       window.removeEventListener("resize", resize);
-
       if (enableMouseInteraction) {
         container.removeEventListener("mousemove", handleMouseMove);
         container.removeEventListener("mouseleave", handleMouseLeave);
@@ -228,109 +235,144 @@ const Threads: React.FC<ThreadsProps> = ({
     };
   }, [color, amplitude, distance, enableMouseInteraction]);
 
+  return <div ref={containerRef} className="w-full h-full relative" {...rest} />;
+};
+
+const TechAnimation = () => {
   return (
-    <div ref={containerRef} className="w-full h-full relative" {...rest} />
+    <div className="absolute inset-0 z-5 pointer-events-none overflow-hidden">
+      {/* Floating Code Icon */}
+      <div className="absolute top-1/4 right-16 animate-bounce" style={{ animationDuration: "4s" }}>
+        <div className="relative">
+          <div className="w-12 h-12 bg-blue-100 rounded-lg border-2 border-blue-300 flex items-center justify-center shadow-lg">
+            <span className="text-blue-600 text-xl font-bold">{'</>'}</span>
+          </div>
+        </div>
+      </div>
+      
+      {/* Floating Gear Icon */}
+      <div className="absolute top-2/3 left-20 animate-float" style={{ animationDuration: "3s" }}>
+        <div className="relative">
+          <div className="w-10 h-10 bg-indigo-100 rounded-full border-2 border-indigo-300 flex items-center justify-center shadow-lg">
+            <span className="text-indigo-600 text-lg">⚙️</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating Lightbulb */}
+      <div className="absolute top-1/2 right-1/4 animate-pulse" style={{ animationDuration: "2s" }}>
+        <div className="w-8 h-8 bg-yellow-100 rounded-full border-2 border-yellow-300 flex items-center justify-center shadow-lg">
+          <span className="text-yellow-600 text-sm">💡</span>
+        </div>
+      </div>
+    </div>
   );
 };
 
 const HeroSection = () => {
+  const [activeNav, setActiveNav] = useState("Home");
+
+  useEffect(() => {
+    const styleSheet = document.createElement("style");
+    styleSheet.type = "text/css";
+    styleSheet.innerText = `
+      @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+      .animate-float {
+        animation: float 3s ease-in-out infinite;
+      }
+    `;
+    document.head.appendChild(styleSheet);
+    return () => document.head.removeChild(styleSheet);
+  }, []);
+
   return (
-    <div className="relative w-full h-screen bg-white overflow-hidden">
-      {/* Background Thread Animation */}
-      <div className="absolute inset-0 z-0">
-        <Threads
-          amplitude={1.2}
-          distance={0.3}
-          enableMouseInteraction={true}
+    <div className="relative w-full h-screen overflow-hidden ">
+      {/* Background Animation */}
+      <div className="absolute inset-0 z-0 ">
+        <Threads 
+          color={[0.2, 0.5, 0.9]} 
+          amplitude={1.2} 
+          distance={0.3} 
+          enableMouseInteraction={true} 
         />
       </div>
 
-      {/* Header Navigation */}
+      {/* Tech Animation */}
+      <TechAnimation />
+
+      {/* Header */}
       <header className="relative z-20 flex items-center justify-between px-8 py-6">
-        {/* Logo */}
         <div className="flex items-center">
-          <div className="text-2xl font-bold text-gray-800">
-            LOGO
+          <div className="text-2xl font-bold text-blue-600">
+            Nexus
           </div>
         </div>
 
-        {/* Center Navigation with Glass Effect */}
         <nav className="absolute left-1/2 transform -translate-x-1/2">
-          <div className="flex items-center space-x-8 px-8 py-3 rounded-full bg-blue-600/80 backdrop-blur-lg border border-blue-500/30 shadow-lg">
-            <a href="#" className="text-white hover:text-blue-100 transition-colors font-medium">Home</a>
-            <a href="#" className="text-white hover:text-blue-100 transition-colors font-medium">Services</a>
-            <a href="#" className="text-white hover:text-blue-100 transition-colors font-medium">About</a>
-            <a href="#" className="text-white hover:text-blue-100 transition-colors font-medium">Portfolio</a>
-            <a href="#" className="text-white hover:text-blue-100 transition-colors font-medium">Contact</a>
+          <div className="flex items-center space-x-1 px-2 py-2 rounded-full bg-white/80 border border-blue-200 shadow-lg backdrop-blur-sm">
+            {["Home", "Services", "About", "Portfolio", "Contact"].map((item) => (
+              <button
+                key={item}
+                onClick={() => setActiveNav(item)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeNav === item
+                    ? "bg-blue-600 text-white shadow-lg transform scale-105"
+                    : "text-gray-600 hover:text-blue-600 hover:bg-blue-50"
+                }`}
+              >
+                {item}
+              </button>
+            ))}
           </div>
         </nav>
 
-        {/* CTA Button */}
-        <button className="text-white px-6 py-3 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 shadow-2xl bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/25 hover:-translate-y-1" 
-                style={{ 
-                  boxShadow: '0 10px 20px rgba(37, 99, 235, 0.3), 0 6px 6px rgba(37, 99, 235, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.1)',
-                  background: 'linear-gradient(145deg, #3b82f6, #2563eb)'
-                }}>
-          Get Services Now
+        <button className="relative group px-6 py-3 rounded-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-lg">
+          Get Started
         </button>
       </header>
 
-      {/* Floating Professional Icons - Only Mouse */}
-      <div className="absolute inset-0 z-5 pointer-events-none">
-        {/* Mouse/Cursor Icon */}
-        <div className="absolute top-1/3 right-20 animate-pulse" style={{ animationDelay: '1s', animationDuration: '3.5s' }}>
-          <div className="w-10 h-10 bg-white/80 backdrop-blur-sm rounded-lg shadow-lg flex items-center justify-center">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z" stroke="#3b82f6" strokeWidth="2" fill="none"/>
-              <path d="M13 13l6 6" stroke="#3b82f6" strokeWidth="2"/>
-            </svg>
-          </div>
-        </div>
-      </div>
-
-      {/* Hero Content */}
+      {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center -mt-16">
         <div className="max-w-4xl mx-auto">
-          {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-blue-600">
-            World of Optimal
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            <span className="text-gray-900">
+              Next-Gen Digital
+            </span>
             <br />
-            Next-Gen Solutions
+            <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 bg-clip-text text-transparent">
+              Solutions
+            </span>
           </h1>
-
-          {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-gray-600 font-medium mb-12 max-w-2xl mx-auto">
-            Crafting solutions that lead to success
+          
+          <p className="text-xl md:text-2xl text-gray-600 font-light mb-12 max-w-2xl mx-auto">
+            Illuminating the path to innovation with cutting-edge technology and professional expertise
           </p>
-
-          {/* Additional CTA Buttons */}
+          
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="text-white px-8 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 shadow-2xl bg-blue-600 hover:bg-blue-700 hover:shadow-blue-500/25" 
-                    style={{ 
-                      boxShadow: '0 12px 24px rgba(37, 99, 235, 0.3), 0 8px 8px rgba(37, 99, 235, 0.2), inset 0 -3px 0 rgba(0, 0, 0, 0.1)',
-                      background: 'linear-gradient(145deg, #3b82f6, #2563eb)'
-                    }}>
-              Explore Our Work
+            <button className="group relative px-8 py-4 rounded-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-lg">
+              Explore Solutions
             </button>
-            <button className="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-full font-semibold hover:text-white transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 bg-white hover:bg-blue-600 shadow-xl hover:shadow-blue-500/25" 
-                    style={{ 
-                      boxShadow: '0 8px 16px rgba(37, 99, 235, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.2)'
-                    }}>
-              Learn More
+            
+            <button className="relative px-8 py-4 rounded-lg font-semibold text-blue-600 border-2 border-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+              Watch Demo
             </button>
           </div>
         </div>
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gray-400 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 border-2 border-blue-400 rounded-full flex justify-center">
+            <div className="w-1 h-3 bg-blue-600 rounded-full mt-2 animate-pulse" />
           </div>
         </div>
       </div>
 
-      {/* Gradient Overlay for Better Text Readability */}
-      <div className="absolute inset-0 z-5 bg-gradient-to-b from-white/10 via-transparent to-white/5"></div>
+      {/* Background Decorations */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
     </div>
   );
 };
