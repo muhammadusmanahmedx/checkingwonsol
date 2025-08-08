@@ -1,126 +1,135 @@
 "use client";
-import Globe from "@/components/magicui/globe";
+import createGlobe, { COBEOptions } from "cobe";
+import { useMotionValue, useSpring } from "framer-motion";
+import { useEffect, useRef } from "react";
 
-export default function GlobeDemo() {
+import { cn } from "@/lib/utils";
+
+const MOVEMENT_DAMPING = 1400;
+
+const GLOBE_CONFIG: COBEOptions = {
+  width: 800,
+  height: 800,
+  onRender: () => {},
+  devicePixelRatio: 2,
+  phi: 0,
+  theta: 0.3,
+  dark: 0,
+  diffuse: 0.4,
+  mapSamples: 16000,
+  mapBrightness: 1.2,
+  baseColor: [0.9, 0.9, 0.9],
+  markerColor: [79 / 255, 70 / 255, 229 / 255],
+  glowColor: [0.8, 0.8, 1.0],
+  markers: [
+    // Pakistan (Current Operations) - Larger marker
+    { location: [30.3753, 69.3451], size: 0.15 },
+    // UAE (Future Expansion)
+    { location: [23.4241, 53.8478], size: 0.08 },
+    // Saudi Arabia (Future Expansion)
+    { location: [23.8859, 45.0792], size: 0.08 },
+    // Qatar (Future Expansion)
+    { location: [25.2048, 51.4326], size: 0.08 },
+    // Germany (Europe Expansion)
+    { location: [51.1657, 10.4515], size: 0.08 },
+    // UK (Europe Expansion)
+    { location: [55.3781, -3.4360], size: 0.08 },
+    // Netherlands (Europe Expansion)
+    { location: [52.1326, 5.2913], size: 0.08 },
+    // France (Europe Expansion)
+    { location: [46.2276, 2.2137], size: 0.08 },
+  ],
+};
+
+export function Globe({
+  className,
+  config = GLOBE_CONFIG,
+}: {
+  className?: string;
+  config?: COBEOptions;
+}) {
+  let phi = 0;
+  let width = 0;
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const pointerInteracting = useRef<number | null>(null);
+  const pointerInteractionMovement = useRef(0);
+
+  const r = useMotionValue(0);
+  const rs = useSpring(r, {
+    mass: 1,
+    damping: 30,
+    stiffness: 100,
+  });
+
+  const updatePointerInteraction = (value: number | null) => {
+    pointerInteracting.current = value;
+    if (canvasRef.current) {
+      canvasRef.current.style.cursor = value !== null ? "grabbing" : "grab";
+    }
+  };
+
+  const updateMovement = (clientX: number) => {
+    if (pointerInteracting.current !== null) {
+      const delta = clientX - pointerInteracting.current;
+      pointerInteractionMovement.current = delta;
+      r.set(r.get() + delta / MOVEMENT_DAMPING);
+    }
+  };
+
+  useEffect(() => {
+    const onResize = () => {
+      if (canvasRef.current) {
+        width = canvasRef.current.offsetWidth;
+      }
+    };
+
+    window.addEventListener("resize", onResize);
+    onResize();
+
+    const globe = createGlobe(canvasRef.current!, {
+      ...config,
+      width: width * 2,
+      height: width * 2,
+      onRender: (state) => {
+        if (!pointerInteracting.current) phi += 0.005;
+        state.phi = phi + rs.get();
+        state.width = width * 2;
+        state.height = width * 2;
+      },
+    });
+
+    setTimeout(() => (canvasRef.current!.style.opacity = "1"), 0);
+    return () => {
+      globe.destroy();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [rs, config]);
+
   return (
-    <div className="relative flex size-full items-center justify-center overflow-hidden min-h-[700px] m-0 p-0">
-      {/* Left Panel - Current Operations */}
-      <div className="pointer-events-none absolute left-8 top-1/2 -translate-y-1/2 z-10 max-w-xs">
-        <div className="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-6 shadow-lg">
-          <div className="flex items-center mb-4">
-            <div className="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-            <h3 className="text-lg font-bold text-gray-900">Currently Operating</h3>
-          </div>
-          
-          <div className="space-y-3">
-            <div className="flex items-center">
-              <div className="w-8 h-6 bg-green-600 rounded-sm mr-3 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">PK</span>
-              </div>
-              <div>
-                <p className="font-semibold text-gray-900">Pakistan</p>
-                <p className="text-sm text-gray-600">Headquarters & Main Operations</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <div className="flex items-center justify-between text-sm">
-              <span className="text-gray-600">Established</span>
-              <span className="font-semibold text-gray-900">2020</span>
-            </div>
-            <div className="flex items-center justify-between text-sm mt-1">
-              <span className="text-gray-600">Team Size</span>
-              <span className="font-semibold text-gray-900">50+ Experts</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Right Panel - Future Expansions */}
-      <div className="pointer-events-none absolute right-8 top-1/2 -translate-y-1/2 z-10 max-w-xs">
-        <div className="bg-white/90 backdrop-blur-sm border border-gray-200 rounded-xl p-6 shadow-lg">
-          <div className="flex items-center mb-4">
-            <div className="w-3 h-3 bg-indigo-500 rounded-full mr-3"></div>
-            <h3 className="text-lg font-bold text-gray-900">Strategic Expansions</h3>
-          </div>
-          
-          <div className="space-y-4">
-            {/* Middle East */}
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2 flex items-center">
-                <span className="w-2 h-2 bg-orange-400 rounded-full mr-2"></span>
-                Middle East Hub
-              </h4>
-              <div className="space-y-1">
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-red-600 rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">AE</span>
-                  </div>
-                  <span className="text-gray-700">United Arab Emirates</span>
-                </div>
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-green-700 rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">SA</span>
-                  </div>
-                  <span className="text-gray-700">Saudi Arabia</span>
-                </div>
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-purple-700 rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">QA</span>
-                  </div>
-                  <span className="text-gray-700">Qatar</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Europe */}
-            <div>
-              <h4 className="font-semibold text-gray-900 mb-2 flex items-center">
-                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                European Markets
-              </h4>
-              <div className="space-y-1">
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-black rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">DE</span>
-                  </div>
-                  <span className="text-gray-700">Germany</span>
-                </div>
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-blue-800 rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">UK</span>
-                  </div>
-                  <span className="text-gray-700">United Kingdom</span>
-                </div>
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-orange-600 rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">NL</span>
-                  </div>
-                  <span className="text-gray-700">Netherlands</span>
-                </div>
-                <div className="flex items-center text-sm">
-                  <div className="w-6 h-4 bg-blue-600 rounded-sm mr-2 flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">FR</span>
-                  </div>
-                  <span className="text-gray-700">France</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-4 pt-4 border-t border-gray-200">
-            <div className="text-sm text-gray-600">
-              <span className="font-semibold text-indigo-600">2025-2027</span> Timeline
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <Globe className="w-full h-full" />
-      
-      {/* Subtle overlay */}
-      <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_50%,rgba(79,70,229,0.05),rgba(255,255,255,0))]" />
+    <div
+      className={cn(
+        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
+        className,
+      )}
+    >
+      <canvas
+        className={cn(
+          "size-full opacity-0 transition-opacity duration-500",
+        )}
+        ref={canvasRef}
+        onPointerDown={(e) => {
+          pointerInteracting.current = e.clientX;
+          updatePointerInteraction(e.clientX);
+        }}
+        onPointerUp={() => updatePointerInteraction(null)}
+        onPointerOut={() => updatePointerInteraction(null)}
+        onMouseMove={(e) => updateMovement(e.clientX)}
+        onTouchMove={(e) =>
+          e.touches[0] && updateMovement(e.touches[0].clientX)
+        }
+      />
     </div>
   );
 }
+
+export default Globe;
