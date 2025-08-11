@@ -3,10 +3,16 @@
 import HeroSection from "@/components/hero";
 import ServicesSection from "@/components/services";
 import WhyChooseUs from "@/components/why-choose-us";
-import FeaturedCaseStudies from "@/components/featured-case-studies";
 import Footer from "@/components/footer";
-import PortfolioScrollStack from "@/components/portfolio-scroll-stack";
 import { useRef } from "react";
+import HeroSection2 from "@/components/companyintro";
+import IntroSection from "@/components/companyintro";
+import ServiceHighlights from "@/components/Servicesection";
+import ClientTestimonials from "@/components/clienttestimonials";
+import CTASection from "@/components/Calltoaction";
+
+import ServicesSection2 from "@/components/services-section";
+import AboutSection from "@/components/about-section";
 
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null)
@@ -23,14 +29,25 @@ export default function Home() {
 
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 via-white to-indigo-50">
+    <div className="">
       <HeroSection />
-      <ServicesSection />
+
+<AboutSection/>
+<ServicesSection2/>
+
+
+      {/* <IntroSection/>
+      <ServicesSection/>
+      <ClientTestimonials/> */}
+      {/* <ServiceHighlights /> */}
+     
+
         <WhyChooseUs />
-        <div>
-       {/* <PortfolioScrollStack onScrollEnd={handlePortfolioScrollEnd} /> */}
-      </div>
-      {/* <FeaturedCaseStudies /> */}
+        <div className="mb-20">
+
+         <CTASection/>
+        </div>
+
       <Footer/>
     </div>
   );

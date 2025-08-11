@@ -195,7 +195,7 @@ export function ServicesSection() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl"></div>
       
       {/* Call to Action */}
-      <div className="text-center mt-16 relative z-10">
+      {/* <div className="text-center mt-16 relative z-10">
         <div className="inline-flex flex-col sm:flex-row gap-4 items-center">
           <button className="group relative px-8 py-4 border-2 border-blue-600 text-blue-600 font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:text-white">
             <div className="absolute inset-0 bg-blue-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
@@ -213,7 +213,7 @@ export function ServicesSection() {
         <p className="text-sm text-gray-500 mt-4">
           Trusted by 500+ businesses worldwide for innovative software solutions
         </p>
-      </div>
+      </div> */}
     </div>
   );
 }
