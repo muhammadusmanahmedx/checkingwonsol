@@ -1,4 +1,3 @@
-// pages/index.tsx
 "use client";
 import HeroSection from "@/components/hero";
 import ServicesSection from "@/components/services";
@@ -13,10 +12,10 @@ import CTASection from "@/components/Calltoaction";
 
 import ServicesSection2 from "@/components/services-section";
 import AboutSection from "@/components/about-section";
-import TestimonialCarousel from "@/components/testimonials";
+import { TestimonialCarousel, TestimonialCarouselDemo } from "@/components/testimonials";
 
 export default function Home() {
-  const nextSectionRef = useRef<HTMLDivElement>(null);
+  const nextSectionRef = useRef<HTMLDivElement>(null)
 
   const handlePortfolioScrollEnd = () => {
     // Smooth transition to next section
@@ -24,29 +23,32 @@ export default function Home() {
       nextSectionRef.current.scrollIntoView({
         behavior: "smooth",
         block: "start",
-      });
+      })
     }
-  };
+  }
+
 
   return (
     <div className="">
-      <HeroSection />
+      {/* <HeroSection /> */}
 
-      <AboutSection />
-      <ServicesSection2 />
+<AboutSection/>
+<ServicesSection2/>
+
 
       {/* <IntroSection/>
       <ServicesSection/>
       <ClientTestimonials/> */}
       {/* <ServiceHighlights /> */}
+     
 
-      <WhyChooseUs />
-      <div className="mb-20">
-        <TestimonialCarousel />
-        <CTASection />
-      </div>
+        <WhyChooseUs />
+        <div className="mb-20">
+        {/* <TestimonialCarouselDemo/> */}
+         <CTASection/>
+        </div>
 
-      <Footer />
+      <Footer/>
     </div>
   );
 }

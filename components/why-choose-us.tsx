@@ -8,39 +8,45 @@ const reasons = [
   {
     icon: "🚀",
     title: "Proven Expertise",
-    description: "Over 5+ years of experience delivering cutting-edge software solutions across diverse industries.",
-    stats: "500+ Projects Delivered"
+    description:
+      "Over 5+ years of experience delivering cutting-edge software solutions across diverse industries.",
+    stats: "500+ Projects Delivered",
   },
   {
     icon: "⚡",
     title: "Lightning Fast Delivery",
-    description: "Agile development methodology ensures rapid deployment without compromising on quality.",
-    stats: "50% Faster Than Industry Average"
+    description:
+      "Agile development methodology ensures rapid deployment without compromising on quality.",
+    stats: "50% Faster Than Industry Average",
   },
   {
     icon: "🛡️",
     title: "Enterprise Security",
-    description: "Bank-grade security protocols and compliance standards protect your valuable data.",
-    stats: "99.9% Security Rating"
+    description:
+      "Bank-grade security protocols and compliance standards protect your valuable data.",
+    stats: "99.9% Security Rating",
   },
   {
     icon: "🎯",
     title: "Custom Solutions",
-    description: "Tailored software development that perfectly aligns with your unique business requirements.",
-    stats: "100% Customized Approach"
+    description:
+      "Tailored software development that perfectly aligns with your unique business requirements.",
+    stats: "100% Customized Approach",
   },
   {
     icon: "📈",
     title: "Scalable Architecture",
-    description: "Future-proof solutions designed to grow seamlessly with your expanding business needs.",
-    stats: "10x Scalability Guaranteed"
+    description:
+      "Future-proof solutions designed to grow seamlessly with your expanding business needs.",
+    stats: "10x Scalability Guaranteed",
   },
   {
     icon: "🤝",
     title: "24/7 Support",
-    description: "Round-the-clock technical support and maintenance to ensure uninterrupted operations.",
-    stats: "< 2 Hour Response Time"
-  }
+    description:
+      "Round-the-clock technical support and maintenance to ensure uninterrupted operations.",
+    stats: "< 2 Hour Response Time",
+  },
 ];
 
 const containerVariants = {
@@ -48,9 +54,9 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants = {
@@ -59,9 +65,9 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.5
-    }
-  }
+      duration: 0.5,
+    },
+  },
 };
 
 export function WhyChooseUs() {
@@ -71,30 +77,37 @@ export function WhyChooseUs() {
     <section className="py-20 px-4 max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="text-center mb-16">
+        <div className="mb-12">
+          <span className="inline-block px-6 py-3 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-sm font-semibold border border-[#2C74BC]/20 backdrop-blur-sm">
+            Why Us
+          </span>
+        </div>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <TrueFocus 
-            sentence="Why Choose Nexus"
+          <TrueFocus
+            sentence="Why Choose Won Solutions"
             manualMode={false}
             blurAmount={3}
             borderColor="#3b82f6"
             glowColor="rgba(59, 130, 246, 0.6)"
-            animationDuration={0.8}
+            animationDuration={0.5}
             pauseBetweenAnimations={1.5}
           />
         </motion.div>
-        
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
         >
-          At <span className="font-semibold text-blue-600">Nexus.com</span>, we don't just build software – we craft digital experiences that transform businesses and drive innovation forward.
+          At <span className="font-semibold text-blue-600">wonsol.com</span>, we
+          don't just build software – we craft digital experiences that
+          transform businesses and drive innovation forward.
         </motion.p>
       </div>
 
@@ -115,27 +128,29 @@ export function WhyChooseUs() {
           >
             <div className="relative p-8 border-2 border-gray-200 rounded-xl transition-all duration-300 hover:border-blue-400 hover:shadow-xl cursor-pointer h-full">
               {/* Hover Glow Effect */}
-              <div className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
-                hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-              } shadow-2xl shadow-blue-500/20`}></div>
-              
+              <div
+                className={`absolute inset-0 rounded-xl transition-opacity duration-300 ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                } shadow-2xl shadow-blue-500/20`}
+              ></div>
+
               {/* Content */}
               <div className="relative z-10">
                 {/* Icon */}
                 <div className="text-4xl mb-4 transform transition-transform duration-300 group-hover:scale-110">
                   {reason.icon}
                 </div>
-                
+
                 {/* Title */}
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
                   {reason.title}
                 </h3>
-                
+
                 {/* Description */}
                 <p className="text-gray-600 leading-relaxed mb-4">
                   {reason.description}
                 </p>
-                
+
                 {/* Stats */}
                 <div className="mt-auto">
                   <span className="inline-block px-3 py-1 text-sm font-semibold text-blue-600 border border-blue-200 rounded-full group-hover:bg-blue-50 transition-colors duration-300">
@@ -143,27 +158,35 @@ export function WhyChooseUs() {
                   </span>
                 </div>
               </div>
-              
+
               {/* Corner Decorations */}
-              <div className={`absolute top-2 left-2 w-3 h-3 border-l-2 border-t-2 border-blue-400 transition-opacity duration-300 ${
-                hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-              }`}></div>
-              <div className={`absolute top-2 right-2 w-3 h-3 border-r-2 border-t-2 border-blue-400 transition-opacity duration-300 ${
-                hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-              }`}></div>
-              <div className={`absolute bottom-2 left-2 w-3 h-3 border-l-2 border-b-2 border-blue-400 transition-opacity duration-300 ${
-                hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-              }`}></div>
-              <div className={`absolute bottom-2 right-2 w-3 h-3 border-r-2 border-b-2 border-blue-400 transition-opacity duration-300 ${
-                hoveredIndex === index ? 'opacity-100' : 'opacity-0'
-              }`}></div>
+              <div
+                className={`absolute top-2 left-2 w-3 h-3 border-l-2 border-t-2 border-blue-400 transition-opacity duration-300 ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                }`}
+              ></div>
+              <div
+                className={`absolute top-2 right-2 w-3 h-3 border-r-2 border-t-2 border-blue-400 transition-opacity duration-300 ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                }`}
+              ></div>
+              <div
+                className={`absolute bottom-2 left-2 w-3 h-3 border-l-2 border-b-2 border-blue-400 transition-opacity duration-300 ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                }`}
+              ></div>
+              <div
+                className={`absolute bottom-2 right-2 w-3 h-3 border-r-2 border-b-2 border-blue-400 transition-opacity duration-300 ${
+                  hoveredIndex === index ? "opacity-100" : "opacity-0"
+                }`}
+              ></div>
             </div>
           </motion.div>
         ))}
       </motion.div>
 
       {/* Call to Action */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.8 }}
@@ -186,7 +209,7 @@ export function WhyChooseUs() {
         <p className="text-sm text-gray-500 mt-4">
           Join 500+ satisfied clients who trust Nexus Solutions for their software needs
         </p>
-      </motion.div>
+      </motion.div> */}
 
       {/* Trust Indicators */}
       <motion.div
@@ -200,10 +223,10 @@ export function WhyChooseUs() {
             <span className="text-2xl">⭐</span>
             <span className="font-semibold">4.9/5 Client Rating</span>
           </div>
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <span className="text-2xl">🏆</span>
             <span className="font-semibold">ISO 27001 Certified</span>
-          </div>
+          </div> */}
           <div className="flex items-center gap-2">
             <span className="text-2xl">🌍</span>
             <span className="font-semibold">Global Reach</span>
