@@ -14,6 +14,7 @@ import CTASection from "@/components/Calltoaction";
 import ServicesSection2 from "@/components/services-section";
 import AboutSection from "@/components/about-section";
 import TestimonialCarousel from "@/components/testimonials";
+import { InfiniteSlider } from "@/components/logocarousal";
 
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);
@@ -32,7 +33,60 @@ export default function Home() {
     <div className="">
       <HeroSection />
 
+      <div className="space-y-4">
+        <InfiniteSlider
+          gap={32}
+          duration={20}
+          durationOnHover={60}
+          className="w-full bg-card rounded-lg p-8"
+        >
+          <div className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6">
+            <img
+              src="/apple-logo.png"
+              alt="Apple"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <div className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6">
+            <img
+              src="/google-logo.png"
+              alt="Google"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <div className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6">
+            <img
+              src="/microsoft-logo.png"
+              alt="Microsoft"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <div className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6">
+            <img
+              src="/netflix-inspired-logo.png"
+              alt="Netflix"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <div className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6">
+            <img
+              src="/spotify-logo.png"
+              alt="Spotify"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+          <div className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6">
+            <img
+              src="/tesla-logo.png"
+              alt="Tesla"
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        </InfiniteSlider>
+      </div>
+
       <AboutSection />
+
       <ServicesSection2 />
 
       {/* <IntroSection/>

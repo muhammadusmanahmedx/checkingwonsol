@@ -170,7 +170,7 @@ export default function TestimonialCarousel() {
 
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className=" text-[#2C74BC]">
-              What Our{" "}
+              Our{" "}
               {/* <Highlighter action="underline" color="#F9800">
                 Customers
               </Highlighter>{" "} */}
