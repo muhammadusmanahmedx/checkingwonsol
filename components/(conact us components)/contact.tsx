@@ -80,10 +80,10 @@ export default function ContactPage() {
             <div className="inline-block mb-4 px-6 py-2 bg-[#2C74BC]/10 rounded-full border border-[#2C74BC]/20">
               <span className="text-[#2C74BC] font-semibold text-sm tracking-wider uppercase">Get In Touch</span>
             </div>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] bg-clip-text text-transparent leading-tight">
-              Let's Create
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] bg-clip-text text-transparent leading-tight">
+              Let's Create Something Remarkable
               <br />
-              <span className="text-3xl sm:text-4xl lg:text-5xl">Something Remarkable</span>
+              {/* <span className="text-3xl sm:text-4xl lg:text-5xl">Something Remarkable</span> */}
             </h1>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6">
               Turn your ideas into cutting-edge software solutions with our dedicated team.
