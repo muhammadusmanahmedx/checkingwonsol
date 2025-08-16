@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
 
 interface ThreadsProps {
@@ -243,59 +243,7 @@ const Threads: React.FC<ThreadsProps> = ({
   );
 };
 
-const TechAnimation = () => {
-  return (
-    <div className="absolute  inset-0 z-5 pointer-events-none overflow-hidden">
-      {/* Floating Code Icon */}
-      <div
-        className="absolute top-1/4 right-16 animate-bounce"
-        style={{ animationDuration: "4s" }}
-      >
-        <div className="relative">
-          <div className="w-12 h-12 bg-[#2C74BC]/10 rounded-lg border-2 border-[#2C74BC]/30 flex items-center justify-center shadow-lg backdrop-blur-sm">
-            <span className="text-[#2C74BC] text-xl font-bold">{"</>"}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Gear Icon */}
-      <div
-        className="absolute top-2/3 left-20 animate-float"
-        style={{ animationDuration: "3s" }}
-      >
-        <div className="relative">
-          <div className="w-10 h-10 bg-[#2C74BC]/10 rounded-full border-2 border-[#2C74BC]/30 flex items-center justify-center shadow-lg backdrop-blur-sm">
-            <span className="text-[#2C74BC] text-lg">⚙️</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating Success Icon */}
-      <div
-        className="absolute top-1/2 right-1/4 animate-pulse"
-        style={{ animationDuration: "2s" }}
-      >
-        <div className="w-8 h-8 bg-[#2C74BC]/10 rounded-full border-2 border-[#2C74BC]/30 flex items-center justify-center shadow-lg backdrop-blur-sm">
-          <span className="text-[#2C74BC] text-sm">✨</span>
-        </div>
-      </div>
-
-      {/* Floating Arrow */}
-      <div
-        className="absolute top-1/3 left-1/3 animate-float"
-        style={{ animationDuration: "3.5s" }}
-      >
-        <div className="w-6 h-6 bg-[#2C74BC]/10 rounded-md border border-[#2C74BC]/30 flex items-center justify-center shadow-lg backdrop-blur-sm">
-          <span className="text-[#2C74BC] text-xs">→</span>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const HeroSection = () => {
-  const [activeNav, setActiveNav] = useState("Home");
-
+const HeroSection: React.FC = () => {
   useEffect(() => {
     const styleSheet = document.createElement("style");
     styleSheet.type = "text/css";
@@ -313,7 +261,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-gray-50 to-white">
+    <div className="relative w-full h-screen overflow-hidden ">
       {/* Background Animation */}
       <div className="absolute inset-0 z-0">
         <Threads
@@ -324,59 +272,17 @@ const HeroSection = () => {
         />
       </div>
 
-      {/* Tech Animation */}
-      {/* <TechAnimation /> */}
-
-      {/* Header */}
-      <header className="relative z-20 flex items-center justify-between px-8 py-6">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-[#2C74BC] rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">W</span>
-          </div>
-          <div>
-            <div className="text-2xl font-bold text-[#2C74BC]">
-              Won Solutions
-            </div>
-            <div className="text-xs text-gray-500 -mt-1">
-              World of Optimal Next-Gen Solutions
-            </div>
-          </div>
-        </div>
-
-        <nav className="absolute left-1/2 transform -translate-x-1/2">
-          <div className="flex items-center space-x-1 px-2 py-2 rounded-full bg-white/80 border border-[#2C74BC]/20 shadow-lg backdrop-blur-sm">
-            {["Home", "Services", "About", "Portfolio", "Contact"].map(
-              (item) => (
-                <button
-                  key={item}
-                  onClick={() => setActiveNav(item)}
-                  className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                    activeNav === item
-                      ? "bg-[#2C74BC] text-white shadow-lg transform scale-105"
-                      : "text-gray-600 hover:text-[#2C74BC] hover:bg-[#2C74BC]/5"
-                  }`}
-                >
-                  {item}
-                </button>
-              )
-            )}
-          </div>
-        </nav>
-
-        <button className="relative group px-6 py-3 rounded-lg font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-lg">
-          Get Started
-        </button>
-      </header>
-
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center -mt-16">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center">
         <div className="max-w-5xl mx-auto">
+          {/* Badge */}
           <div className="mb-6">
             <span className="inline-block px-4 py-2 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-sm font-medium border border-[#2C74BC]/20">
               Solutions That Succeed
             </span>
           </div>
 
+          {/* Main Headline */}
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
             <span className="text-gray-900">Crafting Solutions</span>
             <br />
@@ -385,12 +291,14 @@ const HeroSection = () => {
             </span>
           </h1>
 
-          <p className="text-xl md:text-2xl text-gray-600  mb-40 font-regular mb-12 max-w-3xl mx-auto">
+          {/* Description */}
+          <p className="text-xl md:text-2xl text-gray-600 mb-12 font-regular max-w-3xl mx-auto">
             Empowering businesses with optimal next-generation solutions that
             drive innovation, efficiency, and sustainable growth in the digital
             era
           </p>
 
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button className="group relative px-8 py-4 rounded-lg font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-lg">
               Explore Our Solutions
@@ -403,8 +311,6 @@ const HeroSection = () => {
               Schedule Consultation
             </button>
           </div>
-
-          {/* Key Features */}
         </div>
 
         {/* Scroll Indicator */}

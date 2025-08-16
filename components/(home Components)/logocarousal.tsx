@@ -1,29 +1,38 @@
 "use client";
 import { cn } from "@/lib/utils";
 import type React from "react";
-
 import { useMotionValue, animate, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import useMeasure from "react-use-measure";
 
 type InfiniteSliderProps = {
-  children: React.ReactNode;
   gap?: number;
   duration?: number;
   durationOnHover?: number;
   direction?: "horizontal" | "vertical";
   reverse?: boolean;
   className?: string;
+  // Optional: allow custom children to override default logos
+  children?: React.ReactNode;
 };
 
+const defaultLogos = [
+  { src: "/apple-logo.png", alt: "Apple" },
+  { src: "/google-logo.png", alt: "Google" },
+  { src: "/microsoft-logo.png", alt: "Microsoft" },
+  { src: "/netflix-inspired-logo.png", alt: "Netflix" },
+  { src: "/spotify-logo.png", alt: "Spotify" },
+  { src: "/tesla-logo.png", alt: "Tesla" },
+];
+
 export function InfiniteSlider({
-  children,
   gap = 16,
   duration = 50,
   durationOnHover = 100,
   direction = "horizontal",
   reverse = false,
   className,
+  children,
 }: InfiniteSliderProps) {
   const [currentDuration, setCurrentDuration] = useState(duration);
   const [ref, { width, height }] = useMeasure();
@@ -87,6 +96,24 @@ export function InfiniteSlider({
       }
     : {};
 
+  // Use custom children if provided, otherwise use default logos
+  const content = children || (
+    <>
+      {defaultLogos.map((logo, index) => (
+        <div
+          key={index}
+          className="flex-shrink-0 w-48 h-32 flex items-center justify-center p-6"
+        >
+          <img
+            src={logo.src}
+            alt={logo.alt}
+            className="max-w-full max-h-full object-contain"
+          />
+        </div>
+      ))}
+    </>
+  );
+
   return (
     <div className={cn("overflow-hidden", className)}>
       <motion.div
@@ -101,8 +128,8 @@ export function InfiniteSlider({
         ref={ref}
         {...hoverProps}
       >
-        {children}
-        {children}
+        {content}
+        {content}
       </motion.div>
     </div>
   );

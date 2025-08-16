@@ -31,33 +31,7 @@ export default function Home() {
 
   return (
     <div className="">
-      <HeroSection />
-
      
-
-      <AboutSection />
-
-      <ServicesSection2 />
-
-      {/* <IntroSection/>
-      <ServicesSection/>
-      <ClientTestimonials/> */}
-      {/* <ServiceHighlights /> */}
-
-      <WhyChooseUs />
-      <div className="mb-0">
-        <TestimonialCarousel />
-        <CTASection />
-      </div>
-
-      <div className="space-y-2">
-  <InfiniteSlider
-    gap={32}
-    duration={20}
-    durationOnHover={60}
-    className="w-full bg-card rounded-lg p-8"
-  />
-</div>
 
    
     </div>

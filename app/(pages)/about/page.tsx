@@ -1,21 +1,28 @@
 "use client";
 
 import { motion } from "framer-motion";
-import HeroSection from "@/components/hero";
-import ServicesSection from "@/components/services";
-import WhyChooseUs from "@/components/why-choose-us";
-import Footer from "@/components/footer";
+import HeroSection from "@/components/(home Components)/hero";
+import ServicesSection from "@/components/(home Components)/services";
+import WhyChooseUs from "@/components/(home Components)/why-choose-us";
+import Footer from "@/components/(home Components)/footer";
 import { useRef } from "react";
-import HeroSection2 from "@/components/companyintro";
-import IntroSection from "@/components/companyintro";
-import ServiceHighlights from "@/components/Servicesection";
-import ClientTestimonials from "@/components/clienttestimonials";
-import CTASection from "@/components/Calltoaction";
+import HeroSection2 from "@/components/(home Components)/companyintro";
+import IntroSection from "@/components/(home Components)/companyintro";
+import ServiceHighlights from "@/components/(home Components)/Servicesection";
+import ClientTestimonials from "@/components/(home Components)/clienttestimonials";
+import CTASection from "@/components/(home Components)/Calltoaction";
 
-import ServicesSection2 from "@/components/services-section";
-import AboutSection from "@/components/about-section";
-import { DicedHeroSection } from "@/components/(about Components)/Aboutfirst";
+import ServicesSection2 from "@/components/(home Components)/services-section";
+
+// import AboutUs, { DicedHeroSection } from "@/components/(about Components)/Aboutfirst";
 import { WorldMap } from "@/components/(about Components)/Wordlmap";
+import ArcTimelineDemo from "@/components/(about Components)/Aboutfirst";
+import WonSolutionsTimeline from "@/components/(about Components)/timeline";
+import { ArcTimeline, ArcTimelineItem } from "@/components/magicui/arc-timeline";
+import { Globe, Handshake, Lightbulb, Rocket, Target, Zap } from "lucide-react";
+import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
+import TestimonialFactBar from "@/components/(about Components)/stats";
+// import AboutSection from "@/components/(about Components)/Aboutfirst";
 
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);
@@ -53,52 +60,128 @@ export default function Home() {
     },
   ];
 
+
+const timelineData: ArcTimelineItem[] = [
+    {
+      time: "2020-2021",
+      steps: [
+        {
+          icon: <Lightbulb className="w-6 h-6" />,
+          content:
+            "Started with a dream of building my own company and making a difference in the business world. The vision was clear - create solutions that truly matter.",
+        },
+        {
+          icon: <Rocket className="w-6 h-6" />,
+          content:
+            "Began freelancing journey to gain real-world experience and build meaningful relationships with clients across different industries.",
+        },
+      ],
+    },
+    {
+      time: "2022",
+      steps: [
+        {
+          icon: <Handshake className="w-6 h-6" />,
+          content:
+            "Established strong partnerships with physical clients, delivering exceptional results and building trust through consistent quality work.",
+        },
+        {
+          icon: <Zap className="w-6 h-6" />,
+          content:
+            "Proved our capability by successfully handling complex projects and exceeding client expectations in every engagement.",
+        },
+      ],
+    },
+    {
+      time: "2023",
+      steps: [
+        {
+          icon: <Target className="w-6 h-6" />,
+          content:
+            "Took initiative to expand services and tackle enterprise-level challenges, demonstrating our growth and adaptability.",
+        },
+        {
+          icon: <Globe className="w-6 h-6" />,
+          content:
+            "Began planning international expansion with focus on contributing to global business transformation initiatives.",
+        },
+      ],
+    },
+    {
+      time: "2024-2025",
+      steps: [
+        {
+          icon: <Globe className="w-6 h-6" />,
+          content:
+            "Ready to expand overseas and become a key player in Middle East business transformation, particularly in Saudi Arabia, UAE, and Egypt.",
+        },
+        {
+          icon: <Target className="w-6 h-6" />,
+          content:
+            "Committed to being part of Middle East Vision 2030 - supporting Saudi Arabia's digital goals, UAE's innovation leadership, and Egypt's growing tech sector.",
+        },
+      ],
+    },
+  ]
+
+
+
+
   return (
     <>
-      <div className="min-h-screen bg-background relative">
-        <div className="absolute top-2/5 left-3/4 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none z-10">
-          <div className="flex items-center justify-center w-20 h-20">
-            <img
-              src="/placeholder-nbveg.png"
-              alt="Won Solutions Logo"
-              className="w-full h-full object-contain"
-            />
-          </div>
+    
+   
+{/* < ArcTimelineDemo/> */}
+<section className=" pt-12 px-4 text-center">
+        <div className="container mx-auto max-w-4xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-0" style={{ color: "#2C74BC" }}>
+            Our Journey
+          </h1>
+          {/* <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            From freelancing dreams to Middle East Vision 2030 partnership - discover how Won Solutions evolved into an
+            international business partner.
+          </p> */}
         </div>
+      </section>
 
-        <DicedHeroSection
-          topText="Innovation"
-          mainText="Won Solutions"
-          subMainText="Empowering businesses with cutting-edge software solutions. We deliver innovative technology services including cloud computing, AI integration, data analytics, and custom software development to drive your digital transformation forward."
-          buttonText="Get Started"
-          slides={ltrSlides}
-          onMainButtonClick={() => console.log("Main button clicked")}
-          onGridImageHover={(index) =>
-            console.log(`Grid image ${index} hovered`)
-          }
-          onGridImageClick={(index) =>
-            console.log(`Grid image ${index} clicked`)
-          }
-          topTextStyle={{ color: "#2C74BC" }}
-          mainTextStyle={{
-            fontSize: "4.5rem",
-            gradient: "linear-gradient(45deg, #2C74BC, #ffffff)",
-          }}
-          subMainTextStyle={{ color: "#2C74BC" }}
-          buttonStyle={{
-            backgroundColor: "#2C74BC",
-            color: "#ffffff",
-            borderRadius: "2rem",
-            hoverColor: "#ffffff",
-            hoverForeground: "#2C74BC",
-          }}
-          separatorColor="#2C74BC"
-          mobileBreakpoint={1000}
-          fontFamily="Arial, sans-serif"
+      {/* Arc Timeline */}
+      <section className="py-6 px-4">
+        <ArcTimeline
+          data={timelineData}
+          defaultActiveStep={{ time: "2024-2025", stepIndex: 0 }}
+          className="max-w-5xl"
         />
-      </div>
+      </section>
 
-      <div className="py-20 bg-white w-full min-h-screen">
+      <TestimonialFactBar/>
+
+      {/* Vision 2030 Focus */}
+      <section className="py-16 px-4" style={{ backgroundColor: "#2C74BC" }}>
+        <div className="container mx-auto max-w-4xl text-center text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready for Middle East Vision 2030</h2>
+          <p className="text-xl opacity-90 max-w-2xl mx-auto leading-relaxed">
+            Won Solutions is positioned to contribute to the digital transformation of Saudi Arabia, UAE, and Egypt -
+            bringing proven expertise to support regional growth and innovation goals.
+          </p>
+        </div>
+      </section>
+
+
+<div className="space-y-2">
+  <InfiniteSlider
+    gap={32}
+    duration={20}
+    durationOnHover={60}
+    className="w-full bg-card rounded-lg p-8"
+  />
+</div>
+       
+
+
+
+{/* //world map */}
+
+      <div className="py-20 px-8 bg-white w-full min-h-screen">
         {" "}
         {/* Changed background to white */}
         <div className="max-w-7xl mx-auto text-center px-4">
