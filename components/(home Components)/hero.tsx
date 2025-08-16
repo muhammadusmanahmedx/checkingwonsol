@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import type React from "react";
-import { useEffect, useRef } from "react";
-import { Renderer, Program, Mesh, Triangle, Color } from "ogl";
+import type React from "react"
+import { useEffect, useRef } from "react"
+import { Renderer, Program, Mesh, Triangle, Color } from "ogl"
 
 interface ThreadsProps {
-  color?: [number, number, number];
-  amplitude?: number;
-  distance?: number;
-  enableMouseInteraction?: boolean;
+  color?: [number, number, number]
+  amplitude?: number
+  distance?: number
+  enableMouseInteraction?: boolean
 }
 
 const vertexShader = `
@@ -19,7 +19,7 @@ varying vec2 vUv;
 void main() {
   vUv = uv;
   gl_Position = vec4(position, 0.0, 1.0);
-}`;
+}`
 
 const fragmentShader = `
 precision highp float;
@@ -116,17 +116,17 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
 
 void main() {
     mainImage(gl_FragColor, gl_FragCoord.xy);
-}`;
+}`
 
 function throttle(fn: (...args: any[]) => void, wait: number) {
-  let lastTime = 0;
+  let lastTime = 0
   return (...args: any[]) => {
-    const now = Date.now();
+    const now = Date.now()
     if (now - lastTime >= wait) {
-      fn(...args);
-      lastTime = now;
+      fn(...args)
+      lastTime = now
     }
-  };
+  }
 }
 
 const Threads: React.FC<ThreadsProps> = ({
@@ -136,23 +136,23 @@ const Threads: React.FC<ThreadsProps> = ({
   enableMouseInteraction = false,
   ...rest
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const animationFrameId = useRef<number | null>(null);
-  const lastFrameTime = useRef<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const animationFrameId = useRef<number | null>(null)
+  const lastFrameTime = useRef<number>(0)
 
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (!containerRef.current) return
 
-    const container = containerRef.current;
-    const renderer = new Renderer({ alpha: true });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    const container = containerRef.current
+    const renderer = new Renderer({ alpha: true })
+    const gl = renderer.gl
+    gl.clearColor(0, 0, 0, 0)
+    gl.enable(gl.BLEND)
+    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
 
-    container.appendChild(gl.canvas);
+    container.appendChild(gl.canvas)
 
-    const geometry = new Triangle(gl);
+    const geometry = new Triangle(gl)
     const program = new Program(gl, {
       vertex: vertexShader,
       fragment: fragmentShader,
@@ -164,89 +164,86 @@ const Threads: React.FC<ThreadsProps> = ({
         uDistance: { value: distance },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
       },
-    });
+    })
 
-    const mesh = new Mesh(gl, { geometry, program });
+    const mesh = new Mesh(gl, { geometry, program })
 
     const resize = throttle(() => {
-      const { clientWidth, clientHeight } = container;
-      renderer.setSize(clientWidth, clientHeight);
-      program.uniforms.iResolution.value.r = clientWidth;
-      program.uniforms.iResolution.value.g = clientHeight;
-      program.uniforms.iResolution.value.b = clientWidth / clientHeight;
-    }, 100);
+      const { clientWidth, clientHeight } = container
+      renderer.setSize(clientWidth, clientHeight)
+      program.uniforms.iResolution.value.r = clientWidth
+      program.uniforms.iResolution.value.g = clientHeight
+      program.uniforms.iResolution.value.b = clientWidth / clientHeight
+    }, 100)
 
-    window.addEventListener("resize", resize, { passive: true });
-    resize();
+    window.addEventListener("resize", resize, { passive: true })
+    resize()
 
-    const currentMouse = [0.5, 0.5];
-    let targetMouse = [0.5, 0.5];
+    const currentMouse = [0.5, 0.5]
+    let targetMouse = [0.5, 0.5]
 
     const handleMouseMove = throttle((e: MouseEvent) => {
-      const rect = container.getBoundingClientRect();
-      const x = (e.clientX - rect.left) / rect.width;
-      const y = 1.0 - (e.clientY - rect.top) / rect.height;
-      targetMouse = [x, y];
-    }, 50);
+      const rect = container.getBoundingClientRect()
+      const x = (e.clientX - rect.left) / rect.width
+      const y = 1.0 - (e.clientY - rect.top) / rect.height
+      targetMouse = [x, y]
+    }, 50)
 
     const handleMouseLeave = () => {
-      targetMouse = [0.5, 0.5];
-    };
+      targetMouse = [0.5, 0.5]
+    }
 
     if (enableMouseInteraction) {
       container.addEventListener("mousemove", handleMouseMove, {
         passive: true,
-      });
-      container.addEventListener("mouseleave", handleMouseLeave);
+      })
+      container.addEventListener("mouseleave", handleMouseLeave)
     }
 
     function update(t: number) {
       if (t - lastFrameTime.current < 33.33) {
-        animationFrameId.current = requestAnimationFrame(update);
-        return;
+        animationFrameId.current = requestAnimationFrame(update)
+        return
       }
-      lastFrameTime.current = t;
+      lastFrameTime.current = t
 
       if (enableMouseInteraction) {
-        const smoothing = 0.05;
-        currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0]);
-        currentMouse[1] += smoothing * (targetMouse[1] - currentMouse[1]);
-        program.uniforms.uMouse.value[0] = currentMouse[0];
-        program.uniforms.uMouse.value[1] = currentMouse[1];
+        const smoothing = 0.05
+        currentMouse[0] += smoothing * (targetMouse[0] - currentMouse[0])
+        currentMouse[1] += smoothing * (targetMouse[1] - currentMouse[1])
+        program.uniforms.uMouse.value[0] = currentMouse[0]
+        program.uniforms.uMouse.value[1] = currentMouse[1]
       } else {
-        program.uniforms.uMouse.value[0] = 0.5;
-        program.uniforms.uMouse.value[1] = 0.5;
+        program.uniforms.uMouse.value[0] = 0.5
+        program.uniforms.uMouse.value[1] = 0.5
       }
 
-      program.uniforms.iTime.value = t * 0.001;
-      renderer.render({ scene: mesh });
-      animationFrameId.current = requestAnimationFrame(update);
+      program.uniforms.iTime.value = t * 0.001
+      renderer.render({ scene: mesh })
+      animationFrameId.current = requestAnimationFrame(update)
     }
 
-    animationFrameId.current = requestAnimationFrame(update);
+    animationFrameId.current = requestAnimationFrame(update)
 
     return () => {
-      if (animationFrameId.current)
-        cancelAnimationFrame(animationFrameId.current);
-      window.removeEventListener("resize", resize);
+      if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current)
+      window.removeEventListener("resize", resize)
       if (enableMouseInteraction) {
-        container.removeEventListener("mousemove", handleMouseMove);
-        container.removeEventListener("mouseleave", handleMouseLeave);
+        container.removeEventListener("mousemove", handleMouseMove)
+        container.removeEventListener("mouseleave", handleMouseLeave)
       }
-      if (container.contains(gl.canvas)) container.removeChild(gl.canvas);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
-    };
-  }, [color, amplitude, distance, enableMouseInteraction]);
+      if (container.contains(gl.canvas)) container.removeChild(gl.canvas)
+      gl.getExtension("WEBGL_lose_context")?.loseContext()
+    }
+  }, [color, amplitude, distance, enableMouseInteraction])
 
-  return (
-    <div ref={containerRef} className="w-full h-full relative" {...rest} />
-  );
-};
+  return <div ref={containerRef} className="w-full h-full relative" {...rest} />
+}
 
 const HeroSection: React.FC = () => {
   useEffect(() => {
-    const styleSheet = document.createElement("style");
-    styleSheet.type = "text/css";
+    const styleSheet = document.createElement("style")
+    styleSheet.type = "text/css"
     styleSheet.innerText = `
       @keyframes float {
         0%, 100% { transform: translateY(0px); }
@@ -255,35 +252,35 @@ const HeroSection: React.FC = () => {
       .animate-float {
         animation: float 3s ease-in-out infinite;
       }
-    `;
-    document.head.appendChild(styleSheet);
-    return () => document.head.removeChild(styleSheet);
-  }, []);
+    `
+    document.head.appendChild(styleSheet)
+    return () => document.head.removeChild(styleSheet)
+  }, [])
 
   return (
-    <div className="relative w-full py-32   overflow-hidden ">
+    <div className="relative w-full  py-16 sm:py-24 lg:py-32 overflow-hidden">
       {/* Background Animation */}
       <div className="absolute inset-0 z-0">
         <Threads
           color={[0.173, 0.455, 0.737]} // #2C74BC
-          amplitude={1.2}
-          distance={0.3}
-          enableMouseInteraction={true}
+          amplitude={typeof window !== "undefined" && window.innerWidth < 768 ? 0.8 : 1.2}
+          distance={typeof window !== "undefined" && window.innerWidth < 768 ? 0.2 : 0.3}
+          enableMouseInteraction={typeof window !== "undefined" && window.innerWidth >= 768}
         />
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-8 text-center">
-        <div className="max-w-5xl mx-auto">
+      <div className="relative z-10 flex flex-col items-center justify-center  px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-5xl mx-auto w-full">
           {/* Badge */}
-          <div className="mb-6">
-            <span className="inline-block px-4 py-2 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-sm font-medium border border-[#2C74BC]/20">
+          <div className="mb-4 sm:mb-6">
+            <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-xs sm:text-sm font-medium border border-[#2C74BC]/20">
               Solutions That Succeed
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
             <span className="text-gray-900">Crafting Solutions</span>
             <br />
             <span className="bg-gradient-to-r from-[#2C74BC] via-[#2C74BC]/80 to-[#2C74BC] bg-clip-text text-transparent">
@@ -292,40 +289,37 @@ const HeroSection: React.FC = () => {
           </h1>
 
           {/* Description */}
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 font-regular max-w-3xl mx-auto">
-            Empowering businesses with optimal next-generation solutions that
-            drive innovation, efficiency, and sustainable growth in the digital
-            era
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-10 lg:mb-12 font-regular max-w-3xl mx-auto px-2 sm:px-0">
+            Empowering businesses with optimal next-generation solutions that drive innovation, efficiency, and
+            sustainable growth in the digital era
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="group relative px-8 py-4 rounded-lg font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-lg">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0">
+            <button className="w-full sm:w-auto group relative px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 hover:-translate-y-1 shadow-lg text-sm sm:text-base">
               Explore Our Solutions
-              <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">
-                →
-              </span>
+              <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
             </button>
 
-            <button className="relative px-8 py-4 rounded-lg font-semibold text-[#2C74BC] border-2 border-[#2C74BC] hover:bg-[#2C74BC] hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1">
+            <button className="w-full sm:w-auto relative px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-[#2C74BC] border-2 border-[#2C74BC] hover:bg-[#2C74BC] hover:text-white transition-all duration-300 hover:scale-105 hover:-translate-y-1 text-sm sm:text-base">
               Schedule Consultation
             </button>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="pt-12  bottom-8 left-1/2 transform translate-x-1  animate-bounce">
-          <div className="w-6 h-10 border-2 border-[#2C74BC]/40 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-[#2C74BC] rounded-full mt-2 animate-pulse" />
+        <div className=" pt-12 sm:pt-12 sm: left-1/2 transform translate-x-1 animate-bounce">
+          <div className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-[#2C74BC]/40 rounded-full flex justify-center">
+            <div className="w-1 h-2 sm:h-3 bg-[#2C74BC] rounded-full mt-1.5 sm:mt-2 animate-pulse" />
           </div>
         </div>
       </div>
 
       {/* Background Decorations */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#2C74BC]/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#2C74BC]/3 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/4 left-1/4 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#2C74BC]/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-72 sm:h-72 lg:w-96 lg:h-96 bg-[#2C74BC]/3 rounded-full blur-3xl"></div>
     </div>
-  );
-};
+  )
+}
 
-export default HeroSection;
+export default HeroSection
