@@ -142,7 +142,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         onFocus={() => setFocusedField("name")}
                         onBlur={() => setFocusedField(null)}
-                        className={`peer w-full h-12 px-4 pt-6 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
+                        className={`peer w-full h-14 px-4 pt-7 pb-2 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
                           formErrors.name ? "border-red-300" : ""
                         }`}
                         aria-invalid={!!formErrors.name}
@@ -150,8 +150,8 @@ export default function ContactPage() {
                       />
                       <label
                         htmlFor="name"
-                        className={`absolute left-4 top-3.5 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:text-xs peer-focus:-top-2 peer-focus:text-[#2C74BC] ${
-                          formData.name ? "text-xs -top-2 text-[#2C74BC]" : ""
+                        className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
+                          formData.name ? "text-xs top-1 text-[#2C74BC]" : ""
                         }`}
                       >
                         Full Name *
@@ -172,7 +172,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         onFocus={() => setFocusedField("email")}
                         onBlur={() => setFocusedField(null)}
-                        className={`peer w-full h-12 px-4 pt-6 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
+                        className={`peer w-full h-14 px-4 pt-7 pb-2 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
                           formErrors.email ? "border-red-300" : ""
                         }`}
                         aria-invalid={!!formErrors.email}
@@ -180,8 +180,8 @@ export default function ContactPage() {
                       />
                       <label
                         htmlFor="email"
-                        className={`absolute left-4 top-3.5 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:text-xs peer-focus:-top-2 peer-focus:text-[#2C74BC] ${
-                          formData.email ? "text-xs -top-2 text-[#2C74BC]" : ""
+                        className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
+                          formData.email ? "text-xs top-1 text-[#2C74BC]" : ""
                         }`}
                       >
                         Email Address *
@@ -203,12 +203,12 @@ export default function ContactPage() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField("company")}
                       onBlur={() => setFocusedField(null)}
-                      className="peer w-full h-12 px-4 pt-6 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md"
+                      className="peer w-full h-14 px-4 pt-7 pb-2 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md"
                     />
                     <label
                       htmlFor="company"
-                      className={`absolute left-4 top-3.5 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:text-xs peer-focus:-top-2 peer-focus:text-[#2C74BC] ${
-                        formData.company ? "text-xs -top-2 text-[#2C74BC]" : ""
+                      className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
+                        formData.company ? "text-xs top-1 text-[#2C74BC]" : ""
                       }`}
                     >
                       Company
@@ -225,7 +225,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       onFocus={() => setFocusedField("subject")}
                       onBlur={() => setFocusedField(null)}
-                      className={`peer w-full h-12 px-4 pt-6 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
+                      className={`peer w-full h-14 px-4 pt-7 pb-2 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
                         formErrors.subject ? "border-red-300" : ""
                       }`}
                       aria-invalid={!!formErrors.subject}
@@ -233,8 +233,8 @@ export default function ContactPage() {
                     />
                     <label
                       htmlFor="subject"
-                      className={`absolute left-4 top-3.5 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:text-xs peer-focus:-top-2 peer-focus:text-[#2C74BC] ${
-                        formData.subject ? "text-xs -top-2 text-[#2C74BC]" : ""
+                      className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
+                        formData.subject ? "text-xs top-1 text-[#2C74BC]" : ""
                       }`}
                     >
                       Subject *
@@ -256,7 +256,7 @@ export default function ContactPage() {
                       onFocus={() => setFocusedField("message")}
                       onBlur={() => setFocusedField(null)}
                       rows={5}
-                      className={`peer w-full p-4 pt-6 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white resize-none text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
+                      className={`peer w-full p-4 pt-7 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white resize-none text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
                         formErrors.message ? "border-red-300" : ""
                       }`}
                       aria-invalid={!!formErrors.message}
@@ -264,8 +264,8 @@ export default function ContactPage() {
                     />
                     <label
                       htmlFor="message"
-                      className={`absolute left-4 top-3.5 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-3.5 peer-focus:text-xs peer-focus:-top-2 peer-focus:text-[#2C74BC] ${
-                        formData.message ? "text-xs -top-2 text-[#2C74BC]" : ""
+                      className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
+                        formData.message ? "text-xs top-1 text-[#2C74BC]" : ""
                       }`}
                     >
                       Message *
@@ -280,7 +280,7 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-12 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:scale-[1.01] relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    className="w-full h-12 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                     aria-label={isSubmitting ? "Submitting form" : "Submit form"}
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700" />
@@ -369,13 +369,13 @@ export default function ContactPage() {
                     ].map((item, index) => (
                       <div
                         key={index}
-                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-[#2C74BC]/5 hover:to-[#2C74BC]/10 transition-all duration-300 hover:shadow-md hover:scale-[1.02] hover:border hover:border-[#2C74BC]/20 group cursor-pointer transform"
+                        className="flex items-start space-x-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-[#2C74BC]/5 hover:to-[#2C74BC]/10 transition-all duration-300 hover:shadow-md hover:border hover:border-[#2C74BC]/20 group cursor-pointer"
                         role="button"
                         tabIndex={0}
                         aria-label={`${item.title} information`}
                       >
                         <div className="flex-shrink-0 mt-1">
-                          <div className="w-8 h-8 bg-[#2C74BC]/10 rounded-lg flex items-center justify-center group-hover:bg-[#2C74BC] group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
+                          <div className="w-8 h-8 bg-[#2C74BC]/10 rounded-lg flex items-center justify-center group-hover:bg-[#2C74BC] group-hover:shadow-lg transition-all duration-300">
                             <item.icon className="w-4 h-4 text-[#2C74BC] group-hover:text-white transition-colors" />
                           </div>
                         </div>

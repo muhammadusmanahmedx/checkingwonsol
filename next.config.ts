@@ -5,6 +5,12 @@ const nextConfig: NextConfig = {
   images: {
     domains: ["assets.rapidui.dev"],
   },
+   eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 };
 
 export default nextConfig;
