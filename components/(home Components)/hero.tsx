@@ -261,7 +261,7 @@ const HeroSection: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden ">
+    <div className="relative w-full py-32   overflow-hidden ">
       {/* Background Animation */}
       <div className="absolute inset-0 z-0">
         <Threads
@@ -314,7 +314,7 @@ const HeroSection: React.FC = () => {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="pt-12  bottom-8 left-1/2 transform translate-x-1  animate-bounce">
           <div className="w-6 h-10 border-2 border-[#2C74BC]/40 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-[#2C74BC] rounded-full mt-2 animate-pulse" />
           </div>

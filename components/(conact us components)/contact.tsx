@@ -12,7 +12,15 @@ export default function ContactPage() {
   })
   const [focusedField, setFocusedField] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [formErrors, setFormErrors] = useState({})
+  type FormErrors = {
+    name?: string
+    email?: string
+    company?: string
+    subject?: string
+    message?: string
+    submit?: string
+  }
+  const [formErrors, setFormErrors] = useState<FormErrors>({})
   const [mapLoaded, setMapLoaded] = useState(false)
 
   const validateForm = () => {
