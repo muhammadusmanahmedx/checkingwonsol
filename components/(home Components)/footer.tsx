@@ -1,3 +1,4 @@
+
 "use client";
 import {
   Code2,
@@ -7,10 +8,17 @@ import {
   Linkedin,
   Instagram,
   ArrowRight,
-  ExternalLink,
 } from "lucide-react";
 
-export default function Footer() {
+interface FooterProps {
+  logoUrl?: string;
+  logoAlt?: string;
+}
+
+export default function Footer({ 
+  logoUrl = "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755367351/bg_set_big_zgfqyi.png", 
+  logoAlt = "Won Solutions Logo" 
+}: FooterProps) {
   return (
     <footer className="relative bg-[#2C74BC] text-white">
       <div className="container mx-auto px-6 py-12">
@@ -19,10 +27,25 @@ export default function Footer() {
           {/* Company Section */}
           <div className="lg:col-span-5">
             <div className="flex items-center space-x-3 mb-8">
-              <div className="bg-white rounded-xl p-3">
-                <Code2 className="h-8 w-8 text-[#2C74BC]" />
+              {logoUrl ? (
+                <div className=" rounded-xl p-3">
+                  <img
+                    src={logoUrl}
+                    alt={logoAlt}
+                    className="h-12 w-12 object-contain"
+                  />
+                </div>
+              ) : (
+                <div className="bg-white rounded-xl p-3">
+                  <Code2 className="h-8 w-8 text-[#2C74BC]" />
+                </div>
+              )}
+              <div className="flex flex-col">
+                <span className="text-3xl font-bold text-white">WonSolutions</span>
+                <p className="text-sm text-blue-100">
+                  World of Optimal Next-Gen Solutions
+                </p>
               </div>
-              <span className="text-3xl font-bold text-white">WonSol</span>
             </div>
             <p className="text-white/80 text-lg leading-relaxed max-w-md">
               WonSol (Won Solutions) is your trusted partner in delivering
@@ -40,25 +63,25 @@ export default function Footer() {
                 <div className="absolute -bottom-2 left-0 w-8 h-1 bg-white rounded-full"></div>
               </h3>
               <ul className="space-y-3">
-                {["About Us", "Our Team", "Careers", "News & Blog"].map(
-                  (item, index) => (
-                    <li key={index}>
-                      <a
-                        href={`/${item
-                          .toLowerCase()
-                          .replace(/\s+/g, "-")
-                          .replace("&", "")}`}
-                        className="text-white/70 hover:text-white transition-colors duration-300"
-                      >
-                        {item}
-                      </a>
-                    </li>
-                  )
-                )}
+                {[
+                  { name: "About Us", href: "/about" },
+                  { name: "Services", href: "/Services" },
+                  { name: "Portfolio", href: "/portfolio" },
+                  { name: "Contact", href: "/contact" },
+                ].map((item, index) => (
+                  <li key={index}>
+                    <a
+                      href={item.href}
+                      className="text-white/70 hover:text-white transition-colors duration-300"
+                    >
+                      {item.name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Services Links */}
+            {/* Services Links - First Column */}
             <div>
               <h3 className="text-xl font-bold mb-6 text-white relative">
                 Services
@@ -66,48 +89,46 @@ export default function Footer() {
               </h3>
               <ul className="space-y-3">
                 {[
-                  "Web Development",
-                  "Mobile Apps",
-                  "Cloud Solutions",
-                  "AI & Machine Learning",
+                  { name: "Web Development"},
+                  { name: "Web Design" },
+                  { name: "Website Redesign" },
+                  { name: "UI Design" },
+                  { name: "UI/UX Design"},
                 ].map((item, index) => (
                   <li key={index}>
                     <a
-                      href={`/services/${item
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")
-                        .replace("&", "")}`}
+                      href={item.href}
                       className="text-white/70 hover:text-white transition-colors duration-300"
                     >
-                      {item}
+                      {item.name}
                     </a>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Resources Links */}
+            {/* Services Links - Second Column */}
             <div>
-              <h3 className="text-xl font-bold mb-6 text-white relative">
-                Resources
+              <h3 className="text-xl font-bold mb-6 text-white relative opacity-0">
+                Services
                 <div className="absolute -bottom-2 left-0 w-8 h-1 bg-white rounded-full"></div>
               </h3>
               <ul className="space-y-3">
                 {[
-                  "Documentation",
-                  "Support Center",
-                  "Case Studies",
-                  "API Reference",
+                  { name: "AI & Machine Learning" },
+                  { name: "Automation" },
+                  { name: "Product Design" },
+                  { name: "Full Stack Development"},
+                  { name: "Mobile Apps" },
+             
+                 
                 ].map((item, index) => (
                   <li key={index}>
                     <a
-                      href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                      className="text-white/70 hover:text-white transition-colors duration-300"
+                      
+                      className="text-white/70 hover:text-white  transition-colors duration-300"
                     >
-                      {item}
-                      {item.includes("API") && (
-                        <ExternalLink className="inline h-3 w-3 ml-1 opacity-60" />
-                      )}
+                      {item.name}
                     </a>
                   </li>
                 ))}
@@ -199,17 +220,19 @@ export default function Footer() {
             © {new Date().getFullYear()} WonSol. All rights reserved.
           </p>
           <div className="flex items-center space-x-8">
-            {["Privacy Policy", "Terms of Service", "Cookie Settings"].map(
-              (item, index) => (
-                <a
-                  key={index}
-                  href={`/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  className="text-white/60 hover:text-white transition-colors text-sm"
-                >
-                  {item}
-                </a>
-              )
-            )}
+            {[
+              { name: "Privacy Policy", href: "/privacy-policy" },
+              { name: "Terms of Service", href: "/terms-of-service" },
+              { name: "Cookie Settings", href: "/cookie-settings" },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href={item.href}
+                className="text-white/60 hover:text-white transition-colors text-sm"
+              >
+                {item.name}
+              </a>
+            ))}
           </div>
         </div>
 

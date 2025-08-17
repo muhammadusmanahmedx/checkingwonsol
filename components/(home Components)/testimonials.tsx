@@ -187,11 +187,11 @@ export default function TestimonialCarousel() {
 
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className=" text-[#2C74BC]">
-              Our{" "}
+             
               <span className=" text-white">
                 <Highlighter action="underline" color="#2C74BC">
                   <Highlighter action="highlight" color="#2C74BC">
-                    Customers
+                    Our{" "}Customers
                   </Highlighter>{" "}
                 </Highlighter>
               </span>
@@ -206,36 +206,36 @@ export default function TestimonialCarousel() {
 
         {/* Carousel Container */}
         <div className="relative">
-          {/* Navigation Buttons */}
+          {/* Navigation Buttons - Hidden on mobile, shown on larger screens */}
           <button
             onClick={prevSlide}
             disabled={currentIndex === 0}
-            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 border-2 border-[#2C74BC] rounded-full p-3 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#2C74BC]/20 ${
+            className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 border-2 border-[#2C74BC] rounded-full p-2 sm:p-3 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#2C74BC]/20 hidden sm:block ${
               currentIndex === 0
                 ? "bg-gray-100 text-gray-400 border-gray-300 cursor-not-allowed opacity-50"
                 : "bg-white hover:bg-[#2C74BC] text-[#2C74BC] hover:text-white hover:shadow-xl transform hover:scale-105"
             }`}
             aria-label="Previous testimonial"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-4 h-4 sm:w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           <button
             onClick={nextSlide}
             disabled={currentIndex === testimonials.length - 1}
-            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 border-2 border-[#2C74BC] rounded-full p-3 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#2C74BC]/20 ${
+            className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 border-2 border-[#2C74BC] rounded-full p-2 sm:p-3 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#2C74BC]/20 hidden sm:block ${
               currentIndex === testimonials.length - 1
                 ? "bg-gray-100 text-gray-400 border-gray-300 cursor-not-allowed opacity-50"
                 : "bg-white hover:bg-[#2C74BC] text-[#2C74BC] hover:text-white hover:shadow-xl transform hover:scale-105"
             }`}
             aria-label="Next testimonial"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-4 h-4 sm:w-5 h-5 md:w-6 md:h-6" />
           </button>
 
           {/* Testimonials */}
           <div
-            className="overflow-hidden cursor-grab active:cursor-grabbing"
+            className="overflow-hidden cursor-grab active:cursor-grabbing mt-6 touch-pan-y"
             onMouseDown={handleDragStart}
             onMouseMove={handleDragMove}
             onMouseUp={handleDragEnd}
@@ -256,11 +256,11 @@ export default function TestimonialCarousel() {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  className="w-full flex-shrink-0 flex flex-col items-center px-8"
+                  className="w-full flex-shrink-0 flex flex-col items-center px-4 sm:px-6 md:px-8"
                   style={{ userSelect: "none" }}
                 >
                   {/* Company Logo */}
-                  <div className="mb-8 h-14 flex items-center justify-center">
+                  <div className="mb-6 sm:mb-10 h-12 sm:h-14 md:h-14 flex items-center justify-center w-full">
                     <CompanyLogo
                       company={testimonial.company}
                       logo={testimonial.logo}
@@ -268,13 +268,13 @@ export default function TestimonialCarousel() {
                   </div>
 
                   {/* Review */}
-                  <blockquote className="max-w-4xl text-balance text-center text-xl sm:text-2xl lg:text-3xl font-Regular text-gray-800 leading-relaxed mb-8">
+                  <blockquote className="max-w-sm sm:max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl text-balance text-center text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-regular text-gray-800 leading-relaxed mb-6 sm:mb-8 px-2">
                     "{testimonial.review}"
                   </blockquote>
 
                   {/* Author Info */}
                   <div className="flex flex-col items-center">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden bg-gray-100 ring-4 ring-[#2C74BC]/20 mb-4">
+                    <div className="relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full overflow-hidden bg-gray-100 ring-2 sm:ring-4 ring-[#2C74BC]/20 mb-3 sm:mb-4">
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
@@ -282,10 +282,10 @@ export default function TestimonialCarousel() {
                         draggable={false}
                       />
                     </div>
-                    <h5 className="text-lg font-semibold text-gray-900">
+                    <h5 className="text-base sm:text-lg font-semibold text-gray-900 text-center">
                       {testimonial.name}
                     </h5>
-                    <h5 className="text-base text-gray-500 mt-1">
+                    <h5 className="text-sm sm:text-base text-gray-500 mt-1 text-center">
                       {testimonial.role}
                     </h5>
                   </div>
@@ -296,12 +296,12 @@ export default function TestimonialCarousel() {
         </div>
 
         {/* Navigation Dots */}
-        <div className="mt-12 text-center">
-          <div className="flex items-center justify-center gap-3">
+        <div className="mt-8 sm:mt-10 md:mt-12 text-center">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
             {testimonials.map((_, index) => (
               <button
                 key={index}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#2C74BC]/50 focus:ring-offset-2 ${
+                className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-[#2C74BC]/50 focus:ring-offset-2 ${
                   index === currentIndex
                     ? "bg-[#2C74BC] scale-110 shadow-lg"
                     : "bg-[#2C74BC]/30 hover:bg-[#2C74BC]/50"
@@ -314,15 +314,44 @@ export default function TestimonialCarousel() {
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-8 max-w-md mx-auto">
-          <div className="w-full bg-[#2C74BC]/10 rounded-full h-1">
+        <div className="mt-6 sm:mt-8 max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+          <div className="w-full bg-[#2C74BC]/10 rounded-full h-0.5 sm:h-1">
             <div
-              className="bg-[#2C74BC] h-1 rounded-full transition-all duration-500 ease-out"
+              className="bg-[#2C74BC] h-0.5 sm:h-1 rounded-full transition-all duration-500 ease-out"
               style={{
                 width: `${((currentIndex + 1) / testimonials.length) * 100}%`,
               }}
             />
           </div>
+        </div>
+
+        {/* Mobile Navigation Buttons */}
+        <div className="mt-6 sm:mt-8 flex justify-center gap-4 sm:hidden">
+          <button
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+            className={`border-2 border-[#2C74BC] rounded-full p-3 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#2C74BC]/20 ${
+              currentIndex === 0
+                ? "bg-gray-100 text-gray-400 border-gray-300 cursor-not-allowed opacity-50"
+                : "bg-white hover:bg-[#2C74BC] text-[#2C74BC] hover:text-white hover:shadow-xl transform active:scale-95"
+            }`}
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={nextSlide}
+            disabled={currentIndex === testimonials.length - 1}
+            className={`border-2 border-[#2C74BC] rounded-full p-3 transition-all duration-300 shadow-lg focus:outline-none focus:ring-4 focus:ring-[#2C74BC]/20 ${
+              currentIndex === testimonials.length - 1
+                ? "bg-gray-100 text-gray-400 border-gray-300 cursor-not-allowed opacity-50"
+                : "bg-white hover:bg-[#2C74BC] text-[#2C74BC] hover:text-white hover:shadow-xl transform active:scale-95"
+            }`}
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
         </div>
       </div>
     </section>

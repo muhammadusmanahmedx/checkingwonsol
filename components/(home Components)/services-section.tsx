@@ -2,8 +2,6 @@
 
 import CircularGallery from "./circular-gallary"
 
-
-
 const ServicesSection = () => {
   const services = [
     {
@@ -49,54 +47,56 @@ const ServicesSection = () => {
   ]
 
   return (
-    <section className="relative w-full py-20 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section className="relative w-full py-16 sm:py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
       {/* Background Decorations */}
-      <div className="absolute top-1/4 left-1/6 w-72 h-72 bg-[#2C74BC]/3 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-1/4 right-1/6 w-72 h-72 bg-[#2C74BC]/2 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/4 left-1/6 w-40 sm:w-72 h-40 sm:h-72 bg-[#2C74BC]/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 right-1/6 w-40 sm:w-72 h-40 sm:h-72 bg-[#2C74BC]/10 rounded-full blur-3xl"></div>
 
       {/* Section Header */}
-      <div className="relative z-10 text-center mb-16 px-8">
-        <div className="mb-6">
-          <span className="inline-block px-6 py-3 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-sm font-semibold border border-[#2C74BC]/20 backdrop-blur-sm">
+      <div className="relative z-10 text-center mb-12 sm:mb-16 px-4 sm:px-8">
+        {/* Badge */}
+        <div className="mb-3 sm:mb-6">
+          <span className="inline-block px-3 py-1 sm:px-4 sm:py-2 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-xs sm:text-sm font-medium border border-[#2C74BC]/20">
             Our Expertise
           </span>
         </div>
 
-        <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
           <span className="text-gray-900">Comprehensive</span>
           <br />
           <span className="bg-gradient-to-r from-[#2C74BC] via-[#2C74BC]/80 to-[#2C74BC] bg-clip-text text-transparent">
             Technology Services
           </span>
-        </h2>
+        </h1>
 
-        <p className="text-xl text-gray-600 font-light max-w-3xl mx-auto leading-relaxed">
-          From cutting-edge web development to AI integration, we deliver solutions that transform your business and
-          drive success in the digital landscape
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-10 lg:mb-12 max-w-2xl mx-auto">
+          From cutting-edge web development to AI integration, we deliver solutions that transform your business and drive success in the digital landscape.
         </p>
       </div>
 
       {/* Interactive Services Gallery */}
-      <div className="relative z-10 h-96 mb-12">
+      <div className="relative z-10 h-72 sm:h-96 md:h-[500px] mb-10 sm:mb-12 px-2 sm:px-0">
         <CircularGallery
           items={services}
-          bend={2} // Changed from 0 to 0.5 for a subtle bend
+          bend={2}
           textColor="#2C74BC"
           borderRadius={0.05}
-          font="bold 24px Inter, sans-serif"
+          font="bold 18px Inter, sans-serif"
           scrollSpeed={2}
           scrollEase={0.08}
         />
       </div>
 
       {/* Instructions */}
-      <div className="relative z-10 text-center px-8">
-        <p className="text-gray-500 text-sm mb-4">Scroll horizontally or drag to explore our services</p>
+      <div className="relative z-10 text-center px-4 sm:px-8">
+        <p className="text-gray-500 text-xs sm:text-sm mb-4">
+          Scroll horizontally or drag to explore our services
+        </p>
       </div>
 
       {/* Call to Action */}
-      <div className="relative z-10 text-center mt-12 px-8">
-        <button className="group relative px-8 py-4 rounded-xl font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 shadow-xl">
+      <div className="relative z-10 text-center mt-10 sm:mt-12 px-4">
+        <button className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 shadow-xl text-sm sm:text-base">
           View All Services
           <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
         </button>

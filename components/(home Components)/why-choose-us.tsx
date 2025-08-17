@@ -77,26 +77,30 @@ export function WhyChooseUs() {
     <section className="py-20 px-4 max-w-7xl mx-auto">
       {/* Header Section */}
       <div className="text-center mb-16">
-        <div className="mb-12">
-          <span className="inline-block px-6 py-3 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-sm font-semibold border border-[#2C74BC]/20 backdrop-blur-sm">
-            Why Us
-          </span>
-        </div>
+
+        
+        <div className="mb-4 sm:mb-6">
+            <span className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-xs sm:text-sm font-medium border border-[#2C74BC]/20">
+             Why Choose Us
+            </span>
+          </div>
+
+
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <TrueFocus
-            sentence="Why Choose Won Solutions"
-            manualMode={false}
-            blurAmount={3}
-            borderColor="#3b82f6"
-            glowColor="rgba(59, 130, 246, 0.6)"
-            animationDuration={0.5}
-            pauseBetweenAnimations={1.5}
-          />
+           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+            
+            <span className="text-gray-900">Why Choose</span>
+            <br />
+            <span className="bg-gradient-to-r from-[#2C74BC] via-[#2C74BC]/80 to-[#2C74BC] bg-clip-text text-transparent">
+              Won Solutions
+            </span>
+          </h1>
+         
         </motion.div>
 
         <motion.p
@@ -105,9 +109,12 @@ export function WhyChooseUs() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
         >
-          At <span className="font-semibold text-blue-600">wonsol.com</span>, we
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-10 lg:mb-12 font-regular max-w-3xl mx-auto px-2 sm:px-0">
+            At <span className="font-semibold text-blue-600">wonsol.com</span>, we
           don't just build software – we craft digital experiences that
           transform businesses and drive innovation forward.
+          </p>
+         
         </motion.p>
       </div>
 
@@ -227,14 +234,14 @@ export function WhyChooseUs() {
             <span className="text-2xl">🏆</span>
             <span className="font-semibold">ISO 27001 Certified</span>
           </div> */}
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <span className="text-2xl">🌍</span>
             <span className="font-semibold">Global Reach</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-2xl">⚡</span>
             <span className="font-semibold">Agile Methodology</span>
-          </div>
+          </div> */}
         </div>
       </motion.div>
     </section>
