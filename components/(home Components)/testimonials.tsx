@@ -46,7 +46,7 @@ const testimonials = [
     company: "AgriTech",
     logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755413121/Frame_148_aafhum.png",
     avatar:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format",
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755440321/730411709067079.67ce074506cff_sbeapv.jpg",
     name: "Shehroz Khan",
     role: "CEO, AgriTech",
     review:
@@ -56,7 +56,7 @@ const testimonials = [
     company: "Falah Charity",
     logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png",
     avatar:
-      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755411812/confident-pakistani-businessman-posing-in-black-suit-for-professional-headshot-suitable-for-corporate-branding-and-marketing-photo_titxdr.jpg",
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755440285/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129416_jbaj6r.avif",
     name: "Dr. Naeem",
     role: "CEO, Falah Charity",
     review:
