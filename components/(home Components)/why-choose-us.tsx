@@ -219,31 +219,7 @@ export function WhyChooseUs() {
       </motion.div> */}
 
       {/* Trust Indicators */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, delay: 1 }}
-        className="mt-16 pt-8 border-t border-gray-200"
-      >
-        <div className="flex flex-wrap justify-center items-center gap-8 text-gray-400">
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">⭐</span>
-            <span className="font-semibold">4.9/5 Client Rating</span>
-          </div>
-          {/* <div className="flex items-center gap-2">
-            <span className="text-2xl">🏆</span>
-            <span className="font-semibold">ISO 27001 Certified</span>
-          </div> */}
-          {/* <div className="flex items-center gap-2">
-            <span className="text-2xl">🌍</span>
-            <span className="font-semibold">Global Reach</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-2xl">⚡</span>
-            <span className="font-semibold">Agile Methodology</span>
-          </div> */}
-        </div>
-      </motion.div>
+     
     </section>
   );
 }

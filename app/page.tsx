@@ -15,6 +15,7 @@ import ServicesSection2 from "@/components/(home Components)/services-section";
 import AboutSection from "@/components/(home Components)/about-section";
 import TestimonialCarousel from "@/components/(home Components)/testimonials";
 import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
+// import { HeroSectionnew } from "@/components/(home Components)/hero-section";
 
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);
@@ -33,7 +34,7 @@ export default function Home() {
     <div className="">
       <HeroSection />
 
-     
+     {/* <HeroSectionnew/> */}
 
       <AboutSection />
 

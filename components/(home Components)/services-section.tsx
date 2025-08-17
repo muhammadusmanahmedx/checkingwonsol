@@ -47,7 +47,7 @@ const ServicesSection = () => {
   ]
 
   return (
-    <section className="relative w-full py-16 sm:py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <section className="relative w-full py-16 sm:py-20 lg:py-28  overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-1/4 left-1/6 w-40 sm:w-72 h-40 sm:h-72 bg-[#2C74BC]/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/4 right-1/6 w-40 sm:w-72 h-40 sm:h-72 bg-[#2C74BC]/10 rounded-full blur-3xl"></div>

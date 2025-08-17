@@ -21,7 +21,7 @@ const defaultLogos = [
   { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png", alt: "SalSabeel Scents" },
   { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414869/Frame_150_rd1ng3.png", alt: "WorkForce Pro" },
   { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755413216/Frame_148_1_g7ibmy.png", alt: "Agritech" },
-  { src: "/spotify-logo.png", alt: "Fn Nails Studio" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755428469/Frame_151_1_fnaqaz.png", alt: "Fn Nails Studio" },
   { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png", alt: "Falah Charity" },
 ];
 
