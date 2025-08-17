@@ -167,7 +167,7 @@ const CircularGallery = ({
       </div>
 
       {/* Blue Navigation Buttons */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
+      <div className="absolute bottom-2 z-20 left-1/2 transform  lg:bottom-4 -translate-x-1/2 flex gap-4">
         <button
           onClick={scrollToLeft}
           className="bg-[#2C74BC] hover:bg-[#2C74BC]/90 shadow-lg hover:shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"

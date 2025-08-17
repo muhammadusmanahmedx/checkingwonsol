@@ -26,6 +26,7 @@ import {
   IconStar,
   IconCheck,
 } from "@tabler/icons-react"
+import AboutUsSection from "@/components/breadcrum";
 
 const ServiceCard = ({ service, index }) => {
   const [isHovered, setIsHovered] = useState(false)
@@ -243,16 +244,25 @@ export default function ServicesPage() {
   ]
 
   return (
+
+    <>
+    
+ <AboutUsSection 
+     title="Our Services" 
+     backgroundImage="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755457755/html-css-collage-concept-with-person_1_1_z3okny.jpg"
+     subtitle=" We provide comprehensive technology solutions to help your business thrive"
+   />
+  
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30">
       {/* Animated background elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      {/* <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-[#2C74BC]/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute top-1/3 -left-20 w-60 h-60 bg-blue-400/5 rounded-full blur-2xl animate-pulse delay-1000" />
         <div className="absolute bottom-20 right-1/4 w-40 h-40 bg-indigo-400/5 rounded-full blur-xl animate-pulse delay-500" />
-      </div>
+      </div> */}
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-28">
+        {/* <div className="text-center mb-28">
           <div className="mb-8 inline-block">
             <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-[#2C74BC] to-blue-400 rounded-full mb-6 mx-auto shadow-lg shadow-[#2C74BC]/25 animate-pulse">
               <IconCode className="w-10 h-10 text-white" />
@@ -275,7 +285,7 @@ export default function ServicesPage() {
           </div>
           
           <div className="w-32 h-1.5 bg-gradient-to-r from-[#2C74BC] to-blue-400 mx-auto rounded-full shadow-lg shadow-[#2C74BC]/30" />
-        </div>
+        </div> */}
 
         <ServiceCategory
           title="Development Services"
@@ -371,5 +381,6 @@ export default function ServicesPage() {
         </div>
       </div>
     </div>
+      </>
   )
 }

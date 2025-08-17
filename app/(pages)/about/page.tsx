@@ -22,6 +22,8 @@ import { ArcTimeline, ArcTimelineItem } from "@/components/magicui/arc-timeline"
 import { Globe, Handshake, Lightbulb, Rocket, Target, Zap } from "lucide-react";
 import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
 import TestimonialFactBar from "@/components/(about Components)/stats";
+import AboutUsSection from "@/components/breadcrum";
+import WonsolAboutHero from "@/components/(about Components)/aboutnew1";
 // import AboutSection from "@/components/(about Components)/Aboutfirst";
 
 export default function Home() {
@@ -129,7 +131,18 @@ const timelineData: ArcTimelineItem[] = [
 
   return (
     <>
+
+
     
+    <AboutUsSection 
+  title="About Us" 
+  backgroundImage="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755441239/colleagues-working-project-discussing-details_2_paycsk.jpg"
+  subtitle="Learn more about our company and mission"
+/>
+
+
+
+<WonsolAboutHero/>
    
 {/* < ArcTimelineDemo/> */}
 <section className=" pt-12 px-4 text-center">
@@ -191,7 +204,7 @@ const timelineData: ArcTimelineItem[] = [
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Our Global <span className="text-green-500">Operations</span>
+            Our Global<span className="text-[#2C74BC]">{" "}Operations</span>
           </motion.h1>
           <motion.p
             className="text-sm md:text-lg text-gray-600 max-w-3xl mx-auto py-4 mb-12" // Changed text color for white background

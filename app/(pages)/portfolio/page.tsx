@@ -15,6 +15,7 @@ import ServicesSection2 from "@/components/(home Components)/services-section";
 import AboutSection from "@/components/(home Components)/about-section";
 import TestimonialCarousel from "@/components/(home Components)/testimonials";
 import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
+import AboutUsSection from "@/components/breadcrum";
 
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);
@@ -32,7 +33,11 @@ export default function Home() {
   return (
     <div className="">
      
-
+ <AboutUsSection 
+     title="Our Projects" 
+     backgroundImage="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755459467/social-media-entertainment-lifestyle-graphic-concept-min_ddgskp.jpg"
+     subtitle=" We provide comprehensive technology solutions to help your business thrive"
+   />
    
     </div>
   );
