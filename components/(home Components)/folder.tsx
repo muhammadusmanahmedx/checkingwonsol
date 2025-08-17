@@ -8,7 +8,7 @@ interface FolderProps {
   size?: number
   items?: React.ReactNode[]
   className?: string
-  onToggleOpen?: (isOpen: boolean) => void // New prop to communicate open state
+  onToggleOpen?: (isOpen: boolean) => void
 }
 
 const darkenColor = (hex: string, percent: number): string => {
@@ -44,42 +44,24 @@ const Folder: React.FC<FolderProps> = ({ color = "#5227FF", size = 1, items = []
   )
 
   const folderBackColor = darkenColor(color, 0.08)
-const paper1 = "#6C5CE7" // orange
-const paper2 = "#00B894" // emrald
-const paper3 = "#E17055" // Purple
+  const paper1 = "#6C5CE7"
+  const paper2 = "#00B894"
+  const paper3 = "#E17055"
 
-  const handleClick = () => {
-    const newState = !open
-    setOpen(newState)
+  const handleMouseEnter = () => {
+    setOpen(true)
     if (onToggleOpen) {
-      onToggleOpen(newState) // Communicate state change to parent
-    }
-    if (newState === false) {
-      setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })))
+      onToggleOpen(true)
     }
   }
 
-//   const handlePaperMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
-//     if (!open) return
-//     const rect = e.currentTarget.getBoundingClientRect()
-//     const centerX = rect.left + rect.width / 2
-//     const centerY = rect.top + rect.height / 2
-//     const offsetX = (e.clientX - centerX) * 0.15
-//     const offsetY = (e.clientY - centerY) * 0.15
-//     setPaperOffsets((prev) => {
-//       const newOffsets = [...prev]
-//       newOffsets[index] = { x: offsetX, y: offsetY }
-//       return newOffsets
-//     })
-//   }
-
-//   const handlePaperMouseLeave = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, index: number) => {
-//     setPaperOffsets((prev) => {
-//       const newOffsets = [...prev]
-//       newOffsets[index] = { x: 0, y: 0 }
-//       return newOffsets
-//     })
-//   }
+  const handleMouseLeave = () => {
+    setOpen(false)
+    if (onToggleOpen) {
+      onToggleOpen(false)
+    }
+    setPaperOffsets(Array.from({ length: maxItems }, () => ({ x: 0, y: 0 })))
+  }
 
   const folderStyle: React.CSSProperties = {
     "--folder-color": color,
@@ -89,18 +71,15 @@ const paper3 = "#E17055" // Purple
     "--paper-3": paper3,
   } as React.CSSProperties
 
-  const scaleStyle = { transform: `scale(${size})` }
-
   const getOpenTransform = (index: number) => {
-    // Adjusted to move cards further downward and spread out
-    if (index === 0) return "translate(-150%, -50%) rotate(-20deg)" // Left, lower
-    if (index === 1) return "translate(-50%, -70%) rotate(0deg)" // Center, even lower
-    if (index === 2) return "translate(50%, -50%) rotate(20deg)" // Right, lower
+    if (index === 0) return "translate(-150%, -50%) rotate(-20deg)"
+    if (index === 1) return "translate(-50%, -70%) rotate(0deg)"
+    if (index === 2) return "translate(50%, -50%) rotate(20deg)"
     return ""
   }
 
   return (
-    <div style={scaleStyle} className={className}>
+    <div className={`scale-100 sm:scale-110 md:scale-125 lg:scale-150 ${className}`}>
       <div
         className={`group relative transition-all duration-200 ease-in cursor-pointer ${
           !open ? "hover:-translate-y-2" : ""
@@ -109,18 +88,19 @@ const paper3 = "#E17055" // Purple
           ...folderStyle,
           transform: open ? "translateY(-8px)" : undefined,
         }}
-        onClick={handleClick}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div
-          className="relative w-[120px] h-[100px] rounded-tl-0 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px]"
+          className="relative w-[120px] h-[100px] sm:w-[140px] sm:h-[116px] md:w-[160px] md:h-[133px] lg:w-[180px] lg:h-[150px] rounded-tl-0 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px]"
           style={{ backgroundColor: folderBackColor }}
         >
           <span
-            className="absolute z-0 bottom-[98%] left-0 w-[30px] h-[10px] rounded-tl-[5px] rounded-tr-[5px] rounded-bl-0 rounded-br-0"
+            className="absolute z-0 bottom-[98%] left-0 w-[30px] h-[10px] sm:w-[35px] sm:h-[12px] md:w-[40px] md:h-[14px] lg:w-[45px] lg:h-[16px] rounded-tl-[5px] rounded-tr-[5px] rounded-bl-0 rounded-br-0"
             style={{ backgroundColor: folderBackColor }}
           ></span>
           {papers.map((item, i) => {
-            const sizeClasses = "w-[80%] h-[90%]" // Consistent paper sizes
+            const sizeClasses = "w-[80%] h-[90%]"
 
             const transformStyle = open
               ? `${getOpenTransform(i)} translate(${paperOffsets[i].x}px, ${paperOffsets[i].y}px)`
@@ -129,11 +109,9 @@ const paper3 = "#E17055" // Purple
             return (
               <div
                 key={i}
-                // onMouseMove={(e) => handlePaperMouseMove(e, i)}
-                // onMouseLeave={(e) => handlePaperMouseLeave(e, i)}
                 className={`absolute z-20 bottom-[10%] left-1/2 transition-all duration-300 ease-in-out ${
                   !open ? "transform -translate-x-1/2 translate-y-[10%] group-hover:translate-y-0" : "hover:scale-110"
-                } ${sizeClasses} flex flex-col items-center justify-center p-2 text-center`}
+                } ${sizeClasses} flex flex-col items-center justify-center p-2 sm:p-3 md:p-4 text-center`}
                 style={{
                   ...(!open ? {} : { transform: transformStyle }),
                   backgroundColor: i === 0 ? paper1 : i === 1 ? paper2 : paper3,

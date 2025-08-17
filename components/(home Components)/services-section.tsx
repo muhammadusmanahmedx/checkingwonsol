@@ -7,42 +7,42 @@ import CircularGallery from "./circular-gallary"
 const ServicesSection = () => {
   const services = [
     {
-      image: `/placeholder.svg?height=600&width=800&text=Web+Development`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755404118/programming-background-collage_1_n1mx7d.jpg`,
       text: "Web Development",
       onClick: () => (window.location.href = "/services/web-development"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=Mobile+Apps`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755404319/empowered-business-woman-working-city_1_kjeqta.jpg`,
       text: "Mobile Apps",
       onClick: () => (window.location.href = "/services/mobile-apps"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=Cloud+Solutions`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755404532/saas-concept-collage_1_gxmpxw.jpg`,
       text: "Cloud Solutions",
       onClick: () => (window.location.href = "/services/cloud-solutions"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=AI+Integration`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405240/businesswoman-interacting-with-ai-hologram-office_cfin0o.jpg`,
       text: "AI Integration",
       onClick: () => (window.location.href = "/services/ai-integration"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=Digital+Transformation`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755403844/technology-concept-with-futuristic-element_1_1_rt33cu.jpg`,
       text: "Digital Transformation",
       onClick: () => (window.location.href = "/services/digital-transformation"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=IT+Consulting`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405241/two-young-businessman-having-successful-meeting-restaurant_cyhutx.jpg`,
       text: "IT Consulting",
       onClick: () => (window.location.href = "/services/consulting"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=DevOps+Solutions`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405473/freelance-programmer-working-remote-writing-code-software-pc-using-keyboard-debugging-algorithm-client-selective-focus-coder-computer-screen-with-programming-laguage-text_1_ycpuin.jpg`,
       text: "DevOps Solutions",
       onClick: () => (window.location.href = "/services/devops"),
     },
     {
-      image: `/placeholder.svg?height=600&width=800&text=Cybersecurity`,
+      image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405229/cybersecurity-concept-illustration_1_quvqss.jpg`,
       text: "Cybersecurity",
       onClick: () => (window.location.href = "/services/cybersecurity"),
     },

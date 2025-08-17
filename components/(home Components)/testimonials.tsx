@@ -1,45 +1,44 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Highlighter } from "../magicui/highlighter";
 
 const testimonials = [
   {
-    company: "clerk",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/clerk/clerk-original.svg",
+    company: "SSA Consultants",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755407279/sahillogo_q37krn.png",
     avatar:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face&auto=format",
-    name: "Nick Parsons",
-    role: "Director of Marketing, Clerk",
-    review:
-      "Our team saved countless hours after switching to webtics. The efficiency gains have been remarkable.",
-  },
-  {
-    company: "raycast",
-    logo: "https://raycast.com/favicon-32x32.png",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face&auto=format",
-    name: "Thomas Paul Mann",
-    role: "CEO, Raycast",
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408519/ceo_ssa_xykzmd.jpg",
+    name: "Dr. Umar Sahil",
+    role: "CEO, SSA Consultants",
     review:
       "From data chaos to clarity - webtics delivers immediate results that transformed our workflow.",
   },
   {
-    company: "vercel",
-    logo: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png",
+    company: "SalSabeelScents",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png",
     avatar:
-      "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face&auto=format",
-    name: "Guillermo Rauch",
-    role: "CEO, Vercel",
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409009/WhatsApp_Image_2025-08-17_at_10.36.13_AM_sb6kg2.jpg",
+    name: "Muhammad Kashif",
+    role: "Founder, SalSabeelScents",
+    review:
+      "Our team saved countless hours after switching to webtics. The efficiency gains have been remarkable.",
+  },
+  {
+    company: "Workforce Pro",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409128/workforce_1_skhflu.png",
+    avatar:
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409452/istockphoto-174766396-612x612_1_lzkall.jpg",
+    name: "Muhammad Ali",
+    role: "CEO",
     review:
       "Webtics delivers powerful insights that turn complex data into actionable decisions for our entire team.",
   },
   {
-    company: "nextjs",
+    company: "FN Nails Studio",
     logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
     avatar:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?w=150&h=150&fit=crop&crop=face&auto=format",
-    name: "Sarah Johnson",
-    role: "Product Manager, Next.js",
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409551/beautiful-muslim-woman-black-niqab-600nw-391752175_lvk8xn.webp",
+    name: "Fatima Nazir",
+    role: "CEO, FN Nails Studio",
     review:
       "The intuitive interface and powerful analytics have completely transformed how we make data-driven decisions.",
   },
@@ -64,6 +63,7 @@ const CompanyLogo = ({ company, logo }) => {
 
   // Fallback component names if image fails to load
   const fallbackNames = {
+    SalSabeelScents: "SalSabeelScents",
     clerk: "Clerk",
     raycast: "Raycast",
     vercel: "▲ Vercel",
@@ -73,27 +73,45 @@ const CompanyLogo = ({ company, logo }) => {
 
   if (imageError) {
     return (
-      <div className="text-2xl font-bold text-[#2C74BC] opacity-70 hover:opacity-100 transition-opacity">
+      <div className="text-3xl font-bold text-[#2C74BC]">
         {fallbackNames[company]}
       </div>
     );
   }
 
   return (
-    <div className="opacity-70 hover:opacity-100 transition-opacity">
+    <div>
       <img
         src={logo}
         alt={`${company} logo`}
-        className="h-8 w-auto max-w-[120px] object-contain filter brightness-0 saturate-100"
-        style={{
-          filter:
-            "brightness(0) saturate(100%) invert(25%) sepia(95%) saturate(1245%) hue-rotate(202deg) brightness(94%) contrast(86%)",
-        }}
+        className="h-12 w-auto max-w-[200px] object-contain"
         onError={handleImageError}
         draggable={false}
       />
     </div>
   );
+};
+
+const Highlighter = ({ children, action, color }) => {
+  const baseClasses = "relative inline-block";
+  
+  if (action === "highlight") {
+    return (
+      <span className={`${baseClasses} bg-[#2C74BC] text-white px-2 py-1 rounded`}>
+        {children}
+      </span>
+    );
+  }
+  
+  if (action === "underline") {
+    return (
+      <span className={`${baseClasses} border-b-4 border-[#2C74BC] pb-1`}>
+        {children}
+      </span>
+    );
+  }
+  
+  return <span className={baseClasses}>{children}</span>;
 };
 
 export default function TestimonialCarousel() {
@@ -113,17 +131,6 @@ export default function TestimonialCarousel() {
   const goToSlide = (index) => {
     setCurrentIndex(index);
   };
-
-  // Auto-play functionality
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isDragging && currentIndex < testimonials.length - 1) {
-        nextSlide();
-      }
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, [isDragging, currentIndex]);
 
   // Touch/Mouse drag handlers
   const handleDragStart = (e) => {
@@ -171,9 +178,6 @@ export default function TestimonialCarousel() {
           <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className=" text-[#2C74BC]">
               Our{" "}
-              {/* <Highlighter action="underline" color="#F9800">
-                Customers
-              </Highlighter>{" "} */}
               <span className=" text-white">
                 <Highlighter action="underline" color="#2C74BC">
                   <Highlighter action="highlight" color="#2C74BC">
@@ -246,7 +250,7 @@ export default function TestimonialCarousel() {
                   style={{ userSelect: "none" }}
                 >
                   {/* Company Logo */}
-                  <div className="mb-8 h-10 flex items-center justify-center">
+                  <div className="mb-8 h-14 flex items-center justify-center">
                     <CompanyLogo
                       company={testimonial.company}
                       logo={testimonial.logo}
