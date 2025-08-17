@@ -43,12 +43,12 @@ const testimonials = [
       "The intuitive interface and powerful analytics have completely transformed how we make data-driven decisions.",
   },
   {
-    company: "stripe",
-    logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/stripe/stripe-original.svg",
+    company: "AgriTech",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755410338/Group_99_isujtj.png",
     avatar:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format",
     name: "Emily Chen",
-    role: "Head of Analytics, Stripe",
+    role: "CEO, AgriTech",
     review:
       "Webtics has become an indispensable tool for our team. The insights are actionable and the platform is incredibly user-friendly.",
   },

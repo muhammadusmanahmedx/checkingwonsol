@@ -17,12 +17,12 @@ type InfiniteSliderProps = {
 };
 
 const defaultLogos = [
-  { src: "/apple-logo.png", alt: "Apple" },
-  { src: "/google-logo.png", alt: "Google" },
-  { src: "/microsoft-logo.png", alt: "Microsoft" },
-  { src: "/netflix-inspired-logo.png", alt: "Netflix" },
-  { src: "/spotify-logo.png", alt: "Spotify" },
-  { src: "/tesla-logo.png", alt: "Tesla" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755407279/sahillogo_q37krn.png", alt: "SSA Consultants" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png", alt: "SalSabeel Scents" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409128/workforce_1_skhflu.png", alt: "WorkForce Pro" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755410338/Group_99_isujtj.png", alt: "Agritech" },
+  { src: "/spotify-logo.png", alt: "Fn Nails Studio" },
+  // { src: "/tesla-logo.png", alt: "Tesla" },
 ];
 
 export function InfiniteSlider({
