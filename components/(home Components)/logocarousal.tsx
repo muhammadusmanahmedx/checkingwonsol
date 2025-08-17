@@ -19,10 +19,10 @@ type InfiniteSliderProps = {
 const defaultLogos = [
   { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755407279/sahillogo_q37krn.png", alt: "SSA Consultants" },
   { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png", alt: "SalSabeel Scents" },
-  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409128/workforce_1_skhflu.png", alt: "WorkForce Pro" },
-  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755410338/Group_99_isujtj.png", alt: "Agritech" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414869/Frame_150_rd1ng3.png", alt: "WorkForce Pro" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755413216/Frame_148_1_g7ibmy.png", alt: "Agritech" },
   { src: "/spotify-logo.png", alt: "Fn Nails Studio" },
-  // { src: "/tesla-logo.png", alt: "Tesla" },
+  { src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png", alt: "Falah Charity" },
 ];
 
 export function InfiniteSlider({

@@ -24,7 +24,7 @@ const testimonials = [
   },
   {
     company: "Workforce Pro",
-    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409128/workforce_1_skhflu.png",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414869/Frame_150_rd1ng3.png",
     avatar:
       "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409452/istockphoto-174766396-612x612_1_lzkall.jpg",
     name: "Muhammad Ali",
@@ -44,11 +44,21 @@ const testimonials = [
   },
   {
     company: "AgriTech",
-    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755410338/Group_99_isujtj.png",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755413121/Frame_148_aafhum.png",
     avatar:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format",
-    name: "Emily Chen",
+    name: "Agri Tec",
     role: "CEO, AgriTech",
+    review:
+      "Webtics has become an indispensable tool for our team. The insights are actionable and the platform is incredibly user-friendly.",
+  },
+  {
+    company: "Falah Charity",
+    logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png",
+    avatar:
+      "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755411812/confident-pakistani-businessman-posing-in-black-suit-for-professional-headshot-suitable-for-corporate-branding-and-marketing-photo_titxdr.jpg",
+    name: "Emily Chen",
+    role: "CEO, Falah Charity",
     review:
       "Webtics has become an indispensable tool for our team. The insights are actionable and the platform is incredibly user-friendly.",
   },
