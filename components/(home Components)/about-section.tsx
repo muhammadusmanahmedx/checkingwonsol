@@ -82,7 +82,8 @@ const AboutSection = ({
           >
             <div className="relative">
               <div className="absolute -left-4 top-0 w-1 h-full bg-gradient-to-b from-[#2C74BC] to-transparent"></div>
-              <div className="pl-8">
+              <div className="pl-2 sm:pl-4 lg:pl-6">
+
                 <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-snug">
                   Yes, we're{" "}
                   <span className="text-[#2C74BC]">creative!</span>

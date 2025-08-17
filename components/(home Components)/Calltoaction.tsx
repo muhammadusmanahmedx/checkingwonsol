@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const CTASection: React.FC = () => {
   return (
-    <section className="relative bg-[#2C74BC] py-14 sm:py-16 lg:py-20 overflow-hidden">
+    <section className="relative bg-[#2C74BC] py-14  border-b-1 border-white sm:py-16 lg:py-20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-8 right-8 w-24 sm:w-32 h-24 sm:h-32 bg-white/5 rounded-full blur-2xl"></div>

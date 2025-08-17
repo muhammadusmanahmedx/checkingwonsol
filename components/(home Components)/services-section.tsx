@@ -47,13 +47,13 @@ const ServicesSection = () => {
   ]
 
   return (
-    <section className="relative w-full py-16 sm:py-20 lg:py-28  overflow-hidden">
+    <section className="relative w-full py-16 sm:py-20 lg:py-28 overflow-hidden">
       {/* Background Decorations */}
       <div className="absolute top-1/4 left-1/6 w-40 sm:w-72 h-40 sm:h-72 bg-[#2C74BC]/20 rounded-full blur-3xl"></div>
       <div className="absolute bottom-1/4 right-1/6 w-40 sm:w-72 h-40 sm:h-72 bg-[#2C74BC]/10 rounded-full blur-3xl"></div>
 
       {/* Section Header */}
-      <div className="relative z-10 text-center mb-12 sm:mb-16 px-4 sm:px-8">
+      <div className="relative z-10 text-center mb-8 sm:mb-10 px-4 sm:px-8">
         {/* Badge */}
         <div className="mb-3 sm:mb-6">
           <span className="inline-block px-3 py-1 sm:px-4 sm:py-2 rounded-full bg-[#2C74BC]/10 text-[#2C74BC] text-xs sm:text-sm font-medium border border-[#2C74BC]/20">
@@ -62,20 +62,21 @@ const ServicesSection = () => {
         </div>
 
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
-          <span className="text-gray-900">Comprehensive{" "}</span>
-      
+          <span className="text-gray-900">Comprehensive </span>
+
           <span className="bg-gradient-to-r from-[#2C74BC] via-[#2C74BC]/80 to-[#2C74BC] bg-clip-text text-transparent">
             Technology Services
           </span>
         </h1>
 
-        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-10 lg:mb-12 max-w-2xl mx-auto">
-          From cutting-edge web development to AI integration, we deliver solutions that transform your business and drive success in the digital landscape.
+        <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6 max-w-2xl mx-auto">
+          From cutting-edge web development to AI integration, we deliver solutions that transform your business and
+          drive success in the digital landscape.
         </p>
       </div>
 
       {/* Interactive Services Gallery */}
-      <div className="relative z-10 h-72 sm:h-96 md:h-[500px] mb-10 sm:mb-12 px-2 sm:px-0">
+      <div className="relative z-10 h-72 sm:h-96 md:h-[500px] mb-6 sm:mb-8 px-2 sm:px-0">
         <CircularGallery
           items={services}
           bend={2}
@@ -87,15 +88,10 @@ const ServicesSection = () => {
         />
       </div>
 
-      {/* Instructions */}
-      <div className="relative z-10 text-center px-4 sm:px-8">
-        <p className="text-gray-500 text-xs sm:text-sm mb-4">
-          Scroll horizontally or drag to explore our services
-        </p>
-      </div>
+      
 
       {/* Call to Action */}
-      <div className="relative z-10 text-center mt-10 sm:mt-12 px-4">
+      <div className="relative z-10 text-center mt-6 sm:mt-8 px-4">
         <button className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 shadow-xl text-sm sm:text-base">
           View All Services
           <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
