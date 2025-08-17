@@ -61,9 +61,9 @@ const ServicesSection = () => {
           </span>
         </div>
 
-        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-tight">
-          <span className="text-gray-900">Comprehensive</span>
-          <br />
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
+          <span className="text-gray-900">Comprehensive{" "}</span>
+      
           <span className="bg-gradient-to-r from-[#2C74BC] via-[#2C74BC]/80 to-[#2C74BC] bg-clip-text text-transparent">
             Technology Services
           </span>

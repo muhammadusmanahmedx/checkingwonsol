@@ -20,7 +20,7 @@ const AboutSection = ({
   }, [galleryImages.length]);
 
   return (
-    <section className="  overflow-hidden relative">
+    <section className="  overflow-hidden relative mt-12 sm:mt-16 lg:mt-20 xl:mt-24">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -43,7 +43,7 @@ const AboutSection = ({
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
            
            <span className="text-gray-900">Crafting {" "}</span>
             

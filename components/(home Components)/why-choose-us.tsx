@@ -92,12 +92,12 @@ export function WhyChooseUs() {
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight">
             
-            <span className="text-gray-900">Why Choose</span>
-            <br />
+            <span className="text-gray-900">Why choose {" "}</span>
+        
             <span className="bg-gradient-to-r from-[#2C74BC] via-[#2C74BC]/80 to-[#2C74BC] bg-clip-text text-transparent">
-              Won Solutions
+              won solutions
             </span>
           </h1>
          
@@ -109,8 +109,8 @@ export function WhyChooseUs() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
         >
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 mb-8 sm:mb-10 lg:mb-12 font-regular max-w-3xl mx-auto px-2 sm:px-0">
-            At <span className="font-semibold text-blue-600">wonsol.com</span>, we
+            <p className="ttext-base sm:text-lg md:text-lg lg:text-xl text-gray-600 mb-8 sm:mb-10 lg:mb-12 font-regular max-w-3xl mx-auto px-2 sm:px-0">
+            we
           don't just build software – we craft digital experiences that
           transform businesses and drive innovation forward.
           </p>

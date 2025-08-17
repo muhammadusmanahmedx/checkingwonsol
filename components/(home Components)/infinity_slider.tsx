@@ -1,22 +1,65 @@
 "use client"
 import { cn } from "@/lib/utils"
 import type React from "react"
-
 import { useMotionValue, animate, motion } from "framer-motion"
 import { useState, useEffect } from "react"
 import useMeasure from "react-use-measure"
 
+// Define the image data type
+type ImageData = {
+  src: string
+  alt: string
+  height?: string | number
+}
+
+// Default images array - change this in one place
+const defaultImages: ImageData[] = [
+  {
+    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755407279/sahillogo_q37krn.png",
+    alt: "NVIDIA",
+    height: "32"
+  },
+  {
+    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png",
+    alt: "Column",
+    height: "32"
+  },
+  {
+    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414869/Frame_150_rd1ng3.png",
+    alt: "GitHub",
+    height: "32"
+  },
+  {
+    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755413216/Frame_148_1_g7ibmy.png",
+    alt: "Nike",
+    height: "32"
+  },
+  {
+    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755428469/Frame_151_1_fnaqaz.png",
+    alt: "Company Logo",
+    height: "32"
+  },
+  {
+    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png",
+    alt: "Company Logo",
+    height: "32"
+  }
+]
+
 type InfiniteSliderProps = {
-  children: React.ReactNode
+  images?: ImageData[]
+  children?: React.ReactNode
   gap?: number
   duration?: number
   durationOnHover?: number
   direction?: "horizontal" | "vertical"
   reverse?: boolean
   className?: string
+  imageClassName?: string
 }
 
 export function InfiniteSlider({
+  images = defaultImages,
   children,
   gap = 16,
   duration = 25,
@@ -24,6 +67,7 @@ export function InfiniteSlider({
   direction = "horizontal",
   reverse = false,
   className,
+  imageClassName = "h-12 w-auto opacity-100  transition-opacity",
 }: InfiniteSliderProps) {
   const [currentDuration, setCurrentDuration] = useState(duration)
   const [ref, { width, height }] = useMeasure()
@@ -76,6 +120,17 @@ export function InfiniteSlider({
       }
     : {}
 
+  // Generate content based on images or children
+  const content = children ? children : images.map((image, index) => (
+    <img
+      key={index}
+      className={imageClassName}
+      src={image.src}
+      alt={image.alt}
+      height={image.height}
+    />
+  ))
+
   return (
     <div className={cn("overflow-hidden", className)}>
       <motion.div
@@ -88,45 +143,9 @@ export function InfiniteSlider({
         ref={ref}
         {...hoverProps}
       >
-        {children}
-        {children}
+        {content}
+        {content}
       </motion.div>
     </div>
   )
 }
-//  <div className="relative">
-//               <InfiniteSlider gap={64} duration={25} className="py-4">
-//                 <img
-//                   className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity"
-//                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-lFMbGhgRlFWdJl9MlPf7hfpQOqHucs.png"
-//                   alt="NVIDIA"
-//                   height="32"
-//                 />
-//                 <img
-//                   className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity"
-//                   src="/placeholder.svg?height=32&width=80&text=Column"
-//                   alt="Column"
-//                   height="32"
-//                 />
-//                 <img
-//                   className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity"
-//                   src="/placeholder.svg?height=32&width=80&text=GitHub"
-//                   alt="GitHub"
-//                   height="32"
-//                 />
-//                 <img
-//                   className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity"
-//                   src="/placeholder.svg?height=32&width=60&text=Nike"
-//                   alt="Nike"
-//                   height="32"
-//                 />
-//                 <img
-//                   className="h-8 w-auto opacity-60 hover:opacity-100 transition-opacity"
-//                   src="/placeholder.svg?height=32&width=80&text=Logo"
-//                   alt="Company Logo"
-//                   height="32"
-//                 />
-//               </InfiniteSlider>
-//               <ProgressiveBlur direction="left" className="pointer-events-none absolute inset-y-0 left-0 w-12" />
-//               <ProgressiveBlur direction="right" className="pointer-events-none absolute inset-y-0 right-0 w-12" />
-//             </div>

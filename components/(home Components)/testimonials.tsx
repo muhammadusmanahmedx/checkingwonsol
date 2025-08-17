@@ -47,7 +47,7 @@ const testimonials = [
     logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755413121/Frame_148_aafhum.png",
     avatar:
       "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face&auto=format",
-    name: "Agri Tec",
+    name: "Shehroz Khan",
     role: "CEO, AgriTech",
     review:
       "Webtics has become an indispensable tool for our team. The insights are actionable and the platform is incredibly user-friendly.",
@@ -57,7 +57,7 @@ const testimonials = [
     logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png",
     avatar:
       "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755411812/confident-pakistani-businessman-posing-in-black-suit-for-professional-headshot-suitable-for-corporate-branding-and-marketing-photo_titxdr.jpg",
-    name: "Emily Chen",
+    name: "Dr. Naeem",
     role: "CEO, Falah Charity",
     review:
       "Webtics has become an indispensable tool for our team. The insights are actionable and the platform is incredibly user-friendly.",

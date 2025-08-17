@@ -14,7 +14,8 @@ import CTASection from "@/components/(home Components)/Calltoaction";
 import ServicesSection2 from "@/components/(home Components)/services-section";
 import AboutSection from "@/components/(home Components)/about-section";
 import TestimonialCarousel from "@/components/(home Components)/testimonials";
-import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
+import { InfiniteSlider } from "@/components/(home Components)/infinity_slider";
+// import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
 // import { HeroSectionnew } from "@/components/(home Components)/hero-section";
 
 export default function Home() {
@@ -33,6 +34,15 @@ export default function Home() {
   return (
     <div className="">
       <HeroSection />
+<div className="">
+
+
+ <InfiniteSlider
+        gap={32}
+        duration={30}
+        durationOnHover={60}
+        />
+</div>
 
      {/* <HeroSectionnew/> */}
 
@@ -52,12 +62,7 @@ export default function Home() {
       </div>
 
       <div className="space-y-2">
-  <InfiniteSlider
-    gap={32}
-    duration={20}
-    durationOnHover={60}
-    className="w-full bg-card rounded-lg p-8"
-  />
+  
 </div>
 
    
