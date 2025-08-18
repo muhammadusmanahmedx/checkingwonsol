@@ -18,7 +18,10 @@ import ServicesSection2 from "@/components/(home Components)/services-section";
 import { WorldMap } from "@/components/(about Components)/Wordlmap";
 import ArcTimelineDemo from "@/components/(about Components)/Aboutfirst";
 import WonSolutionsTimeline from "@/components/(about Components)/timeline";
-import { ArcTimeline, ArcTimelineItem } from "@/components/magicui/arc-timeline";
+import {
+  ArcTimeline,
+  ArcTimelineItem,
+} from "@/components/magicui/arc-timeline";
 import { Globe, Handshake, Lightbulb, Rocket, Target, Zap } from "lucide-react";
 import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
 import TestimonialFactBar from "@/components/(about Components)/stats";
@@ -62,8 +65,7 @@ export default function Home() {
     },
   ];
 
-
-const timelineData: ArcTimelineItem[] = [
+  const timelineData: ArcTimelineItem[] = [
     {
       time: "2020-2021",
       steps: [
@@ -124,75 +126,50 @@ const timelineData: ArcTimelineItem[] = [
         },
       ],
     },
-  ]
-
-
-
+  ];
 
   return (
     <>
+      <AboutUsSection
+        title="About Us"
+        backgroundImage="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755441239/colleagues-working-project-discussing-details_2_paycsk.jpg"
+        subtitle="Learn more about our company and mission"
+      />
 
+      <WonsolAboutHero />
 
-    
-    <AboutUsSection 
-  title="About Us" 
-  backgroundImage="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755441239/colleagues-working-project-discussing-details_2_paycsk.jpg"
-  subtitle="Learn more about our company and mission"
-/>
+      {/* < ArcTimelineDemo/> */}
+      {/* \ */}
 
-
-
-<WonsolAboutHero/>
-   
-{/* < ArcTimelineDemo/> */}
-<section className=" pt-12 px-4 text-center">
-        <div className="container mx-auto max-w-4xl">
-          <h1 className="text-4xl md:text-5xl font-bold mb-0" style={{ color: "#2C74BC" }}>
-            Our Journey
-          </h1>
-          {/* <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            From freelancing dreams to Middle East Vision 2030 partnership - discover how Won Solutions evolved into an
-            international business partner.
-          </p> */}
-        </div>
-      </section>
-
-      {/* Arc Timeline */}
-      <section className="py-6 px-4">
-        <ArcTimeline
-          data={timelineData}
-          defaultActiveStep={{ time: "2024-2025", stepIndex: 0 }}
-          className="max-w-5xl"
-        />
-      </section>
-
-      <TestimonialFactBar/>
+      <TestimonialFactBar />
 
       {/* Vision 2030 Focus */}
-      <section className="py-16 px-4" style={{ backgroundColor: "#2C74BC" }}>
-        <div className="container mx-auto max-w-4xl text-center text-white">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready for Middle East Vision 2030</h2>
-          <p className="text-xl opacity-90 max-w-2xl mx-auto leading-relaxed">
-            Won Solutions is positioned to contribute to the digital transformation of Saudi Arabia, UAE, and Egypt -
-            bringing proven expertise to support regional growth and innovation goals.
+      <section
+        className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8"
+        style={{ backgroundColor: "#2C74BC" }}
+      >
+        <div className="container mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-5xl text-center text-white">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 sm:mb-5 md:mb-6 lg:mb-8 leading-tight">
+            Ready for Middle East Vision 2030
+          </h2>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl opacity-90 max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl xl:max-w-3xl mx-auto leading-relaxed px-2 sm:px-4 md:px-6">
+            Won Solutions is positioned to contribute to the digital
+            transformation of Saudi Arabia, UAE, and Egypt - bringing proven
+            expertise to support regional growth and innovation goals.
           </p>
         </div>
       </section>
 
+      <div className="space-y-2">
+        <InfiniteSlider
+          gap={32}
+          duration={20}
+          durationOnHover={60}
+          className="w-full bg-card rounded-lg p-8"
+        />
+      </div>
 
-<div className="space-y-2">
-  <InfiniteSlider
-    gap={32}
-    duration={20}
-    durationOnHover={60}
-    className="w-full bg-card rounded-lg p-8"
-  />
-</div>
-       
-
-
-
-{/* //world map */}
+      {/* //world map */}
 
       <div className="py-20 px-8 bg-white w-full min-h-screen">
         {" "}
@@ -204,7 +181,7 @@ const timelineData: ArcTimelineItem[] = [
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Our Global<span className="text-[#2C74BC]">{" "}Operations</span>
+            Our Global<span className="text-[#2C74BC]"> Operations</span>
           </motion.h1>
           <motion.p
             className="text-sm md:text-lg text-gray-600 max-w-3xl mx-auto py-4 mb-12" // Changed text color for white background

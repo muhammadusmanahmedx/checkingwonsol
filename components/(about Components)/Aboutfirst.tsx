@@ -1,173 +1,131 @@
-import { ArcTimeline, type ArcTimelineItem } from "@/components/magicui/arc-timeline"
-import {
-  RocketIcon,
-  CubeIcon,
-  LockClosedIcon,
-  GlobeIcon,
-  GearIcon,
-  LightningBoltIcon,
-  StarIcon,
-  MagicWandIcon,
-} from "@radix-ui/react-icons"
+"use client";
 
-export default function ArcTimelineDemo() {
-  return (
-    <div className="w-full flex justify-start items-start pl-0">
-      <ArcTimeline
-        className="text-left w-full justify-start items-start"
-        data={TIMELINE}
-        defaultActiveStep={{ time: "2025 Q2", stepIndex: 0 }}
-        arcConfig={{
-          circleWidth: 7000, // Increased for wider arc
-          angleBetweenMinorSteps: 0.25, // Reduced to spread items more
-          lineCountFillBetweenSteps: 12, // Increased for smoother arc
-          boundaryPlaceholderLinesCount: 80, // Increased for wider arc boundaries
-        }}
-      />
-    </div>
-  )
+import type React from "react";
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+
+export interface ArcTimelineItem {
+  time: string;
+  steps: {
+    icon: React.ReactNode;
+    content: string;
+  }[];
 }
 
-const TIMELINE: ArcTimelineItem[] = [
-  {
-    time: "2022",
-    steps: [
-      {
-        icon: <RocketIcon width={20} height={20} />,
-        content: "Founded Visionary Tech, a cutting-edge AI development company.",
-      },
-      {
-        icon: <CubeIcon width={20} height={20} />,
-        content: "Launched first AI-powered mobile app for personalized recommendations.",
-      },
-    ],
+interface ArcTimelineProps {
+  data: ArcTimelineItem[];
+  defaultActiveStep?: { time: string; stepIndex: number };
+  className?: string;
+  arcConfig?: {
+    circleWidth: number;
+    angleBetweenMinorSteps: number;
+    lineCountFillBetweenSteps: number;
+    boundaryPlaceholderLinesCount: number;
+  };
+}
+
+export function ArcTimeline({
+  data,
+  defaultActiveStep,
+  className,
+  arcConfig = {
+    circleWidth: 7000,
+    angleBetweenMinorSteps: 0.25,
+    lineCountFillBetweenSteps: 12,
+    boundaryPlaceholderLinesCount: 80,
   },
-  {
-    time: "2023",
-    steps: [
-      {
-        icon: <LockClosedIcon width={20} height={20} />,
-        content: "Raised $3M seed round at a $20M valuation.",
-      },
-      {
-        icon: <GlobeIcon width={20} height={20} />,
-        content: "Expanded to global markets with localized app versions in 5 countries.",
-      },
-      {
-        icon: <GearIcon width={20} height={20} />,
-        content: "Implemented enhanced machine learning algorithms for data prediction.",
-      },
-    ],
-  },
-  {
-    time: "2024",
-    steps: [
-      {
-        icon: <RocketIcon width={20} height={20} />,
-        content: "Introduced AI-powered virtual assistant for customer service.",
-      },
-      {
-        icon: <GlobeIcon width={20} height={20} />,
-        content: "Partnered with several tech giants to enhance app capabilities.",
-      },
-      {
-        icon: <MagicWandIcon width={20} height={20} />,
-        content: "Launched AR-based features for more immersive user experiences.",
-      },
-    ],
-  },
-  {
-    time: "2025 Q1",
-    steps: [
-      {
-        icon: <StarIcon width={20} height={20} />,
-        content: "Rolled out AI-driven marketplace for personalized product discovery.",
-      },
-      {
-        icon: <LightningBoltIcon width={20} height={20} />,
-        content: "Introduced blockchain integration for secure transactions.",
-      },
-      {
-        icon: <RocketIcon width={20} height={20} />,
-        content: "Showcased at CES with revolutionary AI-powered consumer products.",
-      },
-    ],
-  },
-  {
-    time: "2025 Q2",
-    steps: [
-      {
-        icon: <GearIcon width={20} height={20} />,
-        content: "Rebranded company with new logo and visual identity.",
-      },
-      {
-        icon: <StarIcon width={20} height={20} />,
-        content: "Launched AI-driven content creation tool for marketing teams.",
-      },
-      {
-        icon: <CubeIcon width={20} height={20} />,
-        content: "Acquired a competitor in the AI space to strengthen market position.",
-      },
-    ],
-  },
-  {
-    time: "2025 Q3",
-    steps: [
-      {
-        icon: <CubeIcon width={20} height={20} />,
-        content: "Launched self-driving AI platform for industrial automation.",
-      },
-      {
-        icon: <MagicWandIcon width={20} height={20} />,
-        content: "Added virtual reality integration to the product suite.",
-      },
-    ],
-  },
-  {
-    time: "2025 Q4",
-    steps: [
-      {
-        icon: <StarIcon width={20} height={20} />,
-        content: "Introduced AI-driven analytics dashboard for enterprise clients.",
-      },
-      {
-        icon: <LightningBoltIcon width={20} height={20} />,
-        content: "Launched international expansion into Asian and European markets.",
-      },
-      {
-        icon: <RocketIcon width={20} height={20} />,
-        content: "Hosted first global conference showcasing AI innovations.",
-      },
-    ],
-  },
-  {
-    time: "2026 Q1",
-    steps: [
-      {
-        icon: <GearIcon width={20} height={20} />,
-        content: "Released API for developers to integrate AI into their applications.",
-      },
-      {
-        icon: <StarIcon width={20} height={20} />,
-        content: "Launched new AI-powered voice assistant with multi-language support.",
-      },
-      {
-        icon: <GlobeIcon width={20} height={20} />,
-        content: "Partnered with government agencies for AI-driven policy making.",
-      },
-    ],
-  },
-  {
-    time: "2026 Q2",
-    steps: [
-      {
-        icon: <GearIcon width={20} height={20} />,
-        content: "Unveiled new AI-powered robotics platform for manufacturing.",
-      },
-      {
-        icon: <MagicWandIcon width={20} height={20} />,
-        content: "Introduced machine learning models for sustainable energy solutions.",
-      },
-    ],
-  },
-]
+}: ArcTimelineProps) {
+  const [activeStep, setActiveStep] = useState(
+    defaultActiveStep || { time: data[0]?.time || "", stepIndex: 0 }
+  );
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const responsiveArcConfig = {
+    ...arcConfig,
+    circleWidth: isMobile ? 4000 : arcConfig.circleWidth,
+    angleBetweenMinorSteps: isMobile ? 0.4 : arcConfig.angleBetweenMinorSteps,
+    lineCountFillBetweenSteps: isMobile
+      ? 8
+      : arcConfig.lineCountFillBetweenSteps,
+    boundaryPlaceholderLinesCount: isMobile
+      ? 40
+      : arcConfig.boundaryPlaceholderLinesCount,
+  };
+
+  return (
+    <div className={cn("w-full", className)}>
+      <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
+        {data.map((item) => (
+          <button
+            key={item.time}
+            onClick={() => setActiveStep({ time: item.time, stepIndex: 0 })}
+            className={cn(
+              "px-3 py-2 sm:px-4 sm:py-2 rounded-full text-sm sm:text-base font-medium transition-all duration-200",
+              "hover:scale-105 hover:shadow-md",
+              activeStep.time === item.time
+                ? "bg-[#2C74BC] text-white shadow-lg"
+                : "bg-white text-gray-600 border border-gray-200 hover:border-[#2C74BC]"
+            )}
+          >
+            {item.time}
+          </button>
+        ))}
+      </div>
+
+      <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-6 sm:p-8">
+        <div className="text-center mb-6 sm:mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+            {activeStep.time}
+          </h2>
+          <div className="w-20 h-1 bg-[#2C74BC] rounded-full mx-auto"></div>
+        </div>
+
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {data
+            .find((item) => item.time === activeStep.time)
+            ?.steps.map((step, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "p-4 sm:p-6 rounded-xl border transition-all duration-300 cursor-pointer hover:scale-105",
+                  "hover:shadow-lg",
+                  activeStep.stepIndex === index
+                    ? "bg-blue-50 border-[#2C74BC] shadow-md"
+                    : "bg-gray-50 border-gray-200 hover:border-[#2C74BC]"
+                )}
+                onClick={() =>
+                  setActiveStep({ ...activeStep, stepIndex: index })
+                }
+              >
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div
+                    className={cn(
+                      "flex-shrink-0 p-2 sm:p-3 rounded-lg",
+                      activeStep.stepIndex === index
+                        ? "bg-blue-100 text-[#2C74BC]"
+                        : "bg-gray-200 text-gray-600"
+                    )}
+                  >
+                    {step.icon}
+                  </div>
+                  <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+                    {step.content}
+                  </p>
+                </div>
+              </div>
+            ))}
+        </div>
+      </div>
+    </div>
+  );
+}

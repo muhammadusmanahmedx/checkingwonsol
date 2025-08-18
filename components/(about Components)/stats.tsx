@@ -1,12 +1,16 @@
-import React from 'react';
-import { Users, Award, Building2 } from 'lucide-react';
+import React from "react";
+import { Star, Code, Rocket } from "lucide-react";
 
-export default function TestimonialFactBar() {
+const TestimonialFactBar = () => {
   return (
-    <div className="relative bg-white e px-8 py-6 overflow-hidden">
+    <div className="relative bg-white px-8 py-6 overflow-hidden">
       {/* Wavy Background */}
       <div className="absolute inset-0 opacity-5">
-        <svg className="w-full h-full" viewBox="0 0 1200 400" preserveAspectRatio="none">
+        <svg
+          className="w-full h-full"
+          viewBox="0 0 1200 400"
+          preserveAspectRatio="none"
+        >
           <path
             d="M0,100 C300,200 600,0 900,150 C1050,225 1150,75 1200,125 L1200,400 L0,400 Z"
             fill="#2C74BC"
@@ -29,58 +33,127 @@ export default function TestimonialFactBar() {
         {/* Facts Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-3" style={{backgroundColor: '#2C74BC'}}>
-              <Users className="h-5 w-5 text-white" />
+            <div
+              className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-3"
+              style={{ backgroundColor: "#2C74BC" }}
+            >
+              <Star className="h-5 w-5 text-white" />
             </div>
-            <div className="text-2xl font-semibold mb-1" style={{color: '#2C74BC'}}>10M+</div>
-            <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Trusted Customers</div>
-          </div>
-                  
-          <div className="text-center " style={{borderColor: '#2C74BC'}}>
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-3" style={{backgroundColor: '#2C74BC'}}>
-              <Award className="h-5 w-5 text-white" />
+            <div
+              className="text-2xl font-semibold mb-1"
+              style={{ color: "#2C74BC" }}
+            >
+              100%
             </div>
-            <div className="text-2xl font-semibold mb-1" style={{color: '#2C74BC'}}>2024</div>
-            <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Innovation Award</div>
+            <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+              Customer Satisfaction
+            </div>
           </div>
-                  
+
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-3" style={{backgroundColor: '#2C74BC'}}>
-              <Building2 className="h-5 w-5 text-white" />
+            <div
+              className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-3"
+              style={{ backgroundColor: "#2C74BC" }}
+            >
+              <Code className="h-5 w-5 text-white" />
             </div>
-            <div className="text-2xl font-semibold mb-1" style={{color: '#2C74BC'}}>200+</div>
-            <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">Enterprise Partners</div>
+            <div
+              className="text-2xl font-semibold mb-1"
+              style={{ color: "#2C74BC" }}
+            >
+              50K+
+            </div>
+            <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+              Lines of Code
+            </div>
+          </div>
+
+          <div className="text-center">
+            <div
+              className="inline-flex items-center justify-center w-10 h-10 rounded-sm mb-3"
+              style={{ backgroundColor: "#2C74BC" }}
+            >
+              <Rocket className="h-5 w-5 text-white" />
+            </div>
+            <div
+              className="text-2xl font-semibold mb-1"
+              style={{ color: "#2C74BC" }}
+            >
+              24/7
+            </div>
+            <div className="text-sm font-medium text-gray-600 uppercase tracking-wide">
+              Startup Hustle
+            </div>
           </div>
         </div>
-              
-        {/* CEO Message */}
-        {/* <div className="pt-6" style={{borderTop: `1px solid #2C74BC`}}>
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-start space-x-6">
-              <div className="flex-shrink-0">
+
+        {/* Founder Message */}
+        <div
+          className="pt-8 md:pt-10"
+          style={{ borderTop: `1px solid #2C74BC` }}
+        >
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <div className="flex flex-col sm:flex-row items-start gap-6">
+              {/* Founder Image */}
+              <div className="flex-shrink-0 mx-auto sm:mx-0">
                 <img
-                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face"
-                   alt="CEO Portrait"
-                   className="w-20 h-20 rounded-full object-cover border-2"
-                  style={{borderColor: '#2C74BC'}}
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+                  alt="Founder Portrait"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2"
+                  style={{ borderColor: "#2C74BC" }}
                 />
               </div>
-              <div className="flex-1">
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold mb-1" style={{color: '#2C74BC'}}>Message from Our CEO</h3>
-                  <p className="text-gray-800 leading-relaxed">
-                    "Our commitment to excellence drives everything we do. With over a decade of experience serving millions of customers worldwide, we continue to innovate and deliver solutions that transform businesses and exceed expectations."
-                  </p>
+
+              {/* Message Content */}
+              <div className="flex-1 text-center sm:text-left">
+                <div className="mb-6">
+                  <h3
+                    className="text-lg sm:text-xl font-semibold mb-3"
+                    style={{ color: "#2C74BC" }}
+                  >
+                    Message from Our Founder
+                  </h3>
+
+                  <div
+                    className="bg-gray-50 p-6 rounded-lg border-l-4"
+                    style={{ borderLeftColor: "#2C74BC" }}
+                  >
+                    <p className="text-gray-800 leading-relaxed">
+                      "At Wonsol, our mission is to deliver{" "}
+                      <strong>
+                        cutting-edge software, AI, and automation solutions
+                      </strong>{" "}
+                      that empower businesses to thrive in the era of frontier
+                      technology. We aspire to play an active role in shaping
+                      the future by contributing to{" "}
+                      <strong style={{ color: "#2C74BC" }}>
+                        Vision 2030 initiatives
+                      </strong>{" "}
+                      in Saudi Arabia and Egypt, while also expanding our impact
+                      across the UAE. Our goal is to drive innovation,
+                      efficiency, and sustainable growth through smart,
+                      technology-driven solutions."
+                    </p>
+                  </div>
                 </div>
+
+                {/* Founder Details */}
                 <div className="text-sm text-gray-600">
-                  <div className="font-semibold" style={{color: '#2C74BC'}}>Michael Chen</div>
-                  <div>Chief Executive Officer & Founder</div>
+                  <div
+                    className="font-semibold text-base"
+                    style={{ color: "#2C74BC" }}
+                  >
+                    Muhammad Usman Ahmed
+                  </div>
+                  <div>Founder & Lead Developer</div>
                 </div>
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </div>
   );
-}
+};
+
+export default TestimonialFactBar;
