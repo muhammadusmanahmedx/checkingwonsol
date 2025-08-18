@@ -2,6 +2,7 @@
 
 import CircularGallery from "./circular-gallary"
 
+
 const ServicesSection = () => {
   const services = [
     {
@@ -76,7 +77,7 @@ const ServicesSection = () => {
       </div>
 
       {/* Interactive Services Gallery */}
-      <div className="relative z-10 h-72 sm:h-96 md:h-[500px] mb-6 sm:mb-8 px-2 sm:px-0">
+      <div className="relative z-10 h-72 sm:h-96 md:h-[500px] mb-20 sm:mb-16 md:mb-12 px-2 sm:px-0">
         <CircularGallery
           items={services}
           bend={2}
@@ -87,8 +88,6 @@ const ServicesSection = () => {
           scrollEase={0.08}
         />
       </div>
-
-      
 
       {/* Call to Action */}
       <div className="relative z-10 text-center mt-6 sm:mt-8 px-4">

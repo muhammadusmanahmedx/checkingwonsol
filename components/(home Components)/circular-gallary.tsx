@@ -81,7 +81,7 @@ const CircularGallery = ({
     const cardWidth = 280 // Approximate width of card + gap
     containerRef.current.scrollBy({
       left: -cardWidth,
-      behavior: 'smooth'
+      behavior: "smooth",
     })
   }
 
@@ -90,7 +90,7 @@ const CircularGallery = ({
     const cardWidth = 280 // Approximate width of card + gap
     containerRef.current.scrollBy({
       left: cardWidth,
-      behavior: 'smooth'
+      behavior: "smooth",
     })
   }
 
@@ -117,9 +117,9 @@ const CircularGallery = ({
             display: none;
           }
         `}</style>
-        
+
         {items.map((item, index) => (
-          <div key={index} className="flex-shrink-0 group" >
+          <div key={index} className="flex-shrink-0 group">
             {/* Portrait rectangular container */}
             <div className="relative w-48 h-64 sm:w-56 sm:h-72 md:w-64 md:h-80 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
               {!imageErrors.has(index) ? (
@@ -141,7 +141,7 @@ const CircularGallery = ({
                           strokeLinecap="round"
                           strokeLinejoin="round"
                           strokeWidth={2}
-                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 002 2z"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2z"
                         />
                       </svg>
                     </div>
@@ -164,39 +164,52 @@ const CircularGallery = ({
             </div>
           </div>
         ))}
+        
+        {/* Desktop Navigation Buttons - positioned absolutely */}
+        <div className="hidden sm:flex absolute bottom-4 md:bottom-8 z-20 left-1/2 transform -translate-x-1/2 gap-4">
+          <button
+            onClick={scrollToLeft}
+            className="bg-[#2C74BC] hover:bg-[#2C74BC]/90 shadow-lg hover:shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"
+            aria-label="Scroll left"
+          >
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+
+          <button
+            onClick={scrollToRight}
+            className="bg-[#2C74BC] hover:bg-[#2C74BC]/90 shadow-lg hover:shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"
+            aria-label="Scroll right"
+          >
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
 
-      {/* Blue Navigation Buttons */}
-      <div className="absolute bottom-2 z-20 left-1/2 transform  lg:bottom-4 -translate-x-1/2 flex gap-4">
+      {/* Mobile Navigation Buttons - positioned outside the scrolling container */}
+      <div className="sm:hidden flex justify-center gap-4 mt-4">
         <button
           onClick={scrollToLeft}
           className="bg-[#2C74BC] hover:bg-[#2C74BC]/90 shadow-lg hover:shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"
           aria-label="Scroll left"
         >
-          <svg 
-            className="w-5 h-5 text-white" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        
+
         <button
           onClick={scrollToRight}
           className="bg-[#2C74BC] hover:bg-[#2C74BC]/90 shadow-lg hover:shadow-xl rounded-full p-3 transition-all duration-300 hover:scale-110"
           aria-label="Scroll right"
         >
-          <svg 
-            className="w-5 h-5 text-white" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-          >
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-          </button>
+        </button>
       </div>
     </div>
   )
