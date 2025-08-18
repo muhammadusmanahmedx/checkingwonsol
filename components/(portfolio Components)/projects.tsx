@@ -81,7 +81,7 @@ const Portfolio = () => {
     {
       id: 9,
       title: "Portfolio Website",
-      category: "web-Development",
+      category: "web-development",
       description:
         "Modern, responsive portfolio website template with dark mode support, smooth animations, and customizable sections for creative professionals and agencies.",
       image:
@@ -144,7 +144,8 @@ const Portfolio = () => {
     {
       key: "Ai & System development",
       label: "Ai & System development",
-      count: projects.filter((p) => p.category === "web-design").length,
+      count: projects.filter((p) => p.category === "Ai & System development")
+        .length,
     },
     {
       key: "mobile-app",
