@@ -18,6 +18,18 @@ import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
 import AboutUsSection from "@/components/breadcrum";
 import Portfolio from "@/components/(portfolio Components)/projects";
 
+// export const metadata = {
+//   title: "Our Portfolio | Super Store",
+//   description: "Check out our portfolio of successful projects and collaborations with top brands and customers worldwide.",
+//   keywords: ["portfolio", "projects", "clients", "brands"],
+//   openGraph: {
+//     title: "Our Portfolio - Super Store",
+//     description: "Successful projects and collaborations with top brands.",
+//     images: ["/og-portfolio.png"],
+//   },
+// };
+
+
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);
 

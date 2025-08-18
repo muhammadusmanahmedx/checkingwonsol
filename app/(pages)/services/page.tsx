@@ -24,6 +24,19 @@ import {
 import AboutUsSection from "@/components/breadcrum";
 import Image from "next/image";
 
+
+// export const metadata = {
+//   title: "Our Services | Super Store",
+//   description: "Explore our wide range of services, from fast delivery to secure payments and top-notch customer support.",
+//   keywords: ["services", "fast delivery", "secure checkout", "customer support"],
+//   openGraph: {
+//     title: "Our Services - Super Store",
+//     description: "Fast delivery, secure checkout, and excellent customer support.",
+//     images: ["/og-services.png"],
+//   },
+// };
+
+
 const ServiceCard = ({ service, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isClicked, setIsClicked] = useState(false);
@@ -32,6 +45,9 @@ const ServiceCard = ({ service, index }) => {
     setIsClicked(true);
     setTimeout(() => setIsClicked(false), 200);
   };
+
+
+  
 
   return (
     <div

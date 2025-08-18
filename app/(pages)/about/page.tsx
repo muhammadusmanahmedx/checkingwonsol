@@ -16,7 +16,7 @@ import ServicesSection2 from "@/components/(home Components)/services-section";
 
 // import AboutUs, { DicedHeroSection } from "@/components/(about Components)/Aboutfirst";
 import { WorldMap } from "@/components/(about Components)/Wordlmap";
-import ArcTimelineDemo from "@/components/(about Components)/Aboutfirst";
+// import ArcTimelineDemo from "@/components/(about Components)/Aboutfirst";
 import WonSolutionsTimeline from "@/components/(about Components)/timeline";
 import {
   ArcTimeline,
@@ -28,6 +28,18 @@ import TestimonialFactBar from "@/components/(about Components)/stats";
 import AboutUsSection from "@/components/breadcrum";
 import WonsolAboutHero from "@/components/(about Components)/aboutnew1";
 // import AboutSection from "@/components/(about Components)/Aboutfirst";
+
+// export const metadata = {
+//   title: "About Us | Super Store",
+//   description: "Learn more about Super Store, our mission, and our commitment to bringing you the best shopping experience.",
+//   keywords: ["about super store", "our mission", "ecommerce company"],
+//   openGraph: {
+//     title: "About Super Store",
+//     description: "Committed to bringing you the best shopping experience.",
+//     images: ["/og-about.png"],
+//   },
+// };
+
 
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);

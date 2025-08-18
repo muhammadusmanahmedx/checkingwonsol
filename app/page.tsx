@@ -20,6 +20,19 @@ import { motion } from "framer-motion";
 // import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
 // import { HeroSectionnew } from "@/components/(home Components)/hero-section";
 
+
+// export const metadata = {
+//   title: "Welcome to Super Store – Best Online Shopping",
+//   description: "Discover amazing deals, trending products, and top-quality items. Shop smart, shop Super Store.",
+//   keywords: ["super store", "online shopping", "trending products", "best deals"],
+//   openGraph: {
+//     title: "Super Store – Best Online Shopping",
+//     description: "Discover amazing deals, trending products, and top-quality items.",
+//     images: ["/og-home.png"],
+//   },
+// };
+
+
 export default function Home() {
   const nextSectionRef = useRef<HTMLDivElement>(null);
 
