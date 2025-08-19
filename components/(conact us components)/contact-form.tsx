@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
+import type React from "react";
+import { useState } from "react";
 
 export function ContactForm() {
   const [formData, setFormData] = useState({
@@ -9,43 +9,65 @@ export function ContactForm() {
     email: "",
     company: "",
     message: "",
-  })
+  });
 
-  const [focusedField, setFocusedField] = useState<string | null>(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [focusedField, setFocusedField] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-    console.log("Form submitted:", formData)
-    setIsSubmitting(false)
-  }
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        console.log("Form submitted:", formData);
+        alert("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", company: "", message: "" });
+      } else {
+        alert("❌ Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      alert("❌ Error: " + error);
+    }
+
+    setIsSubmitting(false);
+  };
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="space-y-8">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-gray-900 mb-4">
-          Ready to Discuss Your <span className="text-[#2C74BC]">Next Project?</span>
+          Ready to Discuss Your{" "}
+          <span className="text-[#2C74BC]">Next Project?</span>
         </h2>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-          Let's turn your innovative ideas into powerful software solutions. Contact us to start your digital
-          transformation journey.
+          Let's turn your innovative ideas into powerful software solutions.
+          Contact us to start your digital transformation journey.
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-3 relative">
-            <label htmlFor="name" className="text-sm font-bold text-gray-800 flex items-center gap-2">
+            <label
+              htmlFor="name"
+              className="text-sm font-bold text-gray-800 flex items-center gap-2"
+            >
               <span className="w-2 h-2 bg-[#2C74BC] rounded-full"></span>
               Full Name *
             </label>
@@ -68,7 +90,10 @@ export function ContactForm() {
             </div>
           </div>
           <div className="space-y-3 relative">
-            <label htmlFor="email" className="text-sm font-bold text-gray-800 flex items-center gap-2">
+            <label
+              htmlFor="email"
+              className="text-sm font-bold text-gray-800 flex items-center gap-2"
+            >
               <span className="w-2 h-2 bg-[#2C74BC] rounded-full"></span>
               Email Address *
             </label>
@@ -93,7 +118,10 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-3 relative">
-          <label htmlFor="company" className="text-sm font-bold text-gray-800 flex items-center gap-2">
+          <label
+            htmlFor="company"
+            className="text-sm font-bold text-gray-800 flex items-center gap-2"
+          >
             <span className="w-2 h-2 bg-gray-400 rounded-full"></span>
             Company
           </label>
@@ -116,7 +144,10 @@ export function ContactForm() {
         </div>
 
         <div className="space-y-3 relative">
-          <label htmlFor="message" className="text-sm font-bold text-gray-800 flex items-center gap-2">
+          <label
+            htmlFor="message"
+            className="text-sm font-bold text-gray-800 flex items-center gap-2"
+          >
             <span className="w-2 h-2 bg-[#2C74BC] rounded-full"></span>
             Message *
           </label>
@@ -173,5 +204,5 @@ export function ContactForm() {
         </button>
       </form>
     </div>
-  )
+  );
 }
