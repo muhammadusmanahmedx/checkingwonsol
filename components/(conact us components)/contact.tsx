@@ -1,6 +1,6 @@
-"use client"
-import { useState, useEffect } from "react"
-import { Mail, Phone, MapPin, Clock, Navigation } from "lucide-react"
+"use client";
+import { useState, useEffect } from "react";
+import { Mail, Phone, MapPin, Clock, Navigation } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -9,64 +9,70 @@ export default function ContactPage() {
     company: "",
     subject: "", // Added subject field to form data
     message: "",
-  })
-  const [focusedField, setFocusedField] = useState(null)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [focusedField, setFocusedField] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   type FormErrors = {
-    name?: string
-    email?: string
-    company?: string
-    subject?: string
-    message?: string
-    submit?: string
-  }
-  const [formErrors, setFormErrors] = useState<FormErrors>({})
-  const [mapLoaded, setMapLoaded] = useState(false)
+    name?: string;
+    email?: string;
+    company?: string;
+    subject?: string;
+    message?: string;
+    submit?: string;
+  };
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
+  const [mapLoaded, setMapLoaded] = useState(false);
 
   const validateForm = () => {
-    const errors = {}
-    if (!formData.name.trim()) errors.name = "Name is required"
+    const errors = {};
+    if (!formData.name.trim()) errors.name = "Name is required";
     if (!formData.email.trim()) {
-      errors.email = "Email is required"
+      errors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Invalid email format"
+      errors.email = "Invalid email format";
     }
-    if (!formData.subject.trim()) errors.subject = "Subject is required" // Added subject validation
-    if (!formData.message.trim()) errors.message = "Message is required"
-    return errors
-  }
+    if (!formData.subject.trim()) errors.subject = "Subject is required"; // Added subject validation
+    if (!formData.message.trim()) errors.message = "Message is required";
+    return errors;
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const errors = validateForm()
+    e.preventDefault();
+    const errors = validateForm();
     if (Object.keys(errors).length > 0) {
-      setFormErrors(errors)
-      return
+      setFormErrors(errors);
+      return;
     }
-    setIsSubmitting(true)
-    setFormErrors({})
+    setIsSubmitting(true);
+    setFormErrors({});
     try {
       // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      console.log("Form submitted:", formData)
-      setFormData({ name: "", email: "", company: "", subject: "", message: "" }) // Reset subject field
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      console.log("Form submitted:", formData);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        subject: "",
+        message: "",
+      }); // Reset subject field
     } catch (error) {
-      setFormErrors({ submit: "Failed to send message. Please try again." })
+      setFormErrors({ submit: "Failed to send message. Please try again." });
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-    setFormErrors((prev) => ({ ...prev, [name]: null }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormErrors((prev) => ({ ...prev, [name]: null }));
+  };
 
   useEffect(() => {
-    const timer = setTimeout(() => setMapLoaded(true), 1000)
-    return () => clearTimeout(timer)
-  }, [])
+    const timer = setTimeout(() => setMapLoaded(true), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/50 to-[#2C74BC]/5 relative overflow-hidden">
@@ -86,7 +92,9 @@ export default function ContactPage() {
           {/* Header Section */}
           <div className="text-center mb-12">
             <div className="inline-block mb-4 px-6 py-2 bg-[#2C74BC]/10 rounded-full border border-[#2C74BC]/20">
-              <span className="text-[#2C74BC] font-semibold text-sm tracking-wider uppercase">Get In Touch</span>
+              <span className="text-[#2C74BC] font-semibold text-sm tracking-wider uppercase">
+                Get In Touch
+              </span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] bg-clip-text text-transparent leading-tight">
               Let's Create Something Remarkable
@@ -94,7 +102,8 @@ export default function ContactPage() {
               {/* <span className="text-3xl sm:text-4xl lg:text-5xl">Something Remarkable</span> */}
             </h1>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6">
-              Turn your ideas into cutting-edge software solutions with our dedicated team.
+              Turn your ideas into cutting-edge software solutions with our
+              dedicated team.
             </p>
             <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-sm text-gray-500">
               <div className="flex items-center gap-2">
@@ -120,7 +129,12 @@ export default function ContactPage() {
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94]" />
                 <div className="flex items-center mb-6">
                   <div className="w-10 h-10 bg-gradient-to-br from-[#2C74BC] to-[#1e5a94] rounded-lg flex items-center justify-center mr-3 shadow-md">
-                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-5 h-5 text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -130,14 +144,24 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <div>
-                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Start a Conversation</h2>
-                    <p className="text-gray-600 text-sm sm:text-base">Tell us about your project</p>
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">
+                      Start a Conversation
+                    </h2>
+                    <p className="text-gray-600 text-sm sm:text-base">
+                      Tell us about your project
+                    </p>
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5" aria-label="Contact form">
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                  aria-label="Contact form"
+                >
                   {formErrors.submit && (
-                    <div className="text-red-500 text-sm font-medium text-center">{formErrors.submit}</div>
+                    <div className="text-red-500 text-sm font-medium text-center">
+                      {formErrors.submit}
+                    </div>
                   )}
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div className="relative">
@@ -154,7 +178,9 @@ export default function ContactPage() {
                           formErrors.name ? "border-red-300" : ""
                         }`}
                         aria-invalid={!!formErrors.name}
-                        aria-describedby={formErrors.name ? "name-error" : undefined}
+                        aria-describedby={
+                          formErrors.name ? "name-error" : undefined
+                        }
                       />
                       <label
                         htmlFor="name"
@@ -165,7 +191,10 @@ export default function ContactPage() {
                         Full Name *
                       </label>
                       {formErrors.name && (
-                        <p id="name-error" className="text-red-500 text-xs mt-1">
+                        <p
+                          id="name-error"
+                          className="text-red-500 text-xs mt-1"
+                        >
                           {formErrors.name}
                         </p>
                       )}
@@ -184,7 +213,9 @@ export default function ContactPage() {
                           formErrors.email ? "border-red-300" : ""
                         }`}
                         aria-invalid={!!formErrors.email}
-                        aria-describedby={formErrors.email ? "email-error" : undefined}
+                        aria-describedby={
+                          formErrors.email ? "email-error" : undefined
+                        }
                       />
                       <label
                         htmlFor="email"
@@ -195,7 +226,10 @@ export default function ContactPage() {
                         Email Address *
                       </label>
                       {formErrors.email && (
-                        <p id="email-error" className="text-red-500 text-xs mt-1">
+                        <p
+                          id="email-error"
+                          className="text-red-500 text-xs mt-1"
+                        >
                           {formErrors.email}
                         </p>
                       )}
@@ -237,7 +271,9 @@ export default function ContactPage() {
                         formErrors.subject ? "border-red-300" : ""
                       }`}
                       aria-invalid={!!formErrors.subject}
-                      aria-describedby={formErrors.subject ? "subject-error" : undefined}
+                      aria-describedby={
+                        formErrors.subject ? "subject-error" : undefined
+                      }
                     />
                     <label
                       htmlFor="subject"
@@ -248,7 +284,10 @@ export default function ContactPage() {
                       Subject *
                     </label>
                     {formErrors.subject && (
-                      <p id="subject-error" className="text-red-500 text-xs mt-1">
+                      <p
+                        id="subject-error"
+                        className="text-red-500 text-xs mt-1"
+                      >
                         {formErrors.subject}
                       </p>
                     )}
@@ -268,7 +307,9 @@ export default function ContactPage() {
                         formErrors.message ? "border-red-300" : ""
                       }`}
                       aria-invalid={!!formErrors.message}
-                      aria-describedby={formErrors.message ? "message-error" : undefined}
+                      aria-describedby={
+                        formErrors.message ? "message-error" : undefined
+                      }
                     />
                     <label
                       htmlFor="message"
@@ -279,7 +320,10 @@ export default function ContactPage() {
                       Message *
                     </label>
                     {formErrors.message && (
-                      <p id="message-error" className="text-red-500 text-xs mt-1">
+                      <p
+                        id="message-error"
+                        className="text-red-500 text-xs mt-1"
+                      >
                         {formErrors.message}
                       </p>
                     )}
@@ -289,7 +333,9 @@ export default function ContactPage() {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full h-12 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 relative overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                    aria-label={isSubmitting ? "Submitting form" : "Submit form"}
+                    aria-label={
+                      isSubmitting ? "Submitting form" : "Submit form"
+                    }
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 -translate-x-[150%] group-hover:translate-x-[150%] transition-transform duration-700" />
                     <span className="relative z-10 flex items-center justify-center gap-2">
@@ -332,8 +378,12 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-white" />
                     </div>
                     <div>
-                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Get in Touch</h2>
-                      <p className="text-gray-600 text-sm sm:text-base">We're here to assist you</p>
+                      <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
+                        Get in Touch
+                      </h2>
+                      <p className="text-gray-600 text-sm sm:text-base">
+                        We're here to assist you
+                      </p>
                     </div>
                   </div>
                   <div className="space-y-4 flex-1">
@@ -341,13 +391,13 @@ export default function ContactPage() {
                       {
                         icon: Phone,
                         title: "Phone",
-                        content: "+1 (555) 123-4567",
+                        content: "+923316120479",
                         subtext: "Available 7 days a week",
                       },
                       {
                         icon: Mail,
                         title: "Email",
-                        content: "contact@techsoft.com",
+                        content: "info@wonsol.com",
                         subtext: "24-hour response time",
                       },
                       {
@@ -355,11 +405,11 @@ export default function ContactPage() {
                         title: "Office",
                         content: (
                           <>
-                            123 Tech Street
-                            <br />
-                            San Francisco, CA 94105
-                            <br />
-                            United States
+                            Rawalpindi, Pakistan (Headquarter)
+                            <hr className="my-2 border-t border-gray-300 w-1/2" />
+                            Oklahoma, USA (Representative)
+                            <hr className="my-2 border-t border-gray-300 w-1/2" />
+                            London, UK (Representative)
                           </>
                         ),
                       },
@@ -420,8 +470,12 @@ export default function ContactPage() {
                   <div className="w-12 h-12 bg-[#2C74BC]/10 rounded-full flex items-center justify-center mx-auto mb-3 animate-pulse">
                     <MapPin className="w-6 h-6 text-[#2C74BC]" />
                   </div>
-                  <p className="text-gray-700 font-medium text-sm sm:text-base mb-2">Loading Map...</p>
-                  <p className="text-gray-500 text-xs sm:text-sm">123 Tech Street, San Francisco, CA 94105</p>
+                  <p className="text-gray-700 font-medium text-sm sm:text-base mb-2">
+                    Loading Map...
+                  </p>
+                  <p className="text-gray-500 text-xs sm:text-sm">
+                    123 Tech Street, San Francisco, CA 94105
+                  </p>
                   <a
                     href="https://maps.google.com/?q=123+Tech+Street,+San+Francisco,+CA+94105"
                     target="_blank"
@@ -442,7 +496,9 @@ export default function ContactPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className={`absolute inset-0 transition-opacity duration-500 ${mapLoaded ? "opacity-100" : "opacity-0"}`}
+                className={`absolute inset-0 transition-opacity duration-500 ${
+                  mapLoaded ? "opacity-100" : "opacity-0"
+                }`}
                 onLoad={() => setMapLoaded(true)}
                 title="Office location map"
               />
@@ -451,5 +507,5 @@ export default function ContactPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
