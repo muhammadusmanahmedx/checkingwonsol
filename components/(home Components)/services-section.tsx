@@ -1,51 +1,97 @@
-"use client"
+"use client";
 
-import CircularGallery from "./circular-gallary"
-
+import { useNavigationLoader } from "../navigationLoader";
+import CircularGallery from "./circular-gallary";
 
 const ServicesSection = () => {
+  const { navigateWithLoader, isLoading } = useNavigationLoader();
+
   const services = [
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755404118/programming-background-collage_1_n1mx7d.jpg`,
       text: "Web Development",
-      onClick: () => (window.location.href = "/services/web-development"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/web-development",
+          "Taking you to Web Development services...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755404319/empowered-business-woman-working-city_1_kjeqta.jpg`,
       text: "Mobile Apps",
-      onClick: () => (window.location.href = "/services/mobile-apps"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/mobile-apps",
+          "Taking you to Mobile Apps services...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755404532/saas-concept-collage_1_gxmpxw.jpg`,
       text: "Cloud Solutions",
-      onClick: () => (window.location.href = "/services/cloud-solutions"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/cloud-solutions",
+          "Taking you to Cloud Solutions...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405240/businesswoman-interacting-with-ai-hologram-office_cfin0o.jpg`,
       text: "AI Integration",
-      onClick: () => (window.location.href = "/services/ai-integration"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/ai-integration",
+          "Taking you to AI Integration services...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755403844/technology-concept-with-futuristic-element_1_1_rt33cu.jpg`,
       text: "Digital Transformation",
-      onClick: () => (window.location.href = "/services/digital-transformation"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/digital-transformation",
+          "Taking you to Digital Transformation...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405241/two-young-businessman-having-successful-meeting-restaurant_cyhutx.jpg`,
       text: "IT Consulting",
-      onClick: () => (window.location.href = "/services/consulting"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/consulting",
+          "Taking you to IT Consulting...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405473/freelance-programmer-working-remote-writing-code-software-pc-using-keyboard-debugging-algorithm-client-selective-focus-coder-computer-screen-with-programming-laguage-text_1_ycpuin.jpg`,
       text: "DevOps Solutions",
-      onClick: () => (window.location.href = "/services/devops"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/devops",
+          "Taking you to DevOps Solutions...",
+          2000
+        ),
     },
     {
       image: `https://res.cloudinary.com/dshjm6hcx/image/upload/v1755405229/cybersecurity-concept-illustration_1_quvqss.jpg`,
       text: "Cybersecurity",
-      onClick: () => (window.location.href = "/services/cybersecurity"),
+      onClick: () =>
+        navigateWithLoader(
+          "/services/cybersecurity",
+          "Taking you to Cybersecurity services...",
+          2000
+        ),
     },
-  ]
+  ];
+
+  const handleViewAllServicesClick = () => {
+    navigateWithLoader("/services", "Exploring all our services...", 2500);
+  };
 
   return (
     <section className="relative w-full py-16 sm:py-20 lg:py-28 overflow-hidden">
@@ -71,8 +117,9 @@ const ServicesSection = () => {
         </h1>
 
         <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6 max-w-2xl mx-auto">
-          From cutting-edge web development to AI integration, we deliver solutions that transform your business and
-          drive success in the digital landscape.
+          From cutting-edge web development to AI integration, we deliver
+          solutions that transform your business and drive success in the
+          digital landscape.
         </p>
       </div>
 
@@ -91,13 +138,21 @@ const ServicesSection = () => {
 
       {/* Call to Action */}
       <div className="relative z-10 text-center mt-6 sm:mt-8 px-4">
-        <button className="group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 shadow-xl text-sm sm:text-base">
-          View All Services
-          <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+        <button
+          onClick={handleViewAllServicesClick}
+          disabled={isLoading}
+          className={`group relative px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold text-white bg-[#2C74BC] hover:bg-[#2C74BC]/90 transition-all duration-300 hover:scale-105 shadow-xl text-sm sm:text-base ${
+            isLoading ? "opacity-75 cursor-not-allowed" : ""
+          }`}
+        >
+          {isLoading ? "Loading..." : "View All Services"}
+          <span className="ml-2 group-hover:translate-x-1 transition-transform duration-300">
+            →
+          </span>
         </button>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ServicesSection
+export default ServicesSection;

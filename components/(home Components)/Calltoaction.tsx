@@ -1,11 +1,17 @@
 "use client";
-
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigationLoader } from "../navigationLoader";
 
 const CTASection: React.FC = () => {
+  const { navigateWithLoader, isLoading } = useNavigationLoader();
+
+  const handleGetConsultationClick = () => {
+    navigateWithLoader("/contact", "Connecting you with our experts...", 2500);
+  };
+
   return (
-    <section className="relative bg-[#2C74BC] py-14  border-b-1 border-white sm:py-16 lg:py-20 overflow-hidden">
+    <section className="relative bg-[#2C74BC] py-14 border-b-1 border-white sm:py-16 lg:py-20 overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-8 right-8 w-24 sm:w-32 h-24 sm:h-32 bg-white/5 rounded-full blur-2xl"></div>
@@ -30,21 +36,28 @@ const CTASection: React.FC = () => {
 
           {/* Subtext */}
           <p className="text-base sm:text-lg md:text-xl text-white/90 mb-10 max-w-2xl sm:max-w-3xl mx-auto">
-            Let’s transform your ideas into powerful software solutions. Get
+            Let's transform your ideas into powerful software solutions. Get
             started today with a free consultation.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center ">
-            <motion.a
-              href="#contact"
-              className="inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-[#2C74BC] font-bold text-base sm:text-lg rounded-full hover:bg-white/90 hover:shadow-xl hover:shadow-white/20 transition-all duration-300 group"
-              whileHover={{ y: -3, scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <motion.button
+              onClick={handleGetConsultationClick}
+              disabled={isLoading}
+              className={`inline-flex items-center justify-center px-6 sm:px-8 py-3 sm:py-4 bg-white text-[#2C74BC] font-bold text-base sm:text-lg rounded-full hover:bg-white/90 hover:shadow-xl hover:shadow-white/20 transition-all duration-300 group ${
+                isLoading ? "opacity-75 cursor-not-allowed" : ""
+              }`}
+              whileHover={!isLoading ? { y: -3, scale: 1.05 } : {}}
+              whileTap={!isLoading ? { scale: 0.95 } : {}}
             >
-              <span>Get Free Consultation</span>
+              <span>
+                {isLoading ? "Connecting..." : "Get Free Consultation"}
+              </span>
               <svg
-                className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform"
+                className={`w-5 h-5 ml-2 transition-transform ${
+                  !isLoading ? "group-hover:translate-x-1" : ""
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -56,12 +69,10 @@ const CTASection: React.FC = () => {
                   d="M17 8l4 4m0 0l-4 4m4-4H3"
                 />
               </svg>
-            </motion.a>
+            </motion.button>
           </div>
 
           {/* Quick Contact Info */}
-         
-    
         </motion.div>
       </div>
     </section>

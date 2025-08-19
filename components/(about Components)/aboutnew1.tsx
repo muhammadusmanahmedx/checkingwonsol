@@ -15,8 +15,8 @@ const WonsolAboutHero = ({
           <div className="self-center lg:col-span-4">
             <h1 className="text-2xl font-bold text-gray-900 sm:text-3xl xl:text-4xl leading-tight">
               Welcome to
-              <span className="text-blue-600"> Wonsol</span> Building Tomorrow's
-              Solutions
+              <span className="text-[#2C74BC]"> Wonsol</span> Building
+              Tomorrow's Solutions
             </h1>
             <p className="mt-3 text-sm font-normal leading-6 text-gray-500 sm:text-base sm:leading-7">
               We're a passionate startup dedicated to creating innovative

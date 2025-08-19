@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Filter, Eye } from "lucide-react";
+import { useNavigationLoader } from "../navigationLoader";
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("all");
+  const { navigateWithLoader, isLoading } = useNavigationLoader();
 
   // Sample projects - replace with your actual projects
   const projects = [
@@ -159,6 +161,18 @@ const Portfolio = () => {
       ? projects
       : projects.filter((project) => project.category === activeFilter);
 
+  const handleContactUsClick = () => {
+    navigateWithLoader("/contact", "Let's discuss your next project...", 2500);
+  };
+
+  const handleProjectClick = (projectTitle) => {
+    navigateWithLoader(
+      `/portfolio/${projectTitle.toLowerCase().replace(/\s+/g, "-")}`,
+      `Loading ${projectTitle} details...`,
+      2000
+    );
+  };
+
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-6">
@@ -194,7 +208,8 @@ const Portfolio = () => {
           {filteredProjects.map((project) => (
             <div
               key={project.id}
-              className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-[#2C74BC]"
+              className="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-[#2C74BC] cursor-pointer"
+              onClick={() => handleProjectClick(project.title)}
             >
               <div className="relative h-64 overflow-hidden">
                 <img
@@ -203,6 +218,20 @@ const Portfolio = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                {/* View Project Button - appears on hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <button
+                    className="bg-white/90 text-[#2C74BC] px-4 py-2 rounded-full font-semibold flex items-center gap-2 hover:bg-white transition-colors"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleProjectClick(project.title);
+                    }}
+                  >
+                    <Eye className="w-4 h-4" />
+                    View Project
+                  </button>
+                </div>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#2C74BC] transition-colors duration-300">
@@ -241,8 +270,14 @@ const Portfolio = () => {
               Let's collaborate to bring your vision to life with innovative
               solutions and cutting-edge technology.
             </p>
-            <button className="bg-white text-[#2C74BC] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors">
-              Contact Us Today
+            <button
+              onClick={handleContactUsClick}
+              disabled={isLoading}
+              className={`bg-white text-[#2C74BC] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors hover:cursor-pointer ${
+                isLoading ? "opacity-75 cursor-not-allowed" : ""
+              }`}
+            >
+              {"Contact Us Today"}
             </button>
           </div>
         </div>

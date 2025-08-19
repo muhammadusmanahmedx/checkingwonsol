@@ -1,57 +1,78 @@
-// pages/index.tsx
-"use client";
-import HeroSection from "@/components/(home Components)/hero";
-import ServicesSection from "@/components/(home Components)/services";
-import WhyChooseUs from "@/components/(home Components)/why-choose-us";
-import Footer from "@/components/(home Components)/footer";
-import { useRef } from "react";
-import HeroSection2 from "@/components/(home Components)/companyintro";
-import IntroSection from "@/components/(home Components)/companyintro";
-import ServiceHighlights from "@/components/(home Components)/Servicesection";
-import ClientTestimonials from "@/components/(home Components)/clienttestimonials";
-import CTASection from "@/components/(home Components)/Calltoaction";
+import Script from "next/script";
+import PortfolioClient from "./client";
 
-import ServicesSection2 from "@/components/(home Components)/services-section";
-import AboutSection from "@/components/(home Components)/about-section";
-import TestimonialCarousel from "@/components/(home Components)/testimonials";
-import { InfiniteSlider } from "@/components/(home Components)/logocarousal";
-import AboutUsSection from "@/components/breadcrum";
-import Portfolio from "@/components/(portfolio Components)/projects";
-
-// export const metadata = {
-//   title: "Our Portfolio | Super Store",
-//   description: "Check out our portfolio of successful projects and collaborations with top brands and customers worldwide.",
-//   keywords: ["portfolio", "projects", "clients", "brands"],
-//   openGraph: {
-//     title: "Our Portfolio - Super Store",
-//     description: "Successful projects and collaborations with top brands.",
-//     images: ["/og-portfolio.png"],
-//   },
-// };
-
-
-export default function Home() {
-  const nextSectionRef = useRef<HTMLDivElement>(null);
-
-  const handlePortfolioScrollEnd = () => {
-    // Smooth transition to next section
-    if (nextSectionRef.current) {
-      nextSectionRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+// Metadata for SEO
+export async function generateMetadata() {
+  return {
+    title: "Portfolio - IT Projects & Success Stories | Won Solutions",
+    description:
+      "Explore Won Solutions' portfolio of successful IT projects including web applications, cloud migrations, and digital transformation case studies.",
+    keywords: [
+      "IT portfolio",
+      "web development projects",
+      "cloud migration case studies",
+      "cybersecurity implementations",
+      "digital transformation examples",
+      "client success stories",
+      "IT project showcase",
+    ],
+    openGraph: {
+      title: "Our Work - IT Portfolio | Won Solutions",
+      description:
+        "See how we've helped businesses transform through technology. Browse our portfolio of web development, cloud, and cybersecurity projects.",
+      url: "https://wonsol.com/portfolio",
+    },
+    alternates: {
+      canonical: "https://wonsol.com/portfolio",
+    },
   };
+}
 
+// JSON-LD for structured data
+const portfolioJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Won Solutions Portfolio",
+  description:
+    "A showcase of successful IT projects and client solutions delivered by Won Solutions.",
+  mainEntity: {
+    "@type": "ItemList",
+    name: "IT Projects Portfolio",
+    description:
+      "Collection of web development, cloud, and cybersecurity projects",
+    itemListElement: [
+      {
+        "@type": "CreativeWork",
+        name: "E-Commerce Platform",
+        description:
+          "Developed a scalable e-commerce web application with advanced payment integration.",
+        url: "https://wonsol.com/portfolio/ecommerce-platform",
+      },
+      {
+        "@type": "CreativeWork",
+        name: "Cloud Migration for Enterprise",
+        description:
+          "Successfully migrated enterprise infrastructure to AWS with zero downtime.",
+        url: "https://wonsol.com/portfolio/cloud-migration",
+      },
+      {
+        "@type": "CreativeWork",
+        name: "Cybersecurity Audit",
+        description:
+          "Conducted a comprehensive cybersecurity audit and implemented robust protections.",
+        url: "https://wonsol.com/portfolio/cybersecurity-audit",
+      },
+    ],
+  },
+};
+
+export default function PortfolioPage() {
   return (
-    <div className="">
-      <AboutUsSection
-        title="Our Projects"
-        backgroundImage="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755459467/social-media-entertainment-lifestyle-graphic-concept-min_ddgskp.jpg"
-        subtitle=" We provide comprehensive technology solutions to help your business thrive"
-      />
-
-      <Portfolio />
-    </div>
+    <>
+      <Script id="portfolio-jsonld" type="application/ld+json">
+        {JSON.stringify(portfolioJsonLd)}
+      </Script>
+      <PortfolioClient />
+    </>
   );
 }
