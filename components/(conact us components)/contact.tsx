@@ -1,20 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Mail, Phone, MapPin, Clock, Navigation } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    full_name: "",
+    reply_to: "",
     company: "",
-    subject: "", // Added subject field to form data
+    subject: "",
     message: "",
   });
   const [focusedField, setFocusedField] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false); // State for modal
   type FormErrors = {
-    name?: string;
-    email?: string;
+    full_name?: string;
+    reply_to?: string;
     company?: string;
     subject?: string;
     message?: string;
@@ -23,20 +25,25 @@ export default function ContactPage() {
   const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [mapLoaded, setMapLoaded] = useState(false);
 
+  // Initialize EmailJS with your public key
+  useEffect(() => {
+    emailjs.init("AYMJq8HmUEeUtB1Fy"); // Replace with your actual EmailJS public key
+  }, []);
+
   const validateForm = () => {
-    const errors = {};
-    if (!formData.name.trim()) errors.name = "Name is required";
-    if (!formData.email.trim()) {
-      errors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = "Invalid email format";
+    const errors: FormErrors = {};
+    if (!formData.full_name.trim()) errors.full_name = "Name is required";
+    if (!formData.reply_to.trim()) {
+      errors.reply_to = "Email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.reply_to)) {
+      errors.reply_to = "Invalid email format";
     }
-    if (!formData.subject.trim()) errors.subject = "Subject is required"; // Added subject validation
+    if (!formData.subject.trim()) errors.subject = "Subject is required";
     if (!formData.message.trim()) errors.message = "Message is required";
     return errors;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
@@ -45,25 +52,43 @@ export default function ContactPage() {
     }
     setIsSubmitting(true);
     setFormErrors({});
+
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form submitted:", formData);
+      // Send email using EmailJS
+      await emailjs.send(
+        "service_2h03pmt", // Replace with your actual EmailJS service ID
+        "template_j6pu94h", // Replace with your actual EmailJS template ID
+        {
+          full_name: formData.full_name,
+          reply_to: formData.reply_to,
+          company: formData.company,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        "AYMJq8HmUEeUtB1Fy" // Replace with your actual EmailJS public key
+      );
+      console.log("Email sent successfully");
       setFormData({
-        name: "",
-        email: "",
+        full_name: "",
+        reply_to: "",
         company: "",
         subject: "",
         message: "",
-      }); // Reset subject field
+      });
+      setShowSuccessModal(true); // Show the modal on success
+      // Automatically close the modal after 3 seconds
+      setTimeout(() => {
+        setShowSuccessModal(false);
+      }, 3000);
     } catch (error) {
+      console.error("EmailJS error:", error);
       setFormErrors({ submit: "Failed to send message. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setFormErrors((prev) => ({ ...prev, [name]: null }));
@@ -76,6 +101,29 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/50 to-[#2C74BC]/5 relative overflow-hidden">
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed top-4 right-4 z-50 w-80 bg-green-500 text-white rounded-lg shadow-lg p-4 flex items-center gap-3 animate-slide-in">
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          <p className="text-sm font-medium">
+            Message sent successfully! We'll get back to you soon.
+          </p>
+        </div>
+      )}
+
       {/* Background Decorations */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute -top-48 -right-48 w-80 h-80 bg-[#2C74BC]/5 rounded-full blur-3xl animate-pulse" />
@@ -98,8 +146,6 @@ export default function ContactPage() {
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-[#2C74BC] to-[#1e5a94] bg-clip-text text-transparent leading-tight">
               Let's Create Something Remarkable
-              <br />
-              {/* <span className="text-3xl sm:text-4xl lg:text-5xl">Something Remarkable</span> */}
             </h1>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6">
               Turn your ideas into cutting-edge software solutions with our
@@ -166,71 +212,71 @@ export default function ContactPage() {
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div className="relative">
                       <input
-                        id="name"
-                        name="name"
+                        id="full_name"
+                        name="full_name"
                         type="text"
                         required
-                        value={formData.name}
+                        value={formData.full_name}
                         onChange={handleChange}
-                        onFocus={() => setFocusedField("name")}
+                        onFocus={() => setFocusedField("full_name")}
                         onBlur={() => setFocusedField(null)}
                         className={`peer w-full h-14 px-4 pt-7 pb-2 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
-                          formErrors.name ? "border-red-300" : ""
+                          formErrors.full_name ? "border-red-300" : ""
                         }`}
-                        aria-invalid={!!formErrors.name}
+                        aria-invalid={!!formErrors.full_name}
                         aria-describedby={
-                          formErrors.name ? "name-error" : undefined
+                          formErrors.full_name ? "full_name-error" : undefined
                         }
                       />
                       <label
-                        htmlFor="name"
+                        htmlFor="full_name"
                         className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
-                          formData.name ? "text-xs top-1 text-[#2C74BC]" : ""
+                          formData.full_name ? "text-xs top-1 text-[#2C74BC]" : ""
                         }`}
                       >
                         Full Name *
                       </label>
-                      {formErrors.name && (
+                      {formErrors.full_name && (
                         <p
-                          id="name-error"
+                          id="full_name-error"
                           className="text-red-500 text-xs mt-1"
                         >
-                          {formErrors.name}
+                          {formErrors.full_name}
                         </p>
                       )}
                     </div>
                     <div className="relative">
                       <input
-                        id="email"
-                        name="email"
+                        id="reply_to"
+                        name="reply_to"
                         type="email"
                         required
-                        value={formData.email}
+                        value={formData.reply_to}
                         onChange={handleChange}
-                        onFocus={() => setFocusedField("email")}
+                        onFocus={() => setFocusedField("reply_to")}
                         onBlur={() => setFocusedField(null)}
                         className={`peer w-full h-14 px-4 pt-7 pb-2 border border-gray-200 rounded-lg focus:border-[#2C74BC] focus:ring-2 focus:ring-[#2C74BC]/20 transition-all duration-300 bg-white text-base placeholder-transparent outline-none shadow-sm focus:shadow-md ${
-                          formErrors.email ? "border-red-300" : ""
+                          formErrors.reply_to ? "border-red-300" : ""
                         }`}
-                        aria-invalid={!!formErrors.email}
+                        aria-invalid={!!formErrors.reply_to}
                         aria-describedby={
-                          formErrors.email ? "email-error" : undefined
+                          formErrors.reply_to ? "reply_to-error" : undefined
                         }
                       />
                       <label
-                        htmlFor="email"
+                        htmlFor="reply_to"
                         className={`absolute left-4 top-4 text-gray-500 text-sm transition-all duration-300 peer-placeholder-shown:text-base peer-placeholder-shown:top-4 peer-focus:text-xs peer-focus:top-1 peer-focus:text-[#2C74BC] ${
-                          formData.email ? "text-xs top-1 text-[#2C74BC]" : ""
+                          formData.reply_to ? "text-xs top-1 text-[#2C74BC]" : ""
                         }`}
                       >
                         Email Address *
                       </label>
-                      {formErrors.email && (
+                      {formErrors.reply_to && (
                         <p
-                          id="email-error"
+                          id="reply_to-error"
                           className="text-red-500 text-xs mt-1"
                         >
-                          {formErrors.email}
+                          {formErrors.reply_to}
                         </p>
                       )}
                     </div>

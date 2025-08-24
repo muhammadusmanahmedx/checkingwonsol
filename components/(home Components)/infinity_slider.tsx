@@ -19,11 +19,11 @@ const defaultImages: ImageData[] = [
     alt: "NVIDIA",
     height: "32"
   },
-  {
-    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png",
-    alt: "Column",
-    height: "32"
-  },
+  // {
+  //   src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755408781/Asset_3_mzz7s1.png",
+  //   alt: "Column",
+  //   height: "32"
+  // },
   {
     src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414869/Frame_150_rd1ng3.png",
     alt: "GitHub",
@@ -34,11 +34,11 @@ const defaultImages: ImageData[] = [
     alt: "Nike",
     height: "32"
   },
-  {
-    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755428469/Frame_151_1_fnaqaz.png",
-    alt: "Company Logo",
-    height: "32"
-  },
+  // {
+  //   src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755428469/Frame_151_1_fnaqaz.png",
+  //   alt: "Company Logo",
+  //   height: "32"
+  // },
   {
     src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png",
     alt: "Company Logo",
