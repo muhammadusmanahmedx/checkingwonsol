@@ -97,7 +97,7 @@ const TestimonialFactBar = () => {
               {/* Founder Image */}
               <div className="flex-shrink-0 mx-auto sm:mx-0">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face"
+                  src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
                   alt="Founder Portrait"
                   className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2"
                   style={{ borderColor: "#2C74BC" }}
