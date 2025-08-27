@@ -136,40 +136,32 @@ const Portfolio = () => {
     },
     {
       id: 15,
-      title: "Music App Store Graphics",
+      title: "Play Store App Graphics – All Language Translator",
       category: "play-store-graphics",
       description:
-        "Professional Play Store graphics design including app icons, feature graphics, screenshots, and promotional materials optimized for maximum app store visibility.",
+        "Main display screen design created for the Play Store listing of the All Language Translator app. Built to provide a professional app store presence.",
       image:
-        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1754676668/music_app_z3fsxc.png",
+        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1756318173/Frame_8_1_c6a6s4.png",
     },
     {
       id: 16,
-      title: "Navigation App Store Assets",
+      title: "All Language Translator – Storefront Graphics",
       category: "play-store-graphics",
       description:
-        "Complete Play Store asset package with high-conversion app store graphics, promotional banners, and visual elements designed to increase download rates.",
+        "Custom Play Store graphics designed to represent the All Language Translator app, showcasing its interface and usability while enhancing its visual identity",
       image:
-        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755520221/Frame_8_3_-min_aijjzg.png",
+        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1756319656/Frame_45_bwmpal.png",
     },
     {
       id: 17,
-      title: "Language App Graphics Suite",
+      title: "Smart Navigation – Play Store Graphics",
       category: "play-store-graphics",
       description:
-        "Comprehensive Play Store graphics suite including app icons, feature graphics, screenshots mockups, and promotional materials for language learning applications.",
+        "Visual design for the Smart Navigation app’s Play Store screen, crafted to highlight seamless route guidance, clean interface, and an engaging marketplace presence.",
       image:
-        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755520225/Language_app-min_lhwuvz.png",
+        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1756320373/Frame_13_ykfdya.png",
     },
-    {
-      id: 18,
-      title: "Translation App Store Design",
-      category: "play-store-graphics",
-      description:
-        "Professional app store design package with eye-catching graphics, promotional banners, and marketing materials designed to boost app visibility and downloads.",
-      image:
-        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755520229/Frame_44-min_nulazj.png",
-    },
+   
   ];
 
   const categories = [
