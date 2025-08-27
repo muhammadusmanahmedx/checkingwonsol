@@ -127,12 +127,12 @@ const Portfolio = () => {
     },
     {
       id: 14,
-      title: "Satellite Navigation App",
-      category: "mobile-app",
+      title: "All Language Translator – Play Store Graphics",
+      category: "play-store-graphics",
       description:
-        "Modern, responsive portfolio website template with dark mode support, smooth animations, and customizable sections for creative professionals and agencies.",
+        "A showcase of the main Play Store graphics screen for the All Language Translator app, designed to highlight its features ",
       image:
-        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755520269/Frame_8_2_-min_r14xkg.png",
+        "https://res.cloudinary.com/dshjm6hcx/image/upload/v1756318078/Frame_10_rc7nku.png",
     },
     {
       id: 15,
