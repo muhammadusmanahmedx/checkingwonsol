@@ -133,23 +133,23 @@ const TestimonialFactBar = () => {
               <div className="flex flex-col sm:flex-row items-start gap-4">
                 <div className="flex-shrink-0 mx-auto sm:mx-0">
 
-{/* <div className="flex-shrink-0 mx-auto sm:mx-0">
+<div className="flex-shrink-0 mx-auto sm:mx-0">
                   <img
-                    src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
+                    src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409551/beautiful-muslim-woman-black-niqab-600nw-391752175_lvk8xn.webp"
                     alt="Founder Portrait"
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2"
                     style={{ borderColor: "#2C74BC" }}
                   />
-                </div> */}
+                </div>
 
 
-                  <div
+                  {/* <div
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 flex items-center justify-center text-white font-semibold text-xl"
                     style={{ borderColor: "#2C74BC", backgroundColor: "#2C74BC" }}
                   
                   >
                     FN
-                  </div>
+                  </div> */}
 
 
                 </div>
