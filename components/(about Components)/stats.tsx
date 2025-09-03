@@ -87,65 +87,87 @@ const TestimonialFactBar = () => {
           </div>
         </div>
 
-        {/* Founder Message */}
+        {/* Leadership Team */}
         <div
           className="pt-8 md:pt-10"
           style={{ borderTop: `1px solid #2C74BC` }}
         >
-          <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="flex flex-col sm:flex-row items-start gap-6">
-              {/* Founder Image */}
-              <div className="flex-shrink-0 mx-auto sm:mx-0">
-                <img
-                  src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
-                  alt="Founder Portrait"
-                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-2"
-                  style={{ borderColor: "#2C74BC" }}
-                />
-              </div>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+            <h3
+              className="text-lg sm:text-xl font-semibold mb-8 text-center"
+              style={{ color: "#2C74BC" }}
+            >
+              Meet Our Leadership Team
+            </h3>
 
-              {/* Message Content */}
-              <div className="flex-1 text-center sm:text-left">
-                <div className="mb-6">
-                  <h3
-                    className="text-lg sm:text-xl font-semibold mb-3"
-                    style={{ color: "#2C74BC" }}
-                  >
-                    Message from Our Founder
-                  </h3>
-
-                  <div
-                    className="bg-gray-50 p-6 rounded-lg border-l-4"
-                    style={{ borderLeftColor: "#2C74BC" }}
-                  >
-                    <p className="text-gray-800 leading-relaxed">
-                      "At Wonsol, our mission is to deliver{" "}
-                      <strong>
-                        cutting-edge software, AI, and automation solutions
-                      </strong>{" "}
-                      that empower businesses to thrive in the era of frontier
-                      technology. We aspire to play an active role in shaping
-                      the future by contributing to{" "}
-                      <strong style={{ color: "#2C74BC" }}>
-                        Vision 2030 initiatives
-                      </strong>{" "}
-                      in Saudi Arabia and Egypt, while also expanding our impact
-                      across the UAE. Our goal is to drive innovation,
-                      efficiency, and sustainable growth through smart,
-                      technology-driven solutions."
-                    </p>
-                  </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Founder */}
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className="flex-shrink-0 mx-auto sm:mx-0">
+                  <img
+                    src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
+                    alt="Founder Portrait"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2"
+                    style={{ borderColor: "#2C74BC" }}
+                  />
                 </div>
-
-                {/* Founder Details */}
-                <div className="text-sm text-gray-600">
+                <div className="flex-1 text-center sm:text-left">
                   <div
-                    className="font-semibold text-base"
+                    className="font-semibold text-lg mb-1"
                     style={{ color: "#2C74BC" }}
                   >
                     Muhammad Usman Ahmed
                   </div>
-                  <div>Founder & Lead Developer</div>
+                  <div className="text-sm text-gray-600 mb-3 font-medium">
+                    Founder & Lead Developer
+                  </div>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    Visionary leader driving innovation in AI and automation solutions. 
+                    Passionate about contributing to Vision 2030 initiatives across 
+                    the Middle East region.
+                  </p>
+                </div>
+              </div>
+
+              {/* Co-Founder */}
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <div className="flex-shrink-0 mx-auto sm:mx-0">
+
+{/* <div className="flex-shrink-0 mx-auto sm:mx-0">
+                  <img
+                    src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
+                    alt="Founder Portrait"
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2"
+                    style={{ borderColor: "#2C74BC" }}
+                  />
+                </div> */}
+
+
+                  <div
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 flex items-center justify-center text-white font-semibold text-xl"
+                    style={{ borderColor: "#2C74BC", backgroundColor: "#2C74BC" }}
+                  
+                  >
+                    FN
+                  </div>
+
+
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                  <div
+                    className="font-semibold text-lg mb-1"
+                    style={{ color: "#2C74BC" }}
+                  >
+                    Fatima Nazir
+                  </div>
+                  <div className="text-sm text-gray-600 mb-3 font-medium">
+                    Co-Founder & Technology Strategist
+                  </div>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    Strategic technology expert focused on scaling innovative 
+                    solutions and building partnerships across emerging markets 
+                    in the MENA region.
+                  </p>
                 </div>
               </div>
             </div>
