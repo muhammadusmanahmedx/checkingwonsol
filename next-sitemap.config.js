@@ -3,6 +3,5 @@ module.exports = {
   siteUrl: 'https://wonsol.com',
   generateRobotsTxt: true,
   sitemapSize: 5000,
-  changefreq: 'monthly', // realistic update frequency
-  priority: 0.7,
+  generateIndexSitemap: false, // force a single sitemap.xml
 };
