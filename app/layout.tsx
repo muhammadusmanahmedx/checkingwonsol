@@ -3,9 +3,9 @@ import "./globals.css"; // Ensure global CSS is imported
 import Footer from "@/components/(home Components)/footer";
 import Header from "@/components/header";
 import { NavigationLoaderProvider } from "@/components/navigationLoader";
-// import { NavigationLoaderProvider } from "@/components/navigationLoader";
 
-export const metadata = {
+// --- SEO Metadata ---
+export const metadata: Metadata = {
   metadataBase: new URL("https://wonsol.com"),
   title: {
     default: "Won Solutions - IT Services & Technology Solutions",
@@ -41,7 +41,7 @@ export const metadata = {
     url: "https://wonsol.com",
     images: [
       {
-        url: "/og-image.png", // Should be 1200x630px
+        url: "/logo.png", // Now from public/logo.png
         width: 1200,
         height: 630,
         alt: "Won Solutions - IT Services & Technology Solutions",
@@ -50,15 +50,16 @@ export const metadata = {
     locale: "en_US",
   },
 
-  // Twitter/X Card (optional - you can remove this section if not on Twitter)
-  // twitter: {
-  //   card: "summary_large_image",
-  //   title: "Won Solutions - Top-Quality Products & Services",
-  //   description: "Premium products, secure checkout, fast delivery. Shop with confidence at Won Solutions.",
-  //   images: ["/og-image.png"],
-  // },
+  // Twitter/X Card
+  twitter: {
+    card: "summary_large_image",
+    title: "Won Solutions - IT Services & Technology Solutions",
+    description:
+      "Expert IT services including web development, cloud solutions, cybersecurity, and digital transformation.",
+    images: ["/logo.png"],
+  },
 
-  // Additional SEO enhancements
+  // Robots
   robots: {
     index: true,
     follow: true,
@@ -71,65 +72,76 @@ export const metadata = {
     },
   },
 
-  // Verification (add your actual verification codes)
-  verification: {
-    google: "your-google-verification-code",
-    yandex: "your-yandex-verification-code",
-    bing: "your-bing-verification-code",
-  },
+  // Verification
+  // verification: {
+  //   google: "your-google-verification-code",
+  //   yandex: "your-yandex-verification-code",
+  //   bing: "your-bing-verification-code",
+  // },
 
-  // Structured data
+  // Structured data meta
   other: {
     "application-name": "Won Solutions",
-    "msapplication-TileColor": "#000000", // Update with your brand color
-    "theme-color": "#000000", // Update with your brand color
+    "msapplication-TileColor": "#000000",
+    "theme-color": "#000000",
   },
 
-  // Canonical URL (important for SEO)
+  // Canonical
   alternates: {
     canonical: "https://wonsol.com",
   },
+
+  // 👇 Icons block added
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/logo.png",
+  },
 };
 
-// Additional JSON-LD structured data for better SEO
+// --- JSON-LD Schema ---
 export const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Won Solutions",
   url: "https://wonsol.com",
-  logo: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755367351/bg_set_big_zgfqyi.png",
+  logo: "https://www.wonsol.com/logo.png", // Use full URL
   description:
     "Won Solutions delivers premium products and exceptional services with secure checkout and fast delivery.",
   sameAs: [
-    "https://linkedin.com/company/your-company-handle", // Update with your actual LinkedIn URL
-    "https://instagram.com/your-instagram-handle", // Update with your actual Instagram handle
+    "https://linkedin.com/company/your-company-handle", // Update
+    "https://instagram.com/your-instagram-handle", // Update
   ],
   contactPoint: [
     {
       "@type": "ContactPoint",
-      telephone: "+923316120479", // Add your actual phone number
+      telephone: "+923316120479",
       contactType: "customer service",
     },
     {
       "@type": "ContactPoint",
-      email: "info@wonsol.com", // Add your actual email
+      email: "info@wonsol.com",
       contactType: "customer service",
     },
   ],
 };
 
-// till here seo
-
+// --- Layout ---
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Inject Organization JSON-LD for SEO */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body style={{ margin: 0, padding: 0, overflowX: "hidden" }}>
         <NavigationLoaderProvider
-          logoUrl="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755367351/bg_set_big_zgfqyi.png"
+          logoUrl="/logo.png"
           logoAlt="Won Solutions Logo"
         >
           <Header />
