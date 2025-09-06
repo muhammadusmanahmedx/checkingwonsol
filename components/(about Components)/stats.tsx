@@ -87,89 +87,51 @@ const TestimonialFactBar = () => {
           </div>
         </div>
 
-        {/* Leadership Team */}
-        <div
-          className="pt-8 md:pt-10"
-          style={{ borderTop: `1px solid #2C74BC` }}
-        >
-          <div className="max-w-6xl mx-auto px-4 sm:px-6">
+        {/* Leadership Team - Founder Only */}
+        <div className="pt-12">
+          <div className="max-w-2xl mx-auto text-center">
             <h3
-              className="text-lg sm:text-xl font-semibold mb-8 text-center"
+              className="text-2xl sm:text-3xl font-bold mb-12"
               style={{ color: "#2C74BC" }}
             >
-              Meet Our Leadership Team
+              Meet Our Founder
             </h3>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Founder */}
-              <div className="flex flex-col sm:flex-row items-start gap-4">
-                <div className="flex-shrink-0 mx-auto sm:mx-0">
-                  <img
-                    src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
-                    alt="Founder Portrait"
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2"
-                    style={{ borderColor: "#2C74BC" }}
-                  />
-                </div>
-                <div className="flex-1 text-center sm:text-left">
-                  <div
-                    className="font-semibold text-lg mb-1"
-                    style={{ color: "#2C74BC" }}
-                  >
-                    Muhammad Usman Ahmed
-                  </div>
-                  <div className="text-sm text-gray-600 mb-3 font-medium">
-                    Founder & Lead Developer
-                  </div>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    Visionary leader driving innovation in AI and automation solutions. 
-                    Passionate about contributing to Vision 2030 initiatives across 
-                    the Middle East region.
-                  </p>
-                </div>
+            <div className="flex flex-col items-center">
+              <div className="relative mb-6">
+                <img
+                  src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755492125/93374353155_sea8qq.png"
+                  alt="Founder Portrait"
+                  className="w-36 h-36 sm:w-40 sm:h-40 rounded-full object-cover shadow-2xl"
+                />
+                <div 
+                  className="absolute inset-0 rounded-full border-4 opacity-20"
+                  style={{ borderColor: "#2C74BC" }}
+                ></div>
               </div>
-
-              {/* Co-Founder */}
-              <div className="flex flex-col sm:flex-row items-start gap-4">
-                <div className="flex-shrink-0 mx-auto sm:mx-0">
-
-<div className="flex-shrink-0 mx-auto sm:mx-0">
-                  <img
-                    src="https://res.cloudinary.com/dshjm6hcx/image/upload/v1755409551/beautiful-muslim-woman-black-niqab-600nw-391752175_lvk8xn.webp"
-                    alt="Founder Portrait"
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2"
-                    style={{ borderColor: "#2C74BC" }}
-                  />
-                </div>
-
-
-                  {/* <div
-                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border-2 flex items-center justify-center text-white font-semibold text-xl"
-                    style={{ borderColor: "#2C74BC", backgroundColor: "#2C74BC" }}
-                  
-                  >
-                    FN
-                  </div> */}
-
-
-                </div>
-                <div className="flex-1 text-center sm:text-left">
-                  <div
-                    className="font-semibold text-lg mb-1"
-                    style={{ color: "#2C74BC" }}
-                  >
-                    Fatima Nazir
-                  </div>
-                  <div className="text-sm text-gray-600 mb-3 font-medium">
-                    Co-Founder & Technology Strategist
-                  </div>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    Strategic technology expert focused on scaling innovative 
-                    solutions and building partnerships across emerging markets 
-                    in the MENA region.
-                  </p>
-                </div>
+              
+              <div
+                className="font-bold text-2xl sm:text-3xl mb-2"
+                style={{ color: "#2C74BC" }}
+              >
+                Muhammad Usman Ahmed
               </div>
+              
+              <div 
+                className="text-lg font-semibold mb-6 px-4 py-1 rounded-full"
+                style={{ 
+                  color: "#2C74BC", 
+                  backgroundColor: "rgba(44, 116, 188, 0.1)" 
+                }}
+              >
+                Founder 
+              </div>
+              
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed max-w-xl mx-auto">
+                Visionary leader driving innovation in AI and automation solutions. 
+                Passionate about contributing to Vision 2030 initiatives across 
+                the Middle East region.
+              </p>
             </div>
           </div>
         </div>

@@ -34,11 +34,11 @@ const defaultImages: ImageData[] = [
     alt: "Nike",
     height: "32"
   },
-  {
-    src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755428469/Frame_151_1_fnaqaz.png",
-    alt: "Company Logo",
-    height: "32"
-  },
+  // {
+  //   src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755428469/Frame_151_1_fnaqaz.png",
+  //   alt: "fn nails",
+  //   height: "32"
+  // },
   {
     src: "https://res.cloudinary.com/dshjm6hcx/image/upload/v1755414094/Frame_149_2_j3k8qj.png",
     alt: "Company Logo",
